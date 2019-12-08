@@ -10,10 +10,19 @@
   padding: 20px;
 }
 
+.lock {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+
 .hex {
-  color: whitesmoke;
-  position: absolute;
   bottom: 0px;
+  color: whitesmoke;
+  font-weight: 500;
   left: 50%; 
+  position: absolute;
+  text-shadow: 0.5px 0.5px rgb(113, 113, 113);
+  text-transform: uppercase;
   transform: translate(-50%);
 }
