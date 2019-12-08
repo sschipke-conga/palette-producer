@@ -1,0 +1,19 @@
+.PaletteCard {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.color {
+  position: relative;
+  height: 30vh;
+  padding: 20px;
+}
+
+.hex {
+  color: whitesmoke;
+  position: absolute;
+  bottom: 0px;
+  left: 50%; 
+  transform: translate(-50%);
+}
