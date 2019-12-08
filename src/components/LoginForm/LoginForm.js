@@ -1,19 +1,35 @@
 import React, {Component} from 'react';
-import {Route, NavLink, Link} from 'react-router-dom';
-import ReactModal from 'react-modal';
-import './Modal.scss';
+import {loginUser} from '../../util/apiCalls';
+import './LoginForm.scss';
 
 class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
       username: "",
-      password: ""
+      password: "",
+      hasError: false,
+      error: ''
     };
   }
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  handleSumbit = async (e) => {
+    e.preventDefault()
+    const {username, password, hasError, error
+    } = this.state
+    const user = {
+      username,
+      password
+    }
+
+    try {
+      let res = await loginUser(user)
+      console.log(res)
+    } catch ({message}) {this.setState({hasError: true, error: message})}
   }
 
   componentDidMount() {
@@ -22,10 +38,11 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <form onSumbit={this.handleSumbit}>
+      <form onSubmit={this.handleSumbit}>
         <input
           type="text"
-          placeholder="Enter your name"
+          placeholder="Enter your username"
+          name="username"
           required
           value={this.state.username}
           onChange={this.handleChange}
@@ -33,14 +50,16 @@ class LoginForm extends Component {
         <input
           type="password"
           placeholder="Enter your password"
+          name="password"
           required
           value={this.state.password}
           onChange={this.handleChange}
         />
-        <button
-        type="submit"
-        >Login</button>
+        <button type="submit">Login</button>
+    {this.state.hasError && <p>{this.state.error}</p>}
       </form>
     );
   }
 }
+
+export default LoginForm;
