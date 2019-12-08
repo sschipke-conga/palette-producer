@@ -13,7 +13,7 @@ export const PaletteCard = ({ color, changeColor, isLocked }) => {
   return (
     <div className='PaletteCard'>
       <div className='color' style={colorStyles}>
-        {isLocked ? <IoIosLock /> : <IoIosUnlock />}
+        {isLocked ? <IoIosLock className='lock' /> : <IoIosUnlock className='lock' />}
         <p className='hex'>{color}</p>
       </div>
       <ColorPicker color={color} />
