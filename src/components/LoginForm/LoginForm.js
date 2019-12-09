@@ -29,7 +29,7 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       console.log(res)
-    } catch ({message}) {this.setState({hasError: true, error: message})}
+    } catch ({message}) {this.setState({error: message})}
   }
 
   componentDidMount() {
@@ -37,26 +37,35 @@ class LoginForm extends Component {
   }
 
   render() {
+
     return (
       <form onSubmit={this.handleSumbit}>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          name="username"
-          required
-          value={this.state.username}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Enter your password"
-          name="password"
-          required
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
+        <div className="form-label-input-div">
+          <label  htmlFor="username">Username
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your username"
+            id="username"
+            required
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="form-label-input-div">
+          <label htmlFor="password">Password
+          </label>
+          <input
+            type="password"
+            placeholder="Enter your password"
+            id="password"
+            required
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </div>
         <button type="submit">Login</button>
-    {this.state.hasError && <p>{this.state.error}</p>}
+    {this.state.error && <p>{this.state.error}</p>}
       </form>
     );
   }

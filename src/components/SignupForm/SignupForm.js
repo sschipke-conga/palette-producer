@@ -9,18 +9,20 @@ class SignupForm extends Component {
       username: '',
       password: '',
       confirmPassword: '',
-      hasError: false,
+      isFormComplete: true,
+      passwordError: false,
       error: ''
     };
   }
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleSumbit = async () => {
+  handleSumbit = async (e) => {
+    e.preventDefault()
     const {password, confirmPassword, username} = this.state
-    if (password === confirmPassword) {
+    if (username && password === confirmPassword) {
       const newUser = {
         username,
         password
@@ -28,44 +30,64 @@ class SignupForm extends Component {
       try {
         let res = await createNewUser(newUser)
         console.log(res)
+        this.setState({username: '', password: '', confirmPassword: '', isFormComplete:true})
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
-      this.setState({ hasError: true})
+      this.setState({ error: 'Passwords do not match', passwordError: true})
     }
   };
 
   render() {
-    const {hasError} = this.state;
+    const {error, passwordError} = this.state;
+    const passwordErrorClass = passwordError ? "input-error" : "";
     return (
-      <form>
-        <input
-          type="text"
-          placeholder="Enter your username"
-          name="username"
-          required
-          value={this.state.username}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Enter your password"
-          name="password"
-          required
-          value={this.state.password}
-          onChange={this.handleChange}
-        />
-        <input
-          type="password"
-          placeholder="Re-enter your password"
-          name="confirmPassword"
-          required
-          value={this.state.confirmPassword}
-          onChange={this.handleChange}
-        />
-        <button type="button" onClick={this.handleSumbit}>
+      <form onSubmit={this.handleSumbit}>
+        <p className="form-message">Create an account to save your projects and the palettes you generate!</p>
+        <div className="form-label-input-div">
+          <label htmlFor="username">Username
+            </label>
+          <input
+            type="text"
+            placeholder="Enter your username"
+            id="username"
+            required
+            value={this.state.username}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="form-label-input-div">
+          {passwordError ? (<label className="error-message" htmlFor="password">{error}
+          </label>) : (<label htmlFor="password"> Password
+            </label>)}
+          <input
+            className={passwordErrorClass}
+            type="password"
+            placeholder="Enter your password"
+            id="password"
+            minLength="8"
+            required
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+        </div>
+        <div className="form-label-input-div">
+          {passwordError ? (<label className="error-message" htmlFor="confirmPassword">{error}
+          </label>) : (<label htmlFor="confirmPassword"> Confirm your password
+            </label>)}
+          <input
+            className={passwordErrorClass}
+            type="password"
+            placeholder="Re-enter your password"
+            id="confirmPassword"
+            minLength="8"
+            required
+            value={this.state.confirmPassword}
+            onChange={this.handleChange}
+          />
+        </div>
+        <button type="submit">
           Sign Up!
         </button>
-        {hasError && <p>Passwords do not match</p>}
       </form>
     );
   }
