@@ -4,12 +4,14 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IoMdSave } from "react-icons/io";
 import { IoIosRefresh } from "react-icons/io";
-import PaletteCard from '../PaletteCard/PaletteCard';
+import ColorCard from '../ColorCard/ColorCard';
+import { savePalette } from '../../util/apiCalls';
 
 export class PaletteContainer extends Component {
   constructor() {
     super();
     this.state = {
+      project_id: 1,
       projectName: 'Enter project name',
       paletteName: 'Enter palette name',
       color1: {
@@ -79,15 +81,11 @@ export class PaletteContainer extends Component {
     }
   }
 
-  savePalette = () => {
-
-  }
-
   displayPalettes = colors => {
     const colorKeys = Object.keys(colors);
     return colorKeys.map((colorKey, index) => {
       return (
-        <PaletteCard
+        <ColorCard
           key={index}
           index={'color' + (index + 1)}
           color={colors[colorKey].hexCode}
@@ -119,7 +117,15 @@ export class PaletteContainer extends Component {
           </div>
           <div className='icon-container'>
             <IoIosRefresh className='randomize-icon' onClick={this.randomizePalette} />
-            <IoMdSave className='save-icon' onClick={this.savePalette} />
+            <IoMdSave className='save-icon' onClick={() => savePalette({
+              project_id: this.state.project_id,
+              name: this.state.paletteName,
+              color1: this.state.color1.hexCode,
+              color2: this.state.color2.hexCode,
+              color3: this.state.color3.hexCode,
+              color4: this.state.color4.hexCode,
+              color5: this.state.color5.hexCode
+            })} />
           </div>
         </header>
         <section className='PaletteContainer-section'>
