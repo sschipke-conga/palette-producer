@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {createNewUser} from '../../util/apiCalls';
+import {Redirect} from 'react-router-dom';
 import './SignupForm.scss'
 
 class SignupForm extends Component {
@@ -40,7 +41,10 @@ class SignupForm extends Component {
   };
 
   render() {
-    const {error, passwordError, hasError, username, password, confirmPassword} = this.state;
+    const {error, passwordError, hasError, username, password, confirmPassword, isFormComplete} = this.state;
+    if(isFormComplete) {
+      return <Redirect to="/" />
+    }
     const passwordErrorClass = passwordError ? "input-error" : "";
     const usernameErrorClass = hasError ? "input-error" : "";
     return (

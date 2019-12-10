@@ -1,4 +1,7 @@
+
+
 .modal-backdrop {
+  background: rgb(191, 191, 191);
   width: 100vw;
   height: 110vh;
   position: fixed;
@@ -6,7 +9,7 @@
   left: 50%;
   background-position: center top;
   background-size: cover;
-  opacity: 0.8;
+  opacity: 0.9;
   transform: translate3d(-50%, -50%, 0);
   object-fit: cover;
   z-index: 1;
