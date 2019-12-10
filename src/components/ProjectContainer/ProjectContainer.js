@@ -5,14 +5,18 @@ import PropTypes from 'prop-types';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
 export const ProjectContainer = ({ projects, palettes }) => {
-  const displayProjects = projects.map((project, index) => {
-    return (
-      <ProjectCard
-        key={'ProjectCard' + index}
-        palettes={palettes[project.id]}
-      />
-    )
-  })
+  let displayProjects = null;
+  if (!projects.length === 0 && !palettes === {}) {
+    console.log('Proj Pal', projects, palettes)
+    displayProjects = projects.map((project, index) => {
+      return (
+        <ProjectCard
+          key={'ProjectCard' + index}
+          palettes={palettes[project.id]}
+        />
+      )
+    })
+  }
 
   return (
     <div className='ProjectContainer'>
