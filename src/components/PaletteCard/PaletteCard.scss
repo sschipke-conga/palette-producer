@@ -1,0 +1,40 @@
+.PaletteCard {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+.color {
+  position: relative;
+  height: 30vh;
+  padding: 20px;
+}
+
+.lock {
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+}
+
+.hex {
+  bottom: 0px;
+  color: whitesmoke;
+  font-size: 20px;
+  font-weight: 500;
+  left: 50%; 
+  position: absolute;
+  text-shadow: 0.5px 0.5px rgb(113, 113, 113);
+  text-transform: uppercase;
+  transform: translate(-50%);
+}
+
+.picker-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.color-picker {
+  width: 90%
+}

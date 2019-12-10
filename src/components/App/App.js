@@ -1,19 +1,29 @@
-import React from 'react';
-import { Route, NavLink, Link } from "react-router-dom";
-import Modal from '../Modal/Modal';
-import ReactModal from "react-modal";
-import LoginForm from '../LoginForm/LoginForm';
-import SignupForm from '../SignupForm/SignupForm';
+import React, { Component } from 'react';
 import './App.scss';
+import PaletteContainer from '../PaletteContainer/PaletteContainer';
+import Modal from '../Modal/Modal';
+import { Route } from 'react-router-dom';
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">Header</header>
-    < Modal />
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+
+    }
+  }
+
+  render() {
+    return (
+      <main className='App'>
+        <Route exact path='/' render={() => <PaletteContainer />} />
+      </main>
+    )
+  }
 }
 
 export default App;
+
+App.propTypes = {
+
+}
