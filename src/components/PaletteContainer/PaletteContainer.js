@@ -45,7 +45,6 @@ export class PaletteContainer extends Component {
   }
 
   changeColor = (colorN, hexCode) => {
-    console.log(colorN, hexCode)
     this.setState({
       [colorN]: {
         hexCode,
@@ -78,6 +77,10 @@ export class PaletteContainer extends Component {
         })
       }
     }
+  }
+
+  savePalette = () => {
+
   }
 
   displayPalettes = colors => {
@@ -116,7 +119,7 @@ export class PaletteContainer extends Component {
           </div>
           <div className='icon-container'>
             <IoIosRefresh className='randomize-icon' onClick={this.randomizePalette} />
-            <IoMdSave className='save-icon' />
+            <IoMdSave className='save-icon' onClick={this.savePalette} />
           </div>
         </header>
         <section className='PaletteContainer-section'>
