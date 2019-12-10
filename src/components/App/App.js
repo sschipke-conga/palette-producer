@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import PaletteContainer from '../PaletteContainer/PaletteContainer';
+import Modal from '../Modal/Modal';
 import { Route } from 'react-router-dom';
 
 
