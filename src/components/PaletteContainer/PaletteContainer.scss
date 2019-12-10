@@ -10,7 +10,11 @@
 
 .project-name,
 .palette-name {
+  background: rgb(244, 244, 244);
+  border: none;
   border-radius: 5px;
+  font-family: "Rubik", sans-serif;
+  font-weight: 500;
   margin: 0px;
   padding: 10px;
   text-align: left;
@@ -21,15 +25,25 @@
   }
 }
 
+.project-name {
+  font-size: 30px;
+}
+
+.palette-name {
+  font-size: 26px;
+}
+
 .icon-container {
   align-items: center;
   display: flex;
-  cursor: pointer;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
+.randomize-icon,
 .save-icon {
+  cursor: pointer;
   height: 50px;
+  margin: 10px;
   width: 50px;
 }
 

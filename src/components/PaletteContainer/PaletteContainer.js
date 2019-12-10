@@ -3,19 +3,35 @@ import './PaletteContainer.scss';
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IoMdSave } from "react-icons/io";
+import { IoIosRefresh } from "react-icons/io";
 import PaletteCard from '../PaletteCard/PaletteCard';
 
 export class PaletteContainer extends Component {
   constructor() {
     super();
     this.state = {
-      projectName: '',
-      paletteName: '',
-      color1: '',
-      color2: '',
-      color3: '',
-      color4: '',
-      color5: ''
+      projectName: 'Enter project name',
+      paletteName: 'Enter palette name',
+      color1: {
+        hexCode: '',
+        isLocked: false
+      },
+      color2: {
+        hexCode: '',
+        isLocked: false
+      },
+      color3: {
+        hexCode: '',
+        isLocked: false
+      },
+      color4: {
+        hexCode: '',
+        isLocked: false
+      },
+      color5: {
+        hexCode: '',
+        isLocked: false
+      }
     }
   }
 
@@ -25,10 +41,26 @@ export class PaletteContainer extends Component {
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    this.forceUpdate();
   }
 
   changeColor = (colorN, hexCode) => {
-    this.setState({ [colorN]: hexCode })
+    console.log(colorN, hexCode)
+    this.setState({
+      [colorN]: {
+        hexCode,
+        isLocked: false
+      }
+    })
+  }
+
+  toggleLock = (colorN, hexCode) => {
+    this.setState({
+      [colorN]: {
+        hexCode,
+        isLocked: !this.state[colorN].isLocked
+      }
+    })
   }
 
   generateRandomHex = () => {
@@ -36,23 +68,29 @@ export class PaletteContainer extends Component {
   }
 
   randomizePalette = () => {
-    this.setState({
-      color1: this.generateRandomHex(),
-      color2: this.generateRandomHex(),
-      color3: this.generateRandomHex(),
-      color4: this.generateRandomHex(),
-      color5: this.generateRandomHex()
-    })
+    for (let parameter of ["color1", "color2", "color3", "color4", "color5"]) {
+      if (!this.state[parameter].isLocked) {
+        this.setState({
+          [parameter]: {
+            hexCode: this.generateRandomHex(),
+            isLocked: false
+          }
+        })
+      }
+    }
   }
 
   displayPalettes = colors => {
     const colorKeys = Object.keys(colors);
-    return colorKeys.map(colorKey => {
+    return colorKeys.map((colorKey, index) => {
       return (
         <PaletteCard
-          color={colors[colorKey]}
+          key={index}
+          index={'color' + (index + 1)}
+          color={colors[colorKey].hexCode}
+          isLocked={colors[colorKey].isLocked}
           changeColor={this.changeColor}
-          isLocked={false}
+          toggleLock={this.toggleLock}
         />
       )
     })
@@ -63,24 +101,21 @@ export class PaletteContainer extends Component {
       <main className='PaletteContainer'>
         <header className='PaleteContainer-header'>
           <div className='PaleteContainer-names'>
-            <h1
-              contentEditable="true"
+            <input
+              type='text'
               className='project-name'
               name='projectName'
               value={this.state.projectName}
-              onChange={this.handleChange}>
-              {this.state.projectName === '' ? 'Enter project name' : this.state.projectName}
-            </h1>
-            <h2
-              contentEditable="true"
+              onChange={this.handleChange} />
+            <input
+              type='text'
               className='palette-name'
               name='paletteName'
               value={this.state.paletteName}
-              onChange={this.handleChange}>
-              {this.state.paletteName === '' ? 'Enter palette name' : this.state.paletteName}
-            </h2>
+              onChange={this.handleChange} />
           </div>
           <div className='icon-container'>
+            <IoIosRefresh className='randomize-icon' onClick={this.randomizePalette} />
             <IoMdSave className='save-icon' />
           </div>
         </header>
