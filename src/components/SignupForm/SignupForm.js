@@ -9,7 +9,7 @@ class SignupForm extends Component {
       username: '',
       password: '',
       confirmPassword: '',
-      isFormComplete: true,
+      isFormComplete: false,
       passwordError: false,
       hasError: false,
       error: ''
@@ -20,7 +20,7 @@ class SignupForm extends Component {
     this.setState({ [e.target.id]: e.target.value });
   };
 
-  handleSumbit = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     const {password, confirmPassword, username} = this.state
     if (password === confirmPassword) {
@@ -44,7 +44,7 @@ class SignupForm extends Component {
     const passwordErrorClass = passwordError ? "input-error" : "";
     const usernameErrorClass = hasError ? "input-error" : "";
     return (
-      <form onSubmit={this.handleSumbit}>
+      <form onSubmit={this.handleSubmit}>
         {hasError ? (<p className="error-message">{error}</p>):(<p className="form-message">Create an account to save your projects and the palettes you generate!</p>)}
         <div className="form-label-input-div">
           <label htmlFor="username">Username
