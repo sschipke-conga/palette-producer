@@ -1,6 +1,5 @@
 import React from 'react';
 import {Route, NavLink, Link} from 'react-router-dom';
-import ReactModal from 'react-modal';
 import LoginForm from '../LoginForm/LoginForm';
 import SignupForm from '../SignupForm/SignupForm';
 import './Modal.scss';
