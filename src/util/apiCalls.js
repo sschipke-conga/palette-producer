@@ -10,7 +10,7 @@ export const createNewUser = async user => {
   let res = await fetch(url, options);
 
   if (res.status === 500) {
-    throw Error("This email has already been used");
+    throw Error("This username already taken");
   }
 
   if (!res.ok) {

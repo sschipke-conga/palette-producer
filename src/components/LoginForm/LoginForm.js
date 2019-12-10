@@ -8,18 +8,17 @@ class LoginForm extends Component {
     this.state = {
       username: "",
       password: "",
-      hasError: false,
-      error: ''
+      error: ""
     };
   }
 
   handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({ [e.target.id]: e.target.value });
   }
 
   handleSumbit = async (e) => {
     e.preventDefault()
-    const {username, password, hasError, error
+    const {username, password, error
     } = this.state
     const user = {
       username,
@@ -29,6 +28,7 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       console.log(res)
+      this.setState({username:"", password:"", error:""})
     } catch ({message}) {this.setState({error: message})}
   }
 
@@ -37,18 +37,21 @@ class LoginForm extends Component {
   }
 
   render() {
-
+    const {username, password, error} = this.state;
+    let loginErrrorClass = error ? "input-error" : "";
     return (
       <form onSubmit={this.handleSumbit}>
+        {error ? (<p className="error-message">{error}</p>) : (<p className="form-message">Good to see you, welcome back!</p>)}
         <div className="form-label-input-div">
           <label  htmlFor="username">Username
           </label>
           <input
             type="text"
+            className={loginErrrorClass}
             placeholder="Enter your username"
             id="username"
             required
-            value={this.state.username}
+            value={username}
             onChange={this.handleChange}
           />
         </div>
@@ -57,15 +60,16 @@ class LoginForm extends Component {
           </label>
           <input
             type="password"
+            className={loginErrrorClass}
             placeholder="Enter your password"
             id="password"
+            minLength="8"
             required
-            value={this.state.password}
+            value={password}
             onChange={this.handleChange}
           />
         </div>
         <button type="submit">Login</button>
-    {this.state.error && <p>{this.state.error}</p>}
       </form>
     );
   }

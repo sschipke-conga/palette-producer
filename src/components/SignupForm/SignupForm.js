@@ -11,6 +11,7 @@ class SignupForm extends Component {
       confirmPassword: '',
       isFormComplete: true,
       passwordError: false,
+      hasError: false,
       error: ''
     };
   }
@@ -22,7 +23,8 @@ class SignupForm extends Component {
   handleSumbit = async (e) => {
     e.preventDefault()
     const {password, confirmPassword, username} = this.state
-    if (username && password === confirmPassword) {
+    if (password === confirmPassword) {
+      this.setState({passwordError:false})
       const newUser = {
         username,
         password
@@ -30,7 +32,7 @@ class SignupForm extends Component {
       try {
         let res = await createNewUser(newUser)
         console.log(res)
-        this.setState({username: '', password: '', confirmPassword: '', isFormComplete:true})
+        this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false,isFormComplete:true})
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
       this.setState({ error: 'Passwords do not match', passwordError: true})
@@ -38,20 +40,22 @@ class SignupForm extends Component {
   };
 
   render() {
-    const {error, passwordError} = this.state;
+    const {error, passwordError, hasError, username, password, confirmPassword} = this.state;
     const passwordErrorClass = passwordError ? "input-error" : "";
+    const usernameErrorClass = hasError ? "input-error" : "";
     return (
       <form onSubmit={this.handleSumbit}>
-        <p className="form-message">Create an account to save your projects and the palettes you generate!</p>
+        {hasError ? (<p className="error-message">{error}</p>):(<p className="form-message">Create an account to save your projects and the palettes you generate!</p>)}
         <div className="form-label-input-div">
           <label htmlFor="username">Username
             </label>
           <input
             type="text"
+            className={usernameErrorClass}
             placeholder="Enter your username"
             id="username"
             required
-            value={this.state.username}
+            value={username}
             onChange={this.handleChange}
           />
         </div>
@@ -66,7 +70,7 @@ class SignupForm extends Component {
             id="password"
             minLength="8"
             required
-            value={this.state.password}
+            value={password}
             onChange={this.handleChange}
           />
         </div>
@@ -81,7 +85,7 @@ class SignupForm extends Component {
             id="confirmPassword"
             minLength="8"
             required
-            value={this.state.confirmPassword}
+            value={confirmPassword}
             onChange={this.handleChange}
           />
         </div>
