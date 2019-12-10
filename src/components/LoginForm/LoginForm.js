@@ -8,7 +8,8 @@ class LoginForm extends Component {
     this.state = {
       username: "",
       password: "",
-      error: ""
+      error: "",
+      isLoggedIn: false
     };
   }
 
@@ -16,7 +17,7 @@ class LoginForm extends Component {
     this.setState({ [e.target.id]: e.target.value });
   }
 
-  handleSumbit = async (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault()
     const {username, password, error
     } = this.state
@@ -28,7 +29,7 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       console.log(res)
-      this.setState({username:"", password:"", error:""})
+      this.setState({username:"", password:"", error:"", isLoggedIn: true})
     } catch ({message}) {this.setState({error: message})}
   }
 
@@ -40,7 +41,7 @@ class LoginForm extends Component {
     const {username, password, error} = this.state;
     let loginErrrorClass = error ? "input-error" : "";
     return (
-      <form onSubmit={this.handleSumbit}>
+      <form onSubmit={this.handleSubmit}>
         {error ? (<p className="error-message">{error}</p>) : (<p className="form-message">Good to see you, welcome back!</p>)}
         <div className="form-label-input-div">
           <label  htmlFor="username">Username
