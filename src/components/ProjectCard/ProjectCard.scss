@@ -10,6 +10,7 @@
 
 .add-palette-container {
   align-items: center;
+  background: rgb(244, 244, 244);
   border: 2px black solid;
   cursor: pointer;
   display: flex;
@@ -17,6 +18,12 @@
   justify-content: center;
   margin-left: 20px;
   width: 200px;
+  &:hover {
+    background: rgb(194, 194, 194);
+  } 
+  &:active {
+    background: rgb(177, 177, 177);
+  }
 }
 
 .add-palette-icon {
