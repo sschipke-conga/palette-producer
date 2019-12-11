@@ -4,6 +4,7 @@ import PaletteContainer from '../PaletteContainer/PaletteContainer';
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 import Modal from '../Modal/Modal';
 import { getUserProjects, getProjectPalettes } from '../../util/apiCalls';
+import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
 
 
@@ -46,7 +47,7 @@ class App extends Component {
         <Route exact path='/' render={() => <PaletteContainer />} />
         <Route exact path='/' render={() => <ProjectContainer projects={this.state.projects} palettes={this.state.palettes} />} />
       </main>
-    )
+    );
   }
 }
 

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
 import {loginUser} from '../../util/apiCalls';
 import './LoginForm.scss';
 
@@ -29,6 +30,7 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       console.log(res)
+      this.props.loadProjects(res.id)
       this.setState({username:"", password:"", error:"", isLoggedIn: true})
     } catch ({message}) {this.setState({error: message})}
   }
@@ -38,7 +40,10 @@ class LoginForm extends Component {
   }
 
   render() {
-    const {username, password, error} = this.state;
+    const {username, password, error, isLoggedIn} = this.state;
+    if(isLoggedIn) {
+      return <Redirect to="/" />
+    }
     let loginErrrorClass = error ? "input-error" : "";
     return (
       <form onSubmit={this.handleSubmit}>
