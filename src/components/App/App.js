@@ -3,7 +3,7 @@ import './App.scss';
 import PaletteContainer from '../PaletteContainer/PaletteContainer';
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 import Modal from '../Modal/Modal';
-import { getUserProjects, getProjectPalettes } from '../../util/apiCalls';
+import { getUserProjects, getProjectPalettes, deletePalette, deleteProject } from '../../util/apiCalls';
 import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
 
@@ -22,11 +22,13 @@ class App extends Component {
     console.log(userID)
     this.setState({ userID: userID })
     let projects = await getUserProjects(userID);
-    this.setState({ projects });
+    // this.setState({ projects });
     let palettes = await projects.reduce(async (acc, project) => {
       return acc[project.id] = await getProjectPalettes(project.id)
     }, {});
-    palettes = palettes.reduce((acc, palette) => {
+    palettes = await palettes.reduce((acc, palette) => {
+      console.log('foundPals --->',palettes)
+      console.log('acc --->', acc, palette)
       if (!acc[palette.project_id]) {
         acc[palette.project_id] = [palette];
       } else {
