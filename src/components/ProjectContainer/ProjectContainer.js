@@ -11,6 +11,7 @@ export const ProjectContainer = ({ projects, palettes }) => {
       return (
         <ProjectCard
           key={'ProjectCard' + index}
+          id={project.id}
           palettes={palettes[project.id]}
         />
       )
