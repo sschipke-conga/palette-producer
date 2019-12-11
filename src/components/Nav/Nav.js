@@ -6,7 +6,7 @@ import logo from '../../assets/2026954.svg';
 const Nav = () =>
   <nav>
     <img className="logo" src={logo} alt="logo" />
-    <NavLink exact to="/signup">Account</NavLink>
+    <NavLink exact to="/login">Account</NavLink>
   </nav>
 
 export default Nav;
