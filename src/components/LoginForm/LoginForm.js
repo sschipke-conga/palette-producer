@@ -30,6 +30,7 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       console.log(res)
+      this.props.loadProjects(res.id)
       this.setState({username:"", password:"", error:"", isLoggedIn: true})
     } catch ({message}) {this.setState({error: message})}
   }

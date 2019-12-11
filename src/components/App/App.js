@@ -12,14 +12,15 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userID: 3,
+      userID: null,
       projects: [],
       palettes: {}
     }
   }
 
   loadUserProjectsAndPalettes = async userID => {
-    this.setState(userID)
+    console.log(userID)
+    this.setState({userID: userID})
     let projects = await getUserProjects(userID);
     this.setState({ projects });
     let palettes = await projects.reduce(async (acc, project) => {
@@ -37,13 +38,12 @@ class App extends Component {
   }
 
   render() {
-    const {modalOpen} = this.state
     return (
       <main className='App'>
                 <Nav />
         <Route
           path="/(login|signup)"
-          render={() => <Modal />}
+          render={() => <Modal loadProjects={this.loadUserProjectsAndPalettes} />}
         />
         <Route exact path='/' render={() => <PaletteContainer />} />
         <Route exact path='/' render={() => <ProjectContainer projects={this.state.projects} palettes={this.state.palettes} />} />
