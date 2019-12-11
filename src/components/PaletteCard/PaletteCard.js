@@ -9,7 +9,7 @@ export const PaletteCard = ({ colors }) => {
       background: color,
     }
     return (
-      <div className='color' style={colorStyles}>
+      <div className='colorblocks' style={colorStyles}>
       </div>
     )
   })

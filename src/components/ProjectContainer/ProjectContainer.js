@@ -6,8 +6,10 @@ import { IoIosAddCircleOutline } from 'react-icons/io';
 
 export const ProjectContainer = ({ projects, palettes }) => {
   let displayProjects = null;
-  if (!projects.length === 0 && !palettes === {}) {
-    console.log('Proj Pal', projects, palettes)
+  console.log('Proj Pal', projects, palettes)
+  console.log(projects.length !== 0, Object.keys(palettes).length !== 0)
+  if (projects.length !== 0 && Object.keys(palettes).length !== 0) {
+    console.log(palettes[projects[0].id])
     displayProjects = projects.map((project, index) => {
       return (
         <ProjectCard
