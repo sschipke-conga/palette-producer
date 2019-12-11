@@ -20,7 +20,7 @@ class App extends Component {
 
   loadUserProjectsAndPalettes = async userID => {
     console.log(userID)
-    this.setState({userID: userID})
+    this.setState({ userID: userID })
     let projects = await getUserProjects(userID);
     this.setState({ projects });
     let palettes = await projects.reduce(async (acc, project) => {
@@ -40,7 +40,7 @@ class App extends Component {
   render() {
     return (
       <main className='App'>
-                <Nav />
+        <Nav />
         <Route
           path="/(login|signup)"
           render={() => <Modal loadProjects={this.loadUserProjectsAndPalettes} />}

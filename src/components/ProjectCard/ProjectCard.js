@@ -19,7 +19,7 @@ export const ProjectCard = ({ palettes }) => {
 
   return (
     <div className='ProjectCard'>
-      <div>
+      <div className='add-palette-container'>
         <IoIosAddCircleOutline className='add-palette-icon' />
       </div>
       {displayPalettes}
