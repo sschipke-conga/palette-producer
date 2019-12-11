@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './PaletteContainer.scss';
-import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IoMdSave } from "react-icons/io";
 import { IoIosRefresh } from "react-icons/io";
@@ -8,12 +7,11 @@ import ColorCard from '../ColorCard/ColorCard';
 import { savePalette } from '../../util/apiCalls';
 
 export class PaletteContainer extends Component {
-  constructor() {
+  constructor({ userID, currentProject, currentPalette }) {
     super();
+    console.log(currentProject, currentPalette)
     this.state = {
-      project_id: 1,
-      projectName: 'Enter project name',
-      paletteName: 'Enter palette name',
+      userID,
       color1: {
         hexCode: '',
         isLocked: false
@@ -38,12 +36,34 @@ export class PaletteContainer extends Component {
   }
 
   componentDidMount = () => {
-    this.randomizePalette();
+    if (!this.state.color1.hexCode) {
+      this.randomizePalette();
+    }
   }
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    this.forceUpdate();
+  componentWillReceiveProps = () => {
+    this.setState({
+      color1: {
+        hexCode: this.props.currentPalette.color1 || this.generateRandomHex(),
+        isLocked: false
+      },
+      color2: {
+        hexCode: this.props.currentPalette.color2 || this.generateRandomHex(),
+        isLocked: false
+      },
+      color3: {
+        hexCode: this.props.currentPalette.color3 || this.generateRandomHex(),
+        isLocked: false
+      },
+      color4: {
+        hexCode: this.props.currentPalette.color4 || this.generateRandomHex(),
+        isLocked: false
+      },
+      color5: {
+        hexCode: this.props.currentPalette.color5 || this.generateRandomHex(),
+        isLocked: false
+      }
+    })
   }
 
   changeColor = (colorN, hexCode) => {
@@ -106,20 +126,22 @@ export class PaletteContainer extends Component {
               type='text'
               className='project-name'
               name='projectName'
-              value={this.state.projectName}
-              onChange={this.handleChange} />
+              value={this.props.projectName}
+              placeholder='Enter new project name'
+              onChange={this.props.handleChange} />
             <input
               type='text'
               className='palette-name'
               name='paletteName'
-              value={this.state.paletteName}
-              onChange={this.handleChange} />
+              value={this.props.paletteName}
+              placeholder='Enter new palette name'
+              onChange={this.props.handleChange} />
           </div>
           <div className='icon-container'>
             <IoIosRefresh className='randomize-icon' onClick={this.randomizePalette} />
             <IoMdSave className='save-icon' onClick={() => savePalette({
               project_id: this.state.project_id,
-              name: this.state.paletteName,
+              name: this.props.paletteName,
               color1: this.state.color1.hexCode,
               color2: this.state.color2.hexCode,
               color3: this.state.color3.hexCode,

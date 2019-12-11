@@ -2,9 +2,10 @@
   align-items: center;
   border: 2px solid gray;
   display: flex;
+  flex-wrap: nowrap;
   height: 230px;
   margin: auto;
-  overflow-x: scroll;
+  overflow-x: auto;
   width: 90%;
 }
 

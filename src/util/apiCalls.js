@@ -98,6 +98,27 @@ export const savePalette = async newPalette => {
   return res.json();
 }
 
+export const saveProject = async newProject => {
+  console.log(newProject);
+  let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects`;
+  let options = {
+    method: "POST",
+    body: JSON.stringify(newProject),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let res = await fetch(url, options);
+  if (res.status === 422) {
+    throw Error(res.error);
+  }
+  if (!res.ok) {
+    throw Error("Woops! Something went wrong");
+  }
+  console.log(res);
+  return res.json();
+};
+
 export const deleteProject = async projectId => {
   let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects/${projectId}`;
   let options = {
@@ -132,3 +153,4 @@ export const deletePalette = async paletteId => {
   }
   return res.json();
 };
+

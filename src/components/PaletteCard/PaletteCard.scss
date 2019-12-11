@@ -1,12 +1,17 @@
 .PaletteCard {
   border: 2px black solid;
+  cursor: pointer;
   display: flex;
+  flex: 0 0 auto;
   height: 200px;
   margin-left: 20px;
   width: 200px;
+  &:hover {
+    opacity: 0.5;
+  }
 }
 
 .colorblocks {
   height: 100%;
-  width: 25%;
+  width: 20%;
 }
