@@ -7,6 +7,7 @@ import ProjectContainer from '../ProjectContainer/ProjectContainer';
 
 export const ProjectCard = ({ project, select, palettes, removePalette, removeProject }) => {
   let displayPalettes = 'Add some palettes'
+  console.log('pals in ProjCard --->',palettes)
   if(palettes) {
   displayPalettes = palettes.map((palette, index) => {
     return (

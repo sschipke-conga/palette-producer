@@ -3,7 +3,7 @@ import './App.scss';
 import PaletteContainer from '../PaletteContainer/PaletteContainer';
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 import Modal from '../Modal/Modal';
-import { getUserProjects, getProjectPalettes, deletePalette, deleteProject } from '../../util/apiCalls';
+import { getUserProjects, getProjectPalettes, deletePalette, deleteProject, saveProject, savePalette } from '../../util/apiCalls';
 import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
 
@@ -64,6 +64,24 @@ class App extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  save = async colors => {
+    if (!this.state.currentProject.name) {
+      var project = await saveProject({user_id: this.state.userID ,name: this.state.projectName})
+      this.setState({currentProject: await project.id})
+    }  
+    if (!this.state.currentPalette.name) {
+      let paletteName = this.state.paletteName
+      let project_id = this.state.currentProject.id || project.id
+      const palette = {name: paletteName,
+      ...colors,
+      project_id: project_id
+      }
+      console.log(palette)
+      await savePalette(palette)
+    }
+    this.loadUserProjectsAndPalettes(this.state.userID)
+  }
+
   render() {
     return (
       <main className="App">
@@ -85,6 +103,7 @@ class App extends Component {
               handleChange={this.handleChange}
               projectName={this.state.projectName}
               paletteName={this.state.paletteName}
+              save={this.save}
             />
           )}
         />
