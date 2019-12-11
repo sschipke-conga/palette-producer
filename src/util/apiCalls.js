@@ -46,7 +46,7 @@ export const getUserProjects = async userID => {
   };
   let res = await fetch(url, options);
   if (res.status === 404) {
-    throw Error(res.message);
+    throw Error('Projects not found');
   }
   if (!res.ok) {
     throw Error("Woops! Something went wrong");
@@ -62,14 +62,19 @@ export const getProjectPalettes = async projectID => {
       "Content-Type": "application/json"
     }
   };
-  let res = await fetch(url, options);
-  if (res.status === 404) {
-    throw Error(res.message);
+  try {
+    let res = await fetch(url, options);
+    console.log('res line 69', res.body)
+    if (res.status === 404) {
+      return Error('No palettes found');
+    }
+    if (!res.ok) {
+      throw Error("Woops! Something went wrong");
+    }
+    return res.json();
+  } catch ({message}) {
+    return Error(message)
   }
-  if (!res.ok) {
-    throw Error("Woops! Something went wrong");
-  }
-  return res.json();
 };
 
 export const savePalette = async newPalette => {
@@ -93,3 +98,37 @@ export const savePalette = async newPalette => {
   return res.json();
 }
 
+export const deleteProject = async projectId => {
+  let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects/${projectId}`;
+  let options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+  let res = await fetch(url, options);
+  if(res.status === 404) {
+    throw Error(res.error)
+  } if (!res.ok) {
+    throw Error("Woops! Something went wrong")
+  }
+  return res.json()
+}
+
+export const deletePalette = async paletteId => {
+  let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/palettes/${paletteId}`;
+  let options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let res = await fetch(url, options);
+  if (res.status === 404) {
+    throw Error(res.error);
+  }
+  if (!res.ok) {
+    throw Error("Woops! Something went wrong");
+  }
+  return res.json();
+};
