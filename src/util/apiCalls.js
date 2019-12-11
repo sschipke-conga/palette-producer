@@ -64,7 +64,6 @@ export const getProjectPalettes = async projectID => {
   };
   try {
     let res = await fetch(url, options);
-    console.log('res line 69', res.body)
     if (res.status === 404) {
       return Error('No palettes found');
     }
@@ -78,7 +77,6 @@ export const getProjectPalettes = async projectID => {
 };
 
 export const savePalette = async newPalette => {
-  console.log(newPalette)
   let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/palettes`;
   let options = {
     method: "POST",
@@ -94,12 +92,10 @@ export const savePalette = async newPalette => {
   if (!res.ok) {
     throw Error("Woops! Something went wrong");
   }
-  console.log(res)
   return res.json();
 }
 
 export const saveProject = async newProject => {
-  console.log(newProject);
   let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects`;
   let options = {
     method: "POST",
@@ -115,7 +111,6 @@ export const saveProject = async newProject => {
   if (!res.ok) {
     throw Error("Woops! Something went wrong");
   }
-  console.log(res);
   return res.json();
 };
 

@@ -9,7 +9,6 @@ import { savePalette } from '../../util/apiCalls';
 export class PaletteContainer extends Component {
   constructor({ userID, currentProject, currentPalette }) {
     super();
-    console.log(currentProject, currentPalette)
     this.state = {
       userID,
       color1: {

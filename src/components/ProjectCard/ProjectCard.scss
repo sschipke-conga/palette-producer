@@ -3,7 +3,7 @@
   border: 2px solid gray;
   display: flex;
   flex-wrap: nowrap;
-  height: 230px;
+  height: 400px;
   margin: auto;
   overflow-x: auto;
   width: 90%;
@@ -30,4 +30,8 @@
 .add-palette-icon {
   height: 50px;
   width: 50px;
+}
+
+.projectCard-header-name {
+  width: 150px;
 }
