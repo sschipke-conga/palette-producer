@@ -1,4 +1,15 @@
 nav {
+  border-bottom: 2px solid grey;
   display: flex;
   justify-content: space-between;
+  padding: 20px;
+  a {
+    border-left: 1px solid gray;
+    color: black;
+    padding: 10px 10px 10px 20px;
+    text-decoration: none;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 }

@@ -1,8 +1,13 @@
 .form-label-input-div {
-display: flex;
-flex-direction: column;
-align-items: flex-start;
-justify-content: space-between;
-height: 15%;
-width: 60%;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 60px;
+  margin-top: 20px;
+  width: 60%;
+  input {
+    height: 100%;
+    width: 100%;
+  }
 }
