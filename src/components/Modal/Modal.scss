@@ -72,10 +72,12 @@
 }
 
 .tabs {
+  background: rgb(41, 41, 41);
   display: flex;
   justify-content: space-evenly;
+  padding: 0px;
+  margin: 0px;
   width: 100%;
-  background: rgb(41, 41, 41);
 }
 
 form {
@@ -83,7 +85,6 @@ display: flex;
 align-items: center;
 justify-content: space-between;
 flex-direction: column;
-height: 50%;
 padding-top: 20px;
 width: 100%;
   input {

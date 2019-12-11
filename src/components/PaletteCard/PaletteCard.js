@@ -2,7 +2,7 @@ import './PaletteCard.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PaletteCard = ({ colors }) => {
+export const PaletteCard = ({ colors, id }) => {
 
   const displayColors = colors.map(color => {
     const colorStyles = {
@@ -15,7 +15,7 @@ export const PaletteCard = ({ colors }) => {
   })
 
   return (
-    <div className='PaletteCard'>
+    <div className='PaletteCard' id={id}>
       {displayColors}
     </div >
   )
