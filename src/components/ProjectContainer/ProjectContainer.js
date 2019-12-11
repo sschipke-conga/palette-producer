@@ -20,7 +20,7 @@ export const ProjectContainer = ({ projects, palettes }) => {
 
   return (
     <div className='ProjectContainer'>
-      <div>
+      <div className='add-project-container'>
         <IoIosAddCircleOutline className='add-project-icon' />
       </div>
       {displayProjects}
