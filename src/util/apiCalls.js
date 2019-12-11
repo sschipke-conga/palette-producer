@@ -149,3 +149,47 @@ export const deletePalette = async paletteId => {
   return res.json();
 };
 
+export const updatePalette = async palette => {
+  let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/palettes/${palette.id}`;
+  let options = {
+    method: "PUT",
+    body: JSON.stringify(palette),
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+  let res = await fetch(url, options);
+  if (res.status === 422) {
+    throw Error(res.error);
+  }
+  if(res.status === 404) {
+    throw Error(res.error)
+  }
+  if (!res.ok) {
+    throw Error("Woops! Something went wrong");
+  }
+  return res.json();
+}
+
+export const updateProject = async project => {
+    let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects/${project.id}`;
+    console.log(url)
+    let options = {
+      method: "PATCH",
+      body: JSON.stringify({name: project.name}),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    };
+    let res = await fetch(url, options);
+    if (res.status === 422) {
+      throw Error(res.error);
+    }
+    if (res.status === 404) {
+      throw Error(res.error);
+    }
+    if (!res.ok) {
+      throw Error("Woops! Something went wrong");
+    }
+    return res.json();
+}
