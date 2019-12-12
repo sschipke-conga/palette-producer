@@ -68,25 +68,25 @@ class App extends Component {
       const { currentPalette } = this.state
       let oldColors = [currentPalette.color1, currentPalette.color2, currentPalette.color3, currentPalette.color4, currentPalette.color4]
       let newColors = Object.values(colors)
-      if (!this.state.currentProject.name) {
+      if (!this.state.currentProject.name && this.state.projectName && this.state.paletteName) {
         var project = await saveProject({ user_id: this.state.userID, name: this.state.projectName })
         this.setState({ currentProject: await project.id })
       } else if (this.state.currentProject.name !== this.state.projectName) {
         updateProject({ id: this.state.currentProject.id, name: this.state.projectName })
       }
-      if (!this.state.currentPalette.name) {
+      if (!this.state.currentPalette.name && this.state.paletteName && this.state.projectName) {
         let paletteName = this.state.paletteName;
         let project_id = this.state.currentProject.id || project.id;
         const palette = { name: paletteName, ...colors, project_id: project_id };
         await savePalette(palette);
-      } else if (this.state.currentPalette.name !== this.state.paletteName) {
+      } else if (this.state.currentPalette.name !== this.state.paletteName && this.state.projectName && this.state.paletteName) {
         updatePalette({
           id: this.state.currentPalette.id,
           name: this.state.paletteName,
           project_id: this.state.currentProject.id,
           ...colors
         });
-      } else if (oldColors !== newColors) {
+      } else if (oldColors !== newColors && this.state.projectName && this.state.paletteName) {
         updatePalette({
           id: this.state.currentPalette.id,
           name: this.state.paletteName,
