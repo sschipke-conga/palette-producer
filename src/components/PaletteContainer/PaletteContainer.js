@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 import { IoMdSave } from "react-icons/io";
 import { IoIosRefresh } from "react-icons/io";
 import ColorCard from '../ColorCard/ColorCard';
-import { savePalette } from '../../util/apiCalls';
 
 export class PaletteContainer extends Component {
-  constructor({ userID, currentProject, currentPalette }) {
+  constructor({ userID, currentProject, currentPalette, save }) {
     super();
-    console.log(currentProject, currentPalette)
     this.state = {
       userID,
       color1: {
@@ -119,42 +117,56 @@ export class PaletteContainer extends Component {
 
   render() {
     return (
-      <main className='PaletteContainer'>
-        <header className='PaleteContainer-header'>
-          <div className='PaleteContainer-names'>
+      <main className="PaletteContainer">
+        <header className="PaleteContainer-header">
+          <div className="PaleteContainer-names">
             <input
-              type='text'
-              className='project-name'
-              name='projectName'
+              type="text"
+              className="project-name"
+              name="projectName"
               value={this.props.projectName}
-              placeholder='Enter new project name'
-              onChange={this.props.handleChange} />
+              placeholder="Enter new project name"
+              onChange={this.props.handleChange}
+            />
             <input
-              type='text'
-              className='palette-name'
-              name='paletteName'
+              type="text"
+              className="palette-name"
+              name="paletteName"
               value={this.props.paletteName}
-              placeholder='Enter new palette name'
-              onChange={this.props.handleChange} />
+              placeholder="Enter new palette name"
+              onChange={this.props.handleChange}
+            />
           </div>
-          <div className='icon-container'>
-            <IoIosRefresh className='randomize-icon' onClick={this.randomizePalette} />
-            <IoMdSave className='save-icon' onClick={() => savePalette({
-              project_id: this.state.project_id,
-              name: this.props.paletteName,
-              color1: this.state.color1.hexCode,
-              color2: this.state.color2.hexCode,
-              color3: this.state.color3.hexCode,
-              color4: this.state.color4.hexCode,
-              color5: this.state.color5.hexCode
-            })} />
+          <div className="icon-container">
+            <IoIosRefresh
+              className="randomize-icon"
+              onClick={this.randomizePalette}
+            />
+            <IoMdSave
+              className="save-icon"
+              onClick={() =>
+                this.props.save({
+                  color1: this.state.color1.hexCode,
+                  color2: this.state.color2.hexCode,
+                  color3: this.state.color3.hexCode,
+                  color4: this.state.color4.hexCode,
+                  color5: this.state.color5.hexCode
+                })
+              }
+            />
           </div>
         </header>
-        <section className='PaletteContainer-section'>
-          {this.displayPalettes([this.state.color1, this.state.color2, this.state.color3, this.state.color4, this.state.color5])}
+        <section className="PaletteContainer-section">
+          {this.displayPalettes([
+            this.state.color1,
+            this.state.color2,
+            this.state.color3,
+            this.state.color4,
+            this.state.color5
+          ])}
         </section>
       </main>
-    )
+    );
   }
 }
 

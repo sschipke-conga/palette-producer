@@ -2,7 +2,7 @@ import './PaletteCard.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const PaletteCard = ({ select, project, palette }) => {
+export const PaletteCard = ({ select, project, palette, removePalette }) => {
 
   const colors = [palette.color1, palette.color2, palette.color3, palette.color4, palette.color5];
 
@@ -17,10 +17,21 @@ export const PaletteCard = ({ select, project, palette }) => {
   })
 
   return (
-    <div className='PaletteCard' id={palette.id} name={palette.name} onClick={() => select(project, palette)}>
-      {displayColors}
-    </div >
-  )
+    <div className="PaletteCard-div">
+      {palette.name && <h4 className="paletteCard-header">{palette.name}</h4>}
+      <div
+        className="PaletteCard"
+        id={palette.id}
+        name={palette.name}
+        onClick={() => select(project, palette)}
+      >
+        {displayColors}
+      </div>
+      <button type="button" id={palette.id} onClick={removePalette}>
+        X
+      </button>
+    </div>
+  );
 }
 
 export default PaletteCard;
