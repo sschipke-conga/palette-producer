@@ -24,7 +24,8 @@
     ],
     "collectCoverageFrom": [
       "src/**/{!(serviceWorker),}.js",
-      "!src/index.js"
+      "!src/index.js",
+      "!src/components/Modal/Modal.js"
     ]
   },
   "eslintConfig": {

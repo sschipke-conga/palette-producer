@@ -1,5 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ColorCard alt snapshot should match the alt snapshot if it is not locked 1`] = `
+<div
+  className="ColorCard"
+>
+  <div
+    className="color"
+    style={
+      Object {
+        "background": "#FFFFFF",
+      }
+    }
+  >
+    <IoIosUnlock
+      className="lock"
+      onClick={[Function]}
+    />
+    <p
+      className="hex"
+    >
+      #FFFFFF
+    </p>
+  </div>
+  <div
+    className="picker-container"
+  >
+    <ColorPicker
+      className="color-picker"
+      color="#FFFFFF"
+      disableAlpha={true}
+      onChangeComplete={[Function]}
+      styles={Object {}}
+      width={170}
+    />
+  </div>
+</div>
+`;
+
 exports[`ColorCard should match the snapshot 1`] = `
 <div
   className="ColorCard"

@@ -18,6 +18,7 @@ describe('ProjectCard', () => {
       color5: "#FFFFFF"
     }
   ];
+  const mockSelect = jest.fn()
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(< ProjectCard
@@ -25,17 +26,16 @@ describe('ProjectCard', () => {
     palettes={mockPalettes}
     removePalette={jest.fn()}
     removeProject={jest.fn()}
-    select={jest.fn()}
+    select={mockSelect}
       />)
   })
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot()
   })
-  describe('click', () => {
-    it.skip('should call select on click', () => {
-      console.log(wrapper)
-      wrapper.find('button').simulate('click')
-      expect(wrapper.instance().select).toHaveBeenCalled()
+  describe('select', () => {
+    it('should call select on click', () => {
+      wrapper.find('.add-palette-container').simulate('click')
+      expect(mockSelect).toHaveBeenCalled()
     })
   })
 })
