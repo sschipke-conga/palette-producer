@@ -35,3 +35,15 @@
 .projectCard-header-name {
   width: 150px;
 }
+
+.delete-project {
+  background: rgb(244, 244, 244);
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+  margin-left: 22px;
+  width: 50px;
+  &:hover {
+    opacity: 0.5;
+  }
+}

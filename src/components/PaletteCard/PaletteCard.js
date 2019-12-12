@@ -1,5 +1,6 @@
 import './PaletteCard.scss';
 import React from 'react';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 import PropTypes from 'prop-types';
 
 export const PaletteCard = ({ select, project, palette, removePalette }) => {
@@ -27,9 +28,9 @@ export const PaletteCard = ({ select, project, palette, removePalette }) => {
       >
         {displayColors}
       </div>
-      <button type="button" id={palette.id} onClick={removePalette}>
-        X
-      </button>
+      <IoIosCloseCircleOutline className='delete-palette'
+        id={project.id}
+        onClick={removePalette} />
     </div>
   );
 }
