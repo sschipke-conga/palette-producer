@@ -106,11 +106,11 @@ describe('SignupForm', () => {
       expect(wrapper.state('error')).toEqual('Passwords do not match')
     })
     it('should update its state to be logged in', async () => {
-      let mockEvent = {preventDefault: jest.fn()}
+      let mockEvent = {target: 'MEEEEEEE',preventDefault: jest.fn()}
       wrapper.instance().setState({ username: 'Susan', password: 'password', confirmPassword: 'password' });
       expect(wrapper.state('isFormComplete')).toEqual(false);
       await wrapper.instance().handleSubmit(mockEvent)
-      expect(wrapper.state('isFormComplete')).toEqual(true);
+      await expect(wrapper.state('isFormComplete')).toEqual(true);
     });
     it('should set an error message to state if something goes wrong', async () => {
       let mockEvent = {preventDefault: jest.fn()}

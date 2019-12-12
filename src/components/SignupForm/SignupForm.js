@@ -32,8 +32,8 @@ class SignupForm extends Component {
       }
       try {
         let res = await createNewUser(newUser)
-        this.props.loadProjects(res.id)
         this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false,isFormComplete:true})
+        this.props.loadProjects(res.id)
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
       this.setState({ error: 'Passwords do not match', passwordError: true})
