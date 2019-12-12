@@ -34,7 +34,7 @@ export class PaletteContainer extends Component {
   }
 
   componentDidMount = () => {
-    if (!this.state.color1.hexCode) {
+    if (!this.props.currentPalette.color1) {
       this.randomizePalette();
     }
   }

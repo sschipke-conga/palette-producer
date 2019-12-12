@@ -173,7 +173,6 @@ export const updatePalette = async palette => {
 
 export const updateProject = async project => {
     let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/projects/${project.id}`;
-    console.log(url)
     let options = {
       method: "PATCH",
       body: JSON.stringify({name: project.name}),

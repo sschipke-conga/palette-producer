@@ -16,7 +16,6 @@ describe('LoginForm', () => {
   beforeEach(() => {
     wrapper = shallow(<LoginForm
     />)
-
   })
   it('should match the initial snapshot', () => {
     expect(wrapper).toMatchSnapshot()
@@ -77,11 +76,12 @@ describe('LoginForm', () => {
       expect(loginUser).toHaveBeenCalledWith(mockNewUser);
     })
     it('should update its state to be logged in', async () => {
-      let mockEvent = { preventDefault: jest.fn() }
+      
+      let mockEvent = { target:'HHHHERRRE', preventDefault: jest.fn() }
       wrapper.instance().setState({ username: 'Susan', password: 'password', confirmPassword: 'password' });
       expect(wrapper.state('isLoggedIn')).toEqual(false);
       await wrapper.instance().handleSubmit(mockEvent)
-      expect(wrapper.state('isLoggedIn')).toEqual(true);
+      await expect(wrapper.state('isLoggedIn')).toEqual(true);
     });
     it('should set an error message to state if something goes wrong', async () => {
       let mockEvent = { preventDefault: jest.fn() }
