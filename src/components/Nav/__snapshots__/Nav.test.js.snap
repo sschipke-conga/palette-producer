@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Nav should match the snapshot 1`] = `
+<nav>
+  <img
+    alt="logo"
+    className="logo"
+    src="2026954.svg"
+  />
+  <NavLink
+    exact={true}
+    to="/login"
+  >
+    Account
+  </NavLink>
+</nav>
+`;

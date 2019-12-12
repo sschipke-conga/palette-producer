@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal should match the snapshot 1`] = `
+<Fragment>
+  <Link
+    to="/"
+  >
+    <div
+      className="modal-background"
+    >
+      <div
+        className="modal-backdrop"
+      />
+    </div>
+  </Link>
+  <div
+    className="modal-div"
+  >
+    <ul
+      className="tabs"
+    >
+      <NavLink
+        className="modal-link"
+        to="/login"
+      >
+        <li
+          className="modal-tab"
+        >
+          Log in
+        </li>
+      </NavLink>
+      <NavLink
+        className="modal-link"
+        to="/signup"
+      >
+        <li
+          className="modal-tab"
+        >
+          Sign up
+        </li>
+      </NavLink>
+    </ul>
+    <Route
+      exact={true}
+      path="/login"
+      render={[Function]}
+    />
+    <Route
+      exact={true}
+      path="/signup"
+      render={[Function]}
+    />
+  </div>
+</Fragment>
+`;
