@@ -2,6 +2,9 @@
 
 Palette Producer is a React App allowing a user to create, delete, and edit palettes.
 
+### Live Site
+[Palette Producer](https://palette-producer.herokuapp.com/)
+
 ### Focuses
 
 The primary learning goals for this project are:
@@ -24,8 +27,6 @@ The second focus for this project is developing professional-level workflow habi
 - exploring git rebase and squashing
 - Highly semantic, specific, professional documentation (README, API documentation, etc)
 
-### Screenshots
-
 ### Tech Stack
 
 - React
@@ -36,16 +37,19 @@ The second focus for this project is developing professional-level workflow habi
 
 - React Colors
 
-### Team (solo)
+### Team
 
 - [Scott Schipke](https://github.com/sschipke)
 - [Pol Sieira](https://github.com/polsieira)
+
+### Project Board
+- [Palette Producer Project Board](https://github.com/users/sschipke/projects/2)
 
 ### Set Up
 
 Clone repo.
 ```
-git clone https://github.com/sschipke
+https://github.com/sschipke/palette-producer
 ```
 Install dependencies.
 ```
@@ -54,4 +58,9 @@ npm install
 Run browser.
 ```
 npm start
+```
+
+Note you will need to set up a server and database from
+```
+https://github.com/sschipke/palette-producer-api
 ```
