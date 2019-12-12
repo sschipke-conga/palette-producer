@@ -40,12 +40,10 @@ exports[`ProjectCard should match the snapshot 1`] = `
     removePalette={[MockFunction]}
     select={[MockFunction]}
   />
-  <button
+  <IoIosCloseCircleOutline
+    className="delete-project"
     id={2}
     onClick={[MockFunction]}
-    type="button"
-  >
-    X
-  </button>
+  />
 </div>
 `;
