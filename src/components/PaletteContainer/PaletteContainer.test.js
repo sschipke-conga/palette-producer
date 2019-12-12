@@ -31,7 +31,7 @@ describe('PaletteContainer', () => {
     save={jest.fn()}
     />)
   })
-  describe('componentDid update', ()=> {
+  describe('componentDidMount', ()=> {
     it.skip('should call randomizePalette', () => {
       expect(wrapper.instance().randomizePalette).toHaveBeenCalled()
     })
