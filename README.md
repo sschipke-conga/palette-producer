@@ -3,7 +3,7 @@
 Palette Producer is a React App allowing a user to create, delete, and edit palettes.
 
 ### Live Site
-[Palette Producer](https://palette-producer.herokuapp.com/)
+[Palette Producer](http://palette-producer.herokuapp.com/)
 
 ### Focuses
 
