@@ -31,4 +31,11 @@ describe('ProjectCard', () => {
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot()
   })
+  describe('click', () => {
+    it.skip('should call select on click', () => {
+      console.log(wrapper)
+      wrapper.find('button').simulate('click')
+      expect(wrapper.instance().select).toHaveBeenCalled()
+    })
+  })
 })

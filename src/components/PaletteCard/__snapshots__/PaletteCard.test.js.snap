@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaletteCard should match the snapshot 1`] = `
+<div
+  className="PaletteCard-div"
+>
+  <h4
+    className="paletteCard-header"
+  >
+    Palette
+  </h4>
+  <div
+    className="PaletteCard"
+    id={1}
+    name="Palette"
+    onClick={[Function]}
+  >
+    <div
+      className="colorblocks"
+      key="0"
+      style={
+        Object {
+          "background": "#FFFFFF",
+        }
+      }
+    />
+    <div
+      className="colorblocks"
+      key="1"
+      style={
+        Object {
+          "background": "#FFFFFF",
+        }
+      }
+    />
+    <div
+      className="colorblocks"
+      key="2"
+      style={
+        Object {
+          "background": "#000000",
+        }
+      }
+    />
+    <div
+      className="colorblocks"
+      key="3"
+      style={
+        Object {
+          "background": "#FFFFFF",
+        }
+      }
+    />
+    <div
+      className="colorblocks"
+      key="4"
+      style={
+        Object {
+          "background": "#FFFFFF",
+        }
+      }
+    />
+  </div>
+  <button
+    id={1}
+    onClick={[MockFunction]}
+    type="button"
+  >
+    X
+  </button>
+</div>
+`;
