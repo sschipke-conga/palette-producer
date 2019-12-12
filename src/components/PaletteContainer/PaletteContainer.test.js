@@ -19,24 +19,24 @@ describe('PaletteContainer', () => {
     color5: "#FFFFFF"
   };
   let wrapper, colorCards;
-  beforeEach(()=> {
-    colorCards = shallow(<colorCard 
-    changeColor={jest.fn()}
-    toggleLock={jest.fn()}
+  beforeEach(() => {
+    colorCards = shallow(<colorCard
+      changeColor={jest.fn()}
+      toggleLock={jest.fn()}
     />)
     wrapper = shallow(<PaletteContainer
-    userID={userID}
-    currentProject={currentProject}
-    currentPalette={currentPalette}
-    save={jest.fn()}
+      userID={userID}
+      currentProject={currentProject}
+      currentPalette={currentPalette}
+      save={jest.fn()}
     />)
   })
-  describe('componentDidMount', ()=> {
+  describe('componentDidMount', () => {
     it.skip('should call randomizePalette', () => {
       expect(wrapper.instance().randomizePalette).toHaveBeenCalled()
     })
   })
-    describe('changeColor',() => {
+  describe('changeColor', () => {
     it('should update the state with a new color ', () => {
       expect(wrapper.state('color1')).toEqual({
         hexCode: '',
@@ -49,19 +49,19 @@ describe('PaletteContainer', () => {
       });
     });
   })
-      describe("toggleLock", () => {
-        it("should update the state by toggling the lock ", () => {
-          expect(wrapper.state("color1")).toEqual({
-            hexCode: "",
-            isLocked: false
-          });
-          wrapper.instance().toggleLock("color1", "");
-          expect(wrapper.state("color1")).toEqual({
-            hexCode: "",
-            isLocked: true
-          });
-        });
+  describe("toggleLock", () => {
+    it("should update the state by toggling the lock ", () => {
+      expect(wrapper.state("color1")).toEqual({
+        hexCode: "",
+        isLocked: false
       });
+      wrapper.instance().toggleLock("color1", "");
+      expect(wrapper.state("color1")).toEqual({
+        hexCode: "",
+        isLocked: true
+      });
+    });
+  });
   describe('generateRandomHex', () => {
     it('should generate a hex code', () => {
       const result = wrapper.instance().generateRandomHex()
@@ -69,7 +69,7 @@ describe('PaletteContainer', () => {
       expect(result.length).toEqual(7)
     })
   })
-  describe("randomizePalette", () => {      
+  describe("randomizePalette", () => {
     it('should call generateRandomHex', () => {
       wrapper.instance().generateRandomHex = jest.fn()
       wrapper.instance().randomizePalette()
@@ -77,7 +77,7 @@ describe('PaletteContainer', () => {
     })
   });
   describe('displayPalettes', () => {
-    it.skip('should return and array of ColorCards', ()=> {
+    it.skip('should return and array of ColorCards', () => {
       wrapper.instance().changeColor = 3
       wrapper.instance().toggleLock = 3;
       expect(

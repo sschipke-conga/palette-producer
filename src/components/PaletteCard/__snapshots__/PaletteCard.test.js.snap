@@ -61,12 +61,10 @@ exports[`PaletteCard should match the snapshot 1`] = `
       }
     />
   </div>
-  <button
+  <IoIosCloseCircleOutline
+    className="delete-palette"
     id={1}
     onClick={[MockFunction]}
-    type="button"
-  >
-    X
-  </button>
+  />
 </div>
 `;
