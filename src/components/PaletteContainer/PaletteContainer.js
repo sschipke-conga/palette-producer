@@ -11,57 +11,62 @@ export class PaletteContainer extends Component {
     this.state = {
       userID,
       color1: {
-        hexCode: '',
+        hexCode: this.generateRandomHex(),
         isLocked: false
       },
       color2: {
-        hexCode: '',
+        hexCode: this.generateRandomHex(),
         isLocked: false
       },
       color3: {
-        hexCode: '',
+        hexCode: this.generateRandomHex(),
         isLocked: false
       },
       color4: {
-        hexCode: '',
+        hexCode: this.generateRandomHex(),
         isLocked: false
       },
       color5: {
-        hexCode: '',
+        hexCode: this.generateRandomHex(),
         isLocked: false
       }
     }
   }
 
   componentDidMount = () => {
-    if (!this.props.currentPalette.color1) {
+    if (!this.state.color1) {
       this.randomizePalette();
     }
   }
 
   componentWillReceiveProps = () => {
-    this.setState({
-      color1: {
-        hexCode: this.props.currentPalette.color1 || this.generateRandomHex(),
-        isLocked: false
-      },
-      color2: {
-        hexCode: this.props.currentPalette.color2 || this.generateRandomHex(),
-        isLocked: false
-      },
-      color3: {
-        hexCode: this.props.currentPalette.color3 || this.generateRandomHex(),
-        isLocked: false
-      },
-      color4: {
-        hexCode: this.props.currentPalette.color4 || this.generateRandomHex(),
-        isLocked: false
-      },
-      color5: {
-        hexCode: this.props.currentPalette.color5 || this.generateRandomHex(),
-        isLocked: false
-      }
-    })
+    if (!this.state.color1) {
+      this.randomizePalette()
+    }
+    if (this.props.currentPalette.color1) {
+      this.setState({
+        color1: {
+          hexCode: this.props.currentPalette.color1,
+          isLocked: false
+        },
+        color2: {
+          hexCode: this.props.currentPalette.color2,
+          isLocked: false
+        },
+        color3: {
+          hexCode: this.props.currentPalette.color3,
+          isLocked: false
+        },
+        color4: {
+          hexCode: this.props.currentPalette.color4,
+          isLocked: false
+        },
+        color5: {
+          hexCode: this.props.currentPalette.color5,
+          isLocked: false
+        }
+      })
+    }
   }
 
   changeColor = (colorN, hexCode) => {
