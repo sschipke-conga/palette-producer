@@ -41,7 +41,7 @@ exports[`PaletteContainer should match the snapshot 1`] = `
   >
     <ColorCard
       changeColor={[Function]}
-      color=""
+      color="#1f16fb"
       index="color1"
       isLocked={false}
       key="0"
@@ -49,7 +49,7 @@ exports[`PaletteContainer should match the snapshot 1`] = `
     />
     <ColorCard
       changeColor={[Function]}
-      color=""
+      color="#8a4ab3"
       index="color2"
       isLocked={false}
       key="1"
@@ -57,7 +57,7 @@ exports[`PaletteContainer should match the snapshot 1`] = `
     />
     <ColorCard
       changeColor={[Function]}
-      color=""
+      color="#6033c9"
       index="color3"
       isLocked={false}
       key="2"
@@ -65,7 +65,7 @@ exports[`PaletteContainer should match the snapshot 1`] = `
     />
     <ColorCard
       changeColor={[Function]}
-      color=""
+      color="#ac5861"
       index="color4"
       isLocked={false}
       key="3"
@@ -73,7 +73,7 @@ exports[`PaletteContainer should match the snapshot 1`] = `
     />
     <ColorCard
       changeColor={[Function]}
-      color=""
+      color="#5979"
       index="color5"
       isLocked={false}
       key="4"
