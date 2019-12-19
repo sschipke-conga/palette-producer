@@ -25,13 +25,18 @@ class App extends Component {
   loadUserProjectsAndPalettes = async userID => {
     await this.setState({ projects: [], palettes: {} });
     await this.setState({ userID: userID });
-    let projects = await getUserProjects(userID);
-    await this.setState({ projects });
-    let palettePromises = [];
-    await projects.forEach(project => {
-      palettePromises.push(getProjectPalettes(project.id));
-    });
-    await this.setState({ palettes: await Promise.all(palettePromises) });
+    try {
+      let projects = await getUserProjects(userID);
+      await this.setState({ projects });
+      let palettePromises = [];
+      await projects.forEach(project => {
+        palettePromises.push(getProjectPalettes(project.id));
+      });
+      await this.setState({ palettes: await Promise.all(palettePromises) });
+    } catch ({message}) {
+      console.error(message)
+      this.setState({projects: [], palettes: {}})
+    }
   };
 
   select = (project, palette) => {
