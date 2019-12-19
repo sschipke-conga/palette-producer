@@ -23,9 +23,13 @@ export const ProjectContainer = ({ select, projects, palettes, removePalette, re
 
   return (
     <div className='ProjectContainer'>
-      <div className='add-project-container' onClick={() => select({name: ''}, {name: ''})}>
+      {projects.length === 0 && (<>
+      <h4 className='no-projects'>Get started by your first palette to your first project!</h4>
+      <p className='explanation'>Once you've made a palette, double click it to select it.</p>
+      </>)}
+      {projects.length !== 0 && <div className='add-project-container' onClick={() => select({name: ''}, {name: ''})}>
         <IoIosAddCircleOutline className='add-project-icon' />
-      </div>
+      </div>}
       {displayProjects}
     </div >
   )
