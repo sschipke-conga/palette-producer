@@ -22,6 +22,14 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    if (localStorage.getItem("user")) {
+      const savedUser = JSON.parse(localStorage.getItem("user"));
+      this.setState({userID: savedUser.user_id})
+      this.loadUserProjectsAndPalettes(savedUser.user_id)
+    }
+  }
+
   loadUserProjectsAndPalettes = async userID => {
     await this.setState({ projects: [], palettes: {} });
     await this.setState({ userID: userID });
@@ -102,6 +110,7 @@ class App extends Component {
       this.loadUserProjectsAndPalettes(this.state.userID);
     }
   }
+
 
   render() {
     return (
