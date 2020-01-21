@@ -30,12 +30,9 @@ class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       this.setState({username:"", password:"", error:"", isLoggedIn: true})
+      localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
       this.props.loadProjects(res.id)
     } catch ({message}) {this.setState({error: message})}
-  }
-
-  componentDidMount() {
-
   }
 
   render() {

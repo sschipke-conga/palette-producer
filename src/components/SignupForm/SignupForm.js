@@ -33,6 +33,7 @@ class SignupForm extends Component {
       try {
         let res = await createNewUser(newUser)
         this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false,isFormComplete:true})
+      localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
         this.props.loadProjects(res.id)
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
