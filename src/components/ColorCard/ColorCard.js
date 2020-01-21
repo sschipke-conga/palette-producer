@@ -19,7 +19,7 @@ export const ColorCard = ({ index, color, isLocked, changeColor, toggleLock }) =
         <p className='hex'>{color}</p>
       </div>
       <div className='picker-container'>
-        <ChromePicker className='color-picker' disableAlpha={true} width={170} color={color} onChangeComplete={({ hex }) => changeColor(index, hex)} />
+        <ChromePicker className='color-picker' disableAlpha={true} width={170} color={color} onChange={({ hex }) => changeColor(index, hex)} />
       </div>
     </div >
   )
