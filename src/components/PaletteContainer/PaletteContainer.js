@@ -127,6 +127,15 @@ export class PaletteContainer extends Component {
   render() {
     return (
       <main className="PaletteContainer">
+        <section className="PaletteContainer-section">
+          {this.displayPalettes([
+            this.state.color1,
+            this.state.color2,
+            this.state.color3,
+            this.state.color4,
+            this.state.color5
+          ])}
+        </section>
         <header className="PaleteContainer-header">
           <div className="PaleteContainer-names">
             <input
@@ -165,15 +174,6 @@ export class PaletteContainer extends Component {
             />
           </div>
         </header>
-        <section className="PaletteContainer-section">
-          {this.displayPalettes([
-            this.state.color1,
-            this.state.color2,
-            this.state.color3,
-            this.state.color4,
-            this.state.color5
-          ])}
-        </section>
       </main>
     );
   }
