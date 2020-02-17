@@ -126,32 +126,28 @@ class App extends Component {
           exact
           path="/"
           render={() => (
-            <PaletteContainer
-              userID={this.state.userID}
-              currentProject={this.state.currentProject}
-              currentPalette={this.state.currentPalette}
-              handleChange={this.handleChange}
-              projectName={this.state.projectName}
-              paletteName={this.state.paletteName}
-              save={this.save}
-            />
+            <div>
+              <PaletteContainer
+                userID={this.state.userID}
+                currentProject={this.state.currentProject}
+                currentPalette={this.state.currentPalette}
+                handleChange={this.handleChange}
+                projectName={this.state.projectName}
+                paletteName={this.state.paletteName}
+                save={this.save}
+              />
+              {this.state.userID && (
+                <ProjectContainer
+                  projects={this.state.projects}
+                  palettes={this.state.palettes}
+                  select={this.select}
+                  removePalette={this.removePalette}
+                  removeProject={this.removeProject}
+                />
+              )}
+            </div>
           )}
         />
-        {this.state.userID && (
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <ProjectContainer
-                projects={this.state.projects}
-                palettes={this.state.palettes}
-                select={this.select}
-                removePalette={this.removePalette}
-                removeProject={this.removeProject}
-              />
-            )}
-          />
-        )}
       </main>
     );
   }

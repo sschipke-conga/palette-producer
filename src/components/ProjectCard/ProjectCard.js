@@ -24,13 +24,15 @@ export const ProjectCard = ({ project, select, palettes, removePalette, removePr
   return (
     <div className='ProjectCard' id={project.d} name={project.name}>
       <h3 className="projectCard-header-name">{project.name}</h3>
-      <div className='add-palette-container' onClick={() => select(project, { name: '' })}>
-        <IoIosAddCircleOutline className='add-palette-icon' />
-      </div>
+      <button className='add-palette-container' onClick={() => select(project, { name: '' })}>
+        Create a new palette
+      </button>
       {displayPalettes}
-      <IoIosCloseCircleOutline className='delete-project'
+      <button className='delete-project'
         id={project.id}
-        onClick={removeProject} />
+        onClick={removeProject}>
+          Delete this project 
+      </button>
     </div >
   )
 }
