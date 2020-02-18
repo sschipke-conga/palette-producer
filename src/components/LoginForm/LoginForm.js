@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {loginUser} from '../../util/apiCalls';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import {setUser} from '../../actions'
 import './LoginForm.scss';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -22,6 +25,7 @@ class LoginForm extends Component {
     e.preventDefault()
     const {username, password, error
     } = this.state
+    const {setUser} = this.props
     const user = {
       username,
       password
@@ -29,7 +33,9 @@ class LoginForm extends Component {
 
     try {
       let res = await loginUser(user)
+      setUser({user_id: res.id, username: res.username})
       this.setState({username:"", password:"", error:"", isLoggedIn: true})
+
       localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
       this.props.loadProjects(res.id)
     } catch ({message}) {this.setState({error: message})}
@@ -37,7 +43,8 @@ class LoginForm extends Component {
 
   render() {
     const {username, password, error, isLoggedIn} = this.state;
-    if(isLoggedIn) {
+    const {user} = this.props
+    if(isLoggedIn || user) {
       return <Redirect to="/" />
     }
     let loginErrrorClass = error ? "input-error" : "";
@@ -77,4 +84,16 @@ class LoginForm extends Component {
   }
 }
 
-export default LoginForm;
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setUser
+    },
+    dispatch
+  );
+
+export const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
