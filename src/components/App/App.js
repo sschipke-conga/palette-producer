@@ -27,11 +27,11 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    if (localStorage.getItem("user")) {
-      const savedUser = JSON.parse(localStorage.getItem("user"));
-      this.setState({userID: savedUser.user_id})
-      this.loadUserProjectsAndPalettes(savedUser.user_id)
-    }
+    // if (localStorage.getItem("user")) {
+    //   const savedUser = JSON.parse(localStorage.getItem("user"));
+    //   this.setState({userID: savedUser.user_id})
+    //   this.loadUserProjectsAndPalettes(savedUser.user_id)
+    // }
   }
 
   loadUserProjectsAndPalettes = async userID => {
@@ -42,14 +42,17 @@ export class App extends Component {
     try {
       let projects = await getUserProjects(userID);
       // await this.setState({ projects });
+      console.log(projects)
       setAllProjects(projects)
       let palettePromises = [];
       await projects.forEach(project => {
         palettePromises.push(getProjectPalettes(project.id));
+        console.log(palettePromises)
       });
       // await this.setState({ palettes: await Promise.all(palettePromises) });
-      let resolvedPalettes = await Promise.all(palettePromises)
-      setAllPalettes(...resolvedPalettes);
+      // let resolvedPalettes = await Promise.all(palettePromises)
+      // console.log(resolvedPalettes)
+      setAllPalettes(await Promise.all(palettePromises));
     } catch ({message}) {
       console.error(message)
       this.setState({projects: [], palettes: {}})

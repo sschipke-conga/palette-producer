@@ -7,11 +7,11 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 
-export const ProjectCard = ({ project, select, removePalette, allPalettes, removeProject }) => {
+export const ProjectCard = ({ project, select, removePalette, palettes, removeProject }) => {
   let displayPalettes = 'Add some palettes'
-  if (allPalettes.length) {
+  if (palettes.length) {
 
-    displayPalettes = allPalettes.map((palette, index) => {
+    displayPalettes = palettes.map((palette, index) => {
       return (
         <PaletteCard
           key={'PaletteCard' + index}

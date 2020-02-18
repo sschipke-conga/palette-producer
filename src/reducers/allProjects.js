@@ -1,7 +1,7 @@
 const allProjects = (state = [], action) => {
   switch (action.type) {
     case "SET_PROJECTS":
-      return [...state,...action.allProjects];
+      return [...action.allProjects];
     default:
       return state;
   }
