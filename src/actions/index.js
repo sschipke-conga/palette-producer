@@ -5,6 +5,11 @@ export const setUser = user => ({
   user
 });
 
+export const setAllProjects = allProjects => ({
+  type: 'SET_PROJECTS',
+  allProjects
+});
+
 export const setCurrentPalette = palette => ({
   type: 'SET_CURRENT_PALETTE',
   palette
