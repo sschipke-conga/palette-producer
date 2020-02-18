@@ -7,52 +7,10 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {generateRandomHex} from '../../util/helperFuncs'
 import {setCurrentPalette} from '../../actions/index'
+import PaletteForm from '../PaletteForm/PaletteForm'
 import ColorCard from '../ColorCard/ColorCard';
 
 export class PaletteContainer extends Component {
-
-  // componentDidMount = () => {
-  //   const { color1, color2, color3, color4, color5 } = this.state
-  //   const {setCurrentPalette} = this.props
-  //   const palette = {
-  //     color1: color1.hexCode,
-  //     color2: color2.hexCode,
-  //     color3: color3.hexCode,
-  //     color4: color4.hexCode,
-  //     color5: color5.hexCode
-  //   }
-  //   setCurrentPalette(palette)
-  // }
-
-  // componentWillReceiveProps = () => {
-  //   if (!this.state.color1) {
-  //     this.randomizePalette()
-  //   }
-  //   if (this.props.currentPalette.color1) {
-  //     this.setState({
-  //       color1: {
-  //         hexCode: this.props.currentPalette.color1,
-  //         isLocked: false
-  //       },
-  //       color2: {
-  //         hexCode: this.props.currentPalette.color2,
-  //         isLocked: false
-  //       },
-  //       color3: {
-  //         hexCode: this.props.currentPalette.color3,
-  //         isLocked: false
-  //       },
-  //       color4: {
-  //         hexCode: this.props.currentPalette.color4,
-  //         isLocked: false
-  //       },
-  //       color5: {
-  //         hexCode: this.props.currentPalette.color5,
-  //         isLocked: false
-  //       }
-  //     })
-  //   }
-  // }
 
   randomizePalette = () => {
     const {setCurrentPalette, currentPalette} = this.props;
@@ -89,24 +47,7 @@ export class PaletteContainer extends Component {
           {this.displayPalettes()}
         </section>
         <header className="PaleteContainer-header">
-          {/* <div className="PaleteContainer-names">
-            <input
-              type="text"
-              className="project-name"
-              name="projectName"
-              value={this.props.projectName}
-              placeholder="Enter new project name"
-              onChange={this.props.handleChange}
-            />
-            <input
-              type="text"
-              className="palette-name"
-              name="paletteName"
-              value={this.props.paletteName}
-              placeholder="Enter new palette name"
-              onChange={this.props.handleChange}
-            />
-          </div> */}
+          <PaletteForm />
           <div className="icon-container">
             <IoIosRefresh
               className="randomize-icon"

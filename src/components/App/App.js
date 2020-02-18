@@ -9,6 +9,7 @@ import { setCurrentPalette, setAllPalettes } from "../../actions/index";
 import { getUserProjects, getProjectPalettes, deletePalette, deleteProject, saveProject, savePalette, updatePalette, updateProject } from '../../util/apiCalls';
 import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
+import allPalettes from '../../reducers/allPalettes';
 
 
 export class App extends Component {
@@ -44,6 +45,7 @@ export class App extends Component {
         palettePromises.push(getProjectPalettes(project.id));
       });
       await this.setState({ palettes: await Promise.all(palettePromises) });
+      this.props.setAllPalettes(await Promise.all(palettePromises));
     } catch ({message}) {
       console.error(message)
       this.setState({projects: [], palettes: {}})
@@ -116,6 +118,7 @@ export class App extends Component {
 
 
   render() {
+    const {currentPalette, isMenuActive} = this.props
     return (
       <main className="App">
         <Route
@@ -124,9 +127,9 @@ export class App extends Component {
             <div>
               <Nav />
             <Modal loadProjects={this.loadUserProjectsAndPalettes} />
-                          <PaletteContainer
+                <PaletteContainer
                 userID={this.state.userID}
-                currentPalette={this.state.currentPalette}
+                currentPalette={currentPalette}
                 handleChange={this.handleChange}
                 projectName={this.state.projectName}
                 paletteName={this.state.paletteName}
@@ -143,13 +146,14 @@ export class App extends Component {
               <Nav />
               <PaletteContainer
                 userID={this.state.userID}
-                currentPalette={this.state.currentPalette}
+                currentPalette={currentPalette}
                 handleChange={this.handleChange}
                 projectName={this.state.projectName}
                 paletteName={this.state.paletteName}
                 save={this.save}
               />
-              {/* {this.state.userID && (
+              {this.s}
+              {isMenuActive && (
                 <ProjectContainer
                   projects={this.state.projects}
                   palettes={this.state.palettes}
@@ -157,7 +161,7 @@ export class App extends Component {
                   removePalette={this.removePalette}
                   removeProject={this.removeProject}
                 />
-              )} */}
+              )}
             </div>
           )}
         />
@@ -169,13 +173,17 @@ export class App extends Component {
 export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setCurrentPalette
+      setCurrentPalette,
+      setAllPalettes
     },
     dispatch
   );
 
   export const mapStateToProps = state => ({
-    currentPalette: state.currentPalette
+    allPalettes: state.allPalettes,
+    currentPalette: state.currentPalette,
+    user: state.user,
+    isMenuActive: state.isMenuActive
   });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

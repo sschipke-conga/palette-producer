@@ -1,7 +1,7 @@
 
 
 export const setUser = user => ({
-  type: 'Set_USER',
+  type: 'SET_USER',
   user
 });
 
@@ -11,6 +11,10 @@ export const setCurrentPalette = palette => ({
 });
 
 export const setAllPalettes = allPalettes => ({
-  type: 'SET_PLETTES',
+  type: 'SET_PALETTES',
   allPalettes
 });
+
+export const toggleMenu = () => ({
+  type: 'TOGGLE_MENU'
+})

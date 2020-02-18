@@ -1,12 +1,35 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import { bindActionCreators } from "redux";
+import { toggleMenu } from '../../actions/index'
+import { connect } from "react-redux";
+
 import './Nav.scss'
 import logo from '../../assets/logo.svg';
 
-const Nav = () =>
+export const Nav = ({toggleMenu, user}) =>
   <nav>
     <img className="logo" src={logo} alt="logo" />
-    <NavLink exact to="/login">Account</NavLink>
+    <button onClick={toggleMenu}>Menu</button>
+    {user ? 
+    <div>
+      <p className="display-username">Welcome, {user.username}!</p>
+    </div>
+    :
+    <NavLink exact to="/login">Account</NavLink>}
   </nav>
 
-export default Nav;
+export const mapStateToProps = state => ({
+  isMenuActive: state.isMenuActive,
+  user: state.user
+});
+
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      toggleMenu
+    },
+    dispatch
+  );
+
+export default connect(mapStateToProps, mapDispatchToProps)(Nav);
