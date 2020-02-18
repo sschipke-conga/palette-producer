@@ -10,12 +10,6 @@ import {setCurrentPalette} from '../../actions/index'
 import ColorCard from '../ColorCard/ColorCard';
 
 export class PaletteContainer extends Component {
-  constructor({ userID, currentProject, currentPalette, save }) {
-    super();
-    this.state = {
-      userID,
-    };
-  }
 
   // componentDidMount = () => {
   //   const { color1, color2, color3, color4, color5 } = this.state
@@ -60,34 +54,19 @@ export class PaletteContainer extends Component {
   //   }
   // }
 
-  changeColor = (colorN, hexCode) => {
-    this.setState({
-      [colorN]: {
-        hexCode,
-        isLocked: false
-      }
-    })
-  }
-
   randomizePalette = () => {
-    const {setCurrentPalette} = this.props;
-    // const currentPalette = this.props
-    // setCurrentPalette({})
-    // for (let parameter of ["color1", "color2", "color3", "color4", "color5"]) {
-    //   if (!this.state[parameter].isLocked) {
-    //     this.setState({
-    //       [parameter]: {
-    //         hexCode: generateRandomHex(),
-    //         isLocked: false
-    //       }
-    //     })
-    //   }
-    // }
-    
-
+    const {setCurrentPalette, currentPalette} = this.props;
+    const updatedPalette = currentPalette.map(item => {
+      if(!item.isLocked) {
+        item.hexCode = generateRandomHex()
+      }
+      return item
+    })
+    console.log('random')
+    setCurrentPalette(updatedPalette)
   }
 
-  displayPalettes = colors => {
+  displayPalettes = () => {
     const {currentPalette} = this.props
     return currentPalette.map((color, index) => {
       return (
@@ -107,16 +86,10 @@ export class PaletteContainer extends Component {
     return (
       <main className="PaletteContainer">
         <section className="PaletteContainer-section">
-          {this.displayPalettes([
-            this.state.color1,
-            this.state.color2,
-            this.state.color3,
-            this.state.color4,
-            this.state.color5
-          ])}
+          {this.displayPalettes()}
         </section>
         <header className="PaleteContainer-header">
-          <div className="PaleteContainer-names">
+          {/* <div className="PaleteContainer-names">
             <input
               type="text"
               className="project-name"
@@ -133,24 +106,15 @@ export class PaletteContainer extends Component {
               placeholder="Enter new palette name"
               onChange={this.props.handleChange}
             />
-          </div>
+          </div> */}
           <div className="icon-container">
             <IoIosRefresh
               className="randomize-icon"
               onClick={this.randomizePalette}
             />
-            <IoMdSave
+            {/* <IoMdSave
               className="save-icon"
-              onClick={() =>
-                this.props.save({
-                  color1: this.state.color1.hexCode,
-                  color2: this.state.color2.hexCode,
-                  color3: this.state.color3.hexCode,
-                  color4: this.state.color4.hexCode,
-                  color5: this.state.color5.hexCode
-                })
-              }
-            />
+            /> */}
           </div>
         </header>
       </main>

@@ -3,12 +3,15 @@ import './App.scss';
 import PaletteContainer from '../PaletteContainer/PaletteContainer';
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 import Modal from '../Modal/Modal';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setCurrentPalette, setAllPalettes } from "../../actions/index";
 import { getUserProjects, getProjectPalettes, deletePalette, deleteProject, saveProject, savePalette, updatePalette, updateProject } from '../../util/apiCalls';
 import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
 
 
-class App extends Component {
+export class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -115,11 +118,21 @@ class App extends Component {
   render() {
     return (
       <main className="App">
-        <Nav />
         <Route
           path="/(login|signup)"
           render={() => (
+            <div>
+              <Nav />
             <Modal loadProjects={this.loadUserProjectsAndPalettes} />
+                          <PaletteContainer
+                userID={this.state.userID}
+                currentPalette={this.state.currentPalette}
+                handleChange={this.handleChange}
+                projectName={this.state.projectName}
+                paletteName={this.state.paletteName}
+                save={this.save}
+              />
+            </div>
           )}
         />
         <Route
@@ -127,16 +140,16 @@ class App extends Component {
           path="/"
           render={() => (
             <div>
+              <Nav />
               <PaletteContainer
                 userID={this.state.userID}
-                currentProject={this.state.currentProject}
                 currentPalette={this.state.currentPalette}
                 handleChange={this.handleChange}
                 projectName={this.state.projectName}
                 paletteName={this.state.paletteName}
                 save={this.save}
               />
-              {this.state.userID && (
+              {/* {this.state.userID && (
                 <ProjectContainer
                   projects={this.state.projects}
                   palettes={this.state.palettes}
@@ -144,7 +157,7 @@ class App extends Component {
                   removePalette={this.removePalette}
                   removeProject={this.removeProject}
                 />
-              )}
+              )} */}
             </div>
           )}
         />
@@ -153,7 +166,19 @@ class App extends Component {
   }
 }
 
-export default App;
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setCurrentPalette
+    },
+    dispatch
+  );
+
+  export const mapStateToProps = state => ({
+    currentPalette: state.currentPalette
+  });
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
 

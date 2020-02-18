@@ -19,7 +19,7 @@ export const PaletteCard = ({ select, project, palette, removePalette }) => {
 
   return (
     <div className="PaletteCard-div">
-      {palette.name && <h4 className="paletteCard-header">{palette.name}</h4>}
+      <h4 className="paletteCard-header">{palette.name}</h4>
       <div
         className="PaletteCard"
         id={palette.id}
