@@ -3,12 +3,15 @@ import React from 'react';
 import PaletteCard from '../PaletteCard/PaletteCard';
 import PropTypes from 'prop-types';
 import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 
-export const ProjectCard = ({ project, select, palettes, removePalette, removeProject }) => {
+export const ProjectCard = ({ project, select, removePalette, allPalettes, removeProject }) => {
   let displayPalettes = 'Add some palettes'
-  if (palettes) {
-    displayPalettes = palettes.map((palette, index) => {
+  if (allPalettes.length) {
+
+    displayPalettes = allPalettes.map((palette, index) => {
       return (
         <PaletteCard
           key={'PaletteCard' + index}
@@ -37,7 +40,21 @@ export const ProjectCard = ({ project, select, palettes, removePalette, removePr
   )
 }
 
-export default ProjectCard;
+// export const mapDispatchToProps = dispatch =>
+//   bindActionCreators(
+//     {
+//       setUser
+//     },
+//     dispatch
+//   );
+
+export const mapStateToProps = state => ({
+  user: state.user,
+  allProjects: state.allProjects,
+  allPalettes: state.allPalettes
+});
+
+export default connect(mapStateToProps)(ProjectCard);
 
 ProjectCard.propTypes = {
 

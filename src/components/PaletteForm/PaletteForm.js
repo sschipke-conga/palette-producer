@@ -43,9 +43,9 @@ class PaletteForm extends Component {
     const paletteToPost = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
-      color3: currentPalette[0].hexCode,
-      color4: currentPalette[0].hexCode,
-      color5: currentPalette[0].hexCode,
+      color3: currentPalette[2].hexCode,
+      color4: currentPalette[3].hexCode,
+      color5: currentPalette[4].hexCode,
       name: paletteName,
       project_id: projectId
     };
@@ -54,19 +54,26 @@ class PaletteForm extends Component {
       try {
         const res = await saveProject({name: projectName, user_id: user.user_id})
         paletteToPost.project_id = res.id
-        savePalette(paletteToPost)
+        await savePalette(paletteToPost)
+        this.reset()
       } catch ({error}) {
         console.error(error)
       }
     } else {
       try {
         savePalette(paletteToPost)
+        this.reset()
       } catch ({error}) {
         console.error(error)
       }
     }
-
   }
+
+  reset = () => {
+    this.setState({projectName: '', paletteName:'', projectId:''})
+  }
+
+
 
   render() {
     const { paletteName, projectName, error, isLoggedIn, projectId,} = this.state;

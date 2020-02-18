@@ -1,18 +1,19 @@
 import './ProjectContainer.scss';
 import React from 'react';
 import ProjectCard from '../ProjectCard/ProjectCard';
+import { connect } from "react-redux";
 import PropTypes from 'prop-types';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 
-export const ProjectContainer = ({ select, projects, palettes, removePalette, removeProject }) => {
+export const ProjectContainer = ({ select, removePalette, removeProject, allPalettes, allProjects }) => {
   let displayProjects = null;
-  if (projects.length !== 0 && palettes.length !== 0) {
-    displayProjects = projects.map((project, index) => {
+  if (allProjects.length !== 0 && allPalettes.length !== 0) {
+    displayProjects = allProjects.map((project, index) => {
       return (
         <ProjectCard
           key={'ProjectCard' + index}
           project={project}
-          palettes={palettes[index]}
+          palettes={allPalettes[index]}
           select={select}
           removePalette={removePalette}
           removeProject={removeProject}
@@ -23,11 +24,11 @@ export const ProjectContainer = ({ select, projects, palettes, removePalette, re
 
   return (
     <div className='ProjectContainer'>
-      {projects.length === 0 && (<>
+      {allProjects.length === 0 && (<>
       <h4 className='no-projects'>Get started by adding a palette to your first project!</h4>
       <p className='explanation'>Once you've made a palette, double click it to select it.</p>
       </>)}
-      {projects.length !== 0 && <button className='add-project-container' onClick={() => select({name: ''}, {name: ''})}>
+      {allProjects.length !== 0 && <button className='add-project-container' onClick={() => select({name: ''}, {name: ''})}>
         Create a new project
       </button>}
       {displayProjects}
@@ -35,7 +36,13 @@ export const ProjectContainer = ({ select, projects, palettes, removePalette, re
   )
 }
 
-export default ProjectContainer;
+export const mapStateToProps = state => ({
+  user: state.user,
+  allProjects: state.allProjects,
+  allPalettes: state.allPalettes
+});
+
+export default connect(mapStateToProps)(ProjectContainer);
 
 ProjectContainer.propTypes = {
 
