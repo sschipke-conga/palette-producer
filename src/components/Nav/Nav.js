@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './Nav.scss'
-import logo from '../../assets/2026954.svg';
+import logo from '../../assets/logo.svg';
 
 const Nav = () =>
   <nav>
