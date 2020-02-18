@@ -1,7 +1,8 @@
 const allPalettes = (state = [], action) => {
   switch (action.type) {
     case "SET_PALETTES":
-      return [...action.allPalettes];
+      console.log('palettes reduce', action)
+      return [...state, ...action.allPalettes];
     default:
       return state;
   }
