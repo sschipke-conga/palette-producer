@@ -21,8 +21,11 @@ export class ColorCard extends Component {
   }
 
   changeColor = (hexCode) => {
-    const updatedPalette = this.props.currentPalette;
-    const { color, index, setCurrentPalette } = this.props;
+    const { color, index, isLocked, currentPalette, setCurrentPalette } = this.props;
+    if(isLocked) {
+      return false
+    }
+    const updatedPalette = currentPalette;
     updatedPalette[index].hexCode = hexCode
     setCurrentPalette(updatedPalette);
   }
@@ -41,7 +44,10 @@ export class ColorCard extends Component {
         <p className='hex'>{this.props.color}</p>
       </div>
       <div className='picker-container'>
+        {isLocked ?
+        null :
         <ChromePicker className='color-picker' disableAlpha={true} width={170} color={color} onChange={({ hex }) => this.changeColor(hex)} />
+        }
       </div>
     </div >
   )
