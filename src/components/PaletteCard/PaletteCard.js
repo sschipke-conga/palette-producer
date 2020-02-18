@@ -3,7 +3,8 @@ import React from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import {setCurrentPalette} from '../../actions'
+import {setCurrentPalette, removePalette} from '../../actions'
+import {deletePalette} from '../../util/apiCalls'
 import PropTypes from 'prop-types';
 
 export const PaletteCard = ({ select, project, palette, removePalette, setCurrentPalette }) => {
@@ -40,7 +41,11 @@ export const PaletteCard = ({ select, project, palette, removePalette, setCurren
       </div>
       <IoIosCloseCircleOutline className='delete-palette'
         id={project.id}
-        onClick={removePalette} />
+        onClick={async () => {
+          await deletePalette(palette.id)
+          removePalette(palette.id)
+        }
+      } />
     </div>
   );
 }
@@ -48,7 +53,8 @@ export const PaletteCard = ({ select, project, palette, removePalette, setCurren
 export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setCurrentPalette
+      setCurrentPalette,
+      removePalette
     },
     dispatch
   );
