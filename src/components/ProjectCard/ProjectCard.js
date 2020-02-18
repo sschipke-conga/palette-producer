@@ -18,7 +18,6 @@ export const ProjectCard = ({ project, select, removePalette, allPalettes, remov
           project={project}
           select={select}
           palette={palette}
-          removePalette={removePalette}
         />
       )
     })

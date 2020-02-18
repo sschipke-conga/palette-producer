@@ -23,3 +23,8 @@ export const setAllPalettes = allPalettes => ({
 export const toggleMenu = () => ({
   type: 'TOGGLE_MENU'
 })
+
+export const removePalette = (id) => ({
+  type: 'REMOVE_PALETTE',
+  id: parseInt(id)
+});
