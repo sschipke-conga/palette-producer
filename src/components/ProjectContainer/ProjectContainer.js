@@ -9,6 +9,13 @@ export const ProjectContainer = ({ select, removePalette, removeProject, allPale
   let displayProjects = null;
   if (allProjects.length !== 0 && allPalettes.length !== 0) {
     displayProjects = allProjects.map((project, index) => {
+      // let palettesForProject = allPalettes.filter(
+      //   palette => {
+      //     console.log(project.id, palette.project_id)
+      //     return palette.project_id === project.id
+      //   }
+      //   );
+        // console.log(palettesForProject)
       return (
         <ProjectCard
           key={'ProjectCard' + index}
