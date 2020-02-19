@@ -22,12 +22,12 @@ const initialState = [
         }
       ]
 
-const currentPalette = (state = [], action) => {
+const currentPalette = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_CURRENT_PALETTE':
       return [...action.palette];
     default:
-      return initialState;
+      return state;
   }
 };
 

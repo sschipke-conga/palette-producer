@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {createNewUser} from '../../util/apiCalls';
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { setUser } from "../../actions";
 import {Redirect} from 'react-router-dom';
 import './SignupForm.scss'
 
@@ -24,6 +27,8 @@ class SignupForm extends Component {
   handleSubmit = async (e) => {
     e.preventDefault()
     const {password, confirmPassword, username} = this.state
+    const { setUser, loadProjects } = this.props;
+
     if (password === confirmPassword) {
       this.setState({passwordError:false})
       const newUser = {
@@ -32,9 +37,10 @@ class SignupForm extends Component {
       }
       try {
         let res = await createNewUser(newUser)
+        setUser(res)
         this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false,isFormComplete:true})
       localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
-        this.props.loadProjects(res.id)
+        loadProjects(res.id)
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
       this.setState({ error: 'Passwords do not match', passwordError: true})
@@ -43,7 +49,8 @@ class SignupForm extends Component {
 
   render() {
     const {error, passwordError, hasError, username, password, confirmPassword, isFormComplete} = this.state;
-    if(isFormComplete) {
+    const {user} = this.props
+    if(isFormComplete || user) {
       return <Redirect to="/" />
     }
     const passwordErrorClass = passwordError ? "input-error" : "";
@@ -102,4 +109,16 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setUser
+    },
+    dispatch
+  );
+
+export const mapStateToProps = state => ({
+  user: state.user
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
