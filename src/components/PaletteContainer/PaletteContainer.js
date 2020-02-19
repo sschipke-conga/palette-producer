@@ -20,7 +20,6 @@ export class PaletteContainer extends Component {
       }
       return item
     })
-    console.log('random')
     setCurrentPalette(updatedPalette)
   }
 

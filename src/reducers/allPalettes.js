@@ -9,7 +9,6 @@ const allPalettes = (state = [], action) => {
       let updatedPalettes = state.filter(palette => palette.id !== action.id)
       return [...updatedPalettes]
     case 'ADD_PALETTE':
-      console.log('in reducer',action.palette)
       return  [...state, action.palette]
     default:
       return state;

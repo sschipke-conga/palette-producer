@@ -13,7 +13,6 @@ export class LoginForm extends Component {
       username: "",
       password: "",
       error: "",
-      isLoggedIn: false
     };
   }
 
@@ -34,7 +33,7 @@ export class LoginForm extends Component {
     try {
       let res = await loginUser(user)
       setUser({user_id: res.id, username: res.username})
-      this.setState({username:"", password:"", error:"", isLoggedIn: true})
+      this.setState({username:"", password:"", error:""})
 
       localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
       this.props.loadProjects(res.id)
@@ -42,9 +41,9 @@ export class LoginForm extends Component {
   }
 
   render() {
-    const {username, password, error, isLoggedIn} = this.state;
+    const {username, password, error} = this.state;
     const {user} = this.props
-    if(isLoggedIn || user) {
+    if(user) {
       return <Redirect to="/" />
     }
     let loginErrrorClass = error ? "input-error" : "";
