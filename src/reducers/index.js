@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import user from './user'
 import currentPalette from './currentPalette'
-import selectedPaletteInfo from './currentPaletteInfo'
-import selectedProjectInfo from './currentProjectInfo' 
+import selectedPaletteInfo from './selectedPaletteInfo'
+import selectedProjectInfo from './selectedProjectInfo' 
 import allPalettes from './allPalettes'
 import allProjects from './allProjects'
 import isMenuActive from './menuActive'

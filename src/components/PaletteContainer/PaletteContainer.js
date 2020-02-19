@@ -11,7 +11,6 @@ import PaletteForm from '../PaletteForm/PaletteForm'
 import ColorCard from '../ColorCard/ColorCard';
 
 export class PaletteContainer extends Component {
-
   randomizePalette = () => {
     const {setCurrentPalette, currentPalette} = this.props;
     const updatedPalette = currentPalette.map(item => {
@@ -39,24 +38,19 @@ export class PaletteContainer extends Component {
   }
 
   render() {
-    const {currentPalette} = this.props
+    const {user, selectedPaletteInfo} = this.props
     return (
       <main className="PaletteContainer">
         <section className="PaletteContainer-section">
           {this.displayPalettes()}
         </section>
-        <header className="PaleteContainer-header">
-          <PaletteForm />
-          <div className="icon-container">
+        <div className="icon-container">
             <IoIosRefresh
               className="randomize-icon"
               onClick={this.randomizePalette}
             />
-            {/* <IoMdSave
-              className="save-icon"
-            /> */}
           </div>
-        </header>
+          {user && <PaletteForm />}
       </main>
     );
   }
@@ -65,7 +59,13 @@ export class PaletteContainer extends Component {
 
 
 export const mapStateToProps = state => ({
-  currentPalette: state.currentPalette
+  allPalettes: state.allPalettes,
+  allProjects: state.allProjects,
+  currentPalette: state.currentPalette,
+  selectedPaletteInfo: state.selectedPaletteInfo,
+  selectedProjectInfo: state.selectedProjectInfo,
+  user: state.user,
+  isMenuActive: state.isMenuActive
 });
 
 export const mapDispatchToProps = dispatch =>

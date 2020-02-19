@@ -4,9 +4,10 @@ import { Redirect } from "react-router-dom";
 import { loginUser } from "../../util/apiCalls";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {savePalette, saveProject} from '../../util/apiCalls'
-import { setCurrentPalette, addPalette, removePalette, addProject} from "../../actions/index";
-import "./PaletteForm.test";
+import {savePalette, saveProject, updatePalette} from '../../util/apiCalls'
+import { setCurrentPalette, addPalette, removePalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette} from "../../actions/index";
+import "./PaletteForm.scss";
+import selectedProjectInfo from "../../reducers/selectedProjectInfo";
 
 
 
@@ -17,7 +18,8 @@ class PaletteForm extends Component {
       paletteName: '',
       projectName: '',
       projectId: '',
-      error: ''
+      error: '',
+      isUpdateSuccess: false
     };
   }
 
@@ -71,6 +73,27 @@ class PaletteForm extends Component {
     }
   }
 
+  updateSelectedPalette = async () => {
+    const { currentPalette, selectedPaletteInfo, selectedProjectInfo} = this.props
+    const paletteToUpdate = {
+      color1: currentPalette[0].hexCode,
+      color2: currentPalette[1].hexCode,
+      color3: currentPalette[2].hexCode,
+      color4: currentPalette[3].hexCode,
+      color5: currentPalette[4].hexCode,
+      name: selectedPaletteInfo.name,
+      project_id: selectedProjectInfo.id,
+      id: selectedPaletteInfo.id
+    };
+    try {
+      console.log('trying')
+      await updatePalette(paletteToUpdate)
+      this.setState({isUpdateSuccess: true})
+    } catch({error}) {
+      console.error(error)
+    }
+  }
+
   reset = () => {
     this.setState({projectName: '', paletteName:'', projectId:'', error:''})
   }
@@ -78,47 +101,48 @@ class PaletteForm extends Component {
 
 
   render() {
-    const { paletteName, projectName, error, projectId,} = this.state;
-
-    let loginErrrorClass = error ? "input-error" : "";
+    const { paletteName, projectName, error, projectId, isUpdateSuccess} = this.state;
+    const { selectedPaletteInfo, resetSelectedPalette, resetSelectedProject, resetCurrentPalette } = this.props
     return (
-      <form onSubmit={this.handleSubmit}>
+      <div className="palette-form">
+      {!selectedPaletteInfo.name && <form onSubmit={this.handleSubmit}>
         {error ? <p className="error-message">{error}</p> : null}
-        <div className="form-label-input-div">
-          <label htmlFor="password">Project</label>
-          <select
-            value={projectId}
-            onChange={this.handleChange}
-            id="projectId"
-            required
-          >
-            <option value="" defaultValue>
-              Please select a project
-            </option>
-            <option value="CreateNew" defaultValue>
-              Create a new project
-            </option>
-            {this.displayProjectOptions()}
-          </select>
-        </div>
-        {projectId === "CreateNew" && (
+        <div className="project-div">
           <div className="form-label-input-div">
-            <label htmlFor="paletteName">Project Name</label>
-            <input
-              type="text"
-              placeholder="New Project's Name"
-              id="projectName"
-              required
-              value={projectName}
+            <label htmlFor="password">Project</label>
+            <select
+              value={projectId}
               onChange={this.handleChange}
-            />
+              id="projectId"
+              required
+            >
+              <option value="" defaultValue>
+                Please select a project
+              </option>
+              <option value="CreateNew" defaultValue>
+                Create a new project
+              </option>
+              {this.displayProjectOptions()}
+            </select>
           </div>
-        )}
+          {projectId === "CreateNew" && (
+            <div className="form-label-input-div">
+              <label htmlFor="paletteName">Project Name</label>
+              <input
+                type="text"
+                placeholder="New Project's Name"
+                id="projectName"
+                required
+                value={projectName}
+                onChange={this.handleChange}
+              />
+            </div>
+          )}
+          </div>
         <div className="form-label-input-div">
           <label htmlFor="paletteName">Palette Name</label>
           <input
             type="text"
-            className={loginErrrorClass}
             placeholder="Enter your username"
             id="paletteName"
             required
@@ -127,7 +151,39 @@ class PaletteForm extends Component {
           />
         </div>
         <button type="submit">Save Palette</button>
-      </form>
+      </form>}
+      {selectedProjectInfo.name && (< div className="update-palette-div" hidden={selectedPaletteInfo.name ? false : true} >
+          <h4>Current Palette: {selectedPaletteInfo.name}</h4>
+          <p>Edit the colors of this palette, then click the button below to update it.</p>
+        <button className="update-palette-button"
+        onClick={() => this.updateSelectedPalette()}
+        >
+          Update palette
+        </button>
+          <button onClick={() => {
+            resetSelectedPalette()
+            resetSelectedProject()
+            resetCurrentPalette()
+            this.setState({ isUpdateSuccess: false })
+          }
+          }>
+            Create a new palette
+          </button>
+        {isUpdateSuccess && <div className='modal-div message'>
+          <h5>Successfully updated!</h5>
+          <button onClick={ () => {
+            resetSelectedPalette()
+            resetSelectedProject()
+            resetCurrentPalette()
+            this.setState({isUpdateSuccess: false})
+            }
+          }>
+            Create new palette
+          </button>
+        </div>
+        }
+      </div>)}
+    </div>
     );
   }
 }
@@ -138,7 +194,10 @@ export const mapDispatchToProps = dispatch =>
       addPalette,
       addProject,
       removePalette,
-      setCurrentPalette,
+      resetCurrentPalette,
+      resetSelectedPalette,
+      resetSelectedProject,
+      setCurrentPalette
     },
     dispatch
   );
@@ -147,6 +206,8 @@ export const mapStateToProps = state => ({
   allPalettes: state.allPalettes,
   allProjects: state.allProjects,
   currentPalette: state.currentPalette,
+  selectedPaletteInfo: state.selectedPaletteInfo,
+  selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
   isMenuActive: state.isMenuActive
 });

@@ -53,3 +53,15 @@ export const removeProject = id => ({
   type: 'REMOVE_PROJECT',
   id
 })
+
+export const resetSelectedPalette = () => ({
+  type: 'RESET'
+})
+
+export const resetSelectedProject = () => ({
+  type: 'RESET'
+})
+
+export const resetCurrentPalette = () => ({
+  type: 'RESET'
+})
