@@ -2,18 +2,18 @@ import './PaletteCard.scss';
 import React from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { IoIosCloseCircleOutline, IoMdTrash, IoIosCreate   } from 'react-icons/io';
 import {
   setCurrentPalette,
   removePalette,
   toggleMenu,
-  setCurrentPaletteInfo,
-  setCurrentProjectInfo
+  selectPaletteInfo,
+  selectProjectInfo
 } from "../../actions";
 import {deletePalette} from '../../util/apiCalls'
 import PropTypes from 'prop-types';
 
-export const PaletteCard = ({ palettesLeft, project, palette, removePalette, setCurrentPalette, toggleMenu }) => {
+export const PaletteCard = ({ palettesLeft, project, palette, removePalette, setCurrentPalette, selectPaletteInfo, selectProjectInfo, toggleMenu }) => {
 
   const colors = [palette.color1, palette.color2, palette.color3, palette.color4, palette.color5];
   let paletteToDisplay = [
@@ -41,26 +41,32 @@ export const PaletteCard = ({ palettesLeft, project, palette, removePalette, set
         className="PaletteCard"
         id={palette.id}
         name={palette.name}
-        onClick={() => {
-          setCurrentPalette(paletteToDisplay)
-          toggleMenu()
-          }
-        }
       >
         {displayColors}
       </div>
-      {/* { palettesLeft > 1 && */}
-        <button className='delete-palette'
-          disabled={palettesLeft > 1 ? false : true }
-          id={project.id}
-          onClick={async () => {
-            await deletePalette(palette.id)
-            removePalette(palette.id)
+      <div className="palette-buttons-div">
+          <button className='palette-button'
+            disabled={palettesLeft > 1 ? false : true }
+            id={project.id}
+            onClick={async () => {
+              await deletePalette(palette.id)
+              removePalette(palette.id)
+            }
+          }>
+          <IoMdTrash disabled={palettesLeft > 1 ? false : true} className="delete-icon"/>
+          </button>
+        <button className='palette-button'
+        onClick={() => {
+          setCurrentPalette(paletteToDisplay)
+          selectPaletteInfo({ id: palette.id, name: palette.name, project_id: project.id })
+          selectProjectInfo({ name: project.name, id: project.id })
+          toggleMenu()
           }
-        }>
-          X this palette
+        }
+          >
+          <IoIosCreate className="edit-icon" />
         </button>
-      {/* } */}
+      </div>
     </div>
   );
 }
@@ -69,6 +75,8 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       setCurrentPalette,
+      selectPaletteInfo,
+      selectProjectInfo,
       removePalette,
       toggleMenu
     },
@@ -79,6 +87,8 @@ export const mapStateToProps = state => ({
   allPalettes: state.allPalettes,
   allProjects: state.allProjects,
   currentPalette: state.currentPalette,
+  selectedPaletteInfo: state.selectedPaletteInfo,
+  selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
   isMenuActive: state.isMenuActive
 });

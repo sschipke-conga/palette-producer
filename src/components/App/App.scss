@@ -5,12 +5,8 @@ body {
   font-family: "Rubik", sans-serif;
 }
 
-button:hover {
+button {
   cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
 }
 
 .App {

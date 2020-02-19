@@ -15,12 +15,12 @@ export const setCurrentPalette = palette => ({
   palette
 });
 
-export const setCurrentPaletteInfo = info => ({
+export const selectPaletteInfo = info => ({
   type: 'SET_CURRENT_PALETTE_INFO',
   info
 });
 
-export const setCurrentProjectInfo = info => ({
+export const selectProjectInfo = info => ({
   type: 'SET_CURRENT_PROJECT_INFO',
   info
 });
@@ -52,4 +52,16 @@ export const addProject = project => ({
 export const removeProject = id => ({
   type: 'REMOVE_PROJECT',
   id
+})
+
+export const resetSelectedPalette = () => ({
+  type: 'RESET'
+})
+
+export const resetSelectedProject = () => ({
+  type: 'RESET'
+})
+
+export const resetCurrentPalette = () => ({
+  type: 'RESET'
 })
