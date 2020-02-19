@@ -5,9 +5,11 @@ import PropTypes from 'prop-types';
 import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import {removeProject} from '../../actions'
+import {deleteProject} from '../../util/apiCalls'
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 
-export const ProjectCard = ({ project, select, removePalette, palettes, removeProject }) => {
+export const ProjectCard = ({ project, select, palettes, removeProject }) => {
   let displayPalettes = 'Add some palettes'
   if (palettes.length) {
 
@@ -18,13 +20,14 @@ export const ProjectCard = ({ project, select, removePalette, palettes, removePr
           project={project}
           select={select}
           palette={palette}
+          palettesLeft={palettes.length}
         />
       )
     })
   }
 
   return (
-    <div className='ProjectCard' id={project.d} name={project.name}>
+    <div className='ProjectCard' id={project.id} name={project.name}>
       <h3 className="projectCard-header-name">{project.name}</h3>
       <button className='add-palette-container' onClick={() => select(project, { name: '' })}>
         Create a new palette
@@ -32,20 +35,24 @@ export const ProjectCard = ({ project, select, removePalette, palettes, removePr
       {displayPalettes}
       <button className='delete-project'
         id={project.id}
-        onClick={removeProject}>
+        onClick={() => {
+          deleteProject(project.id)
+          removeProject(project.id)
+          }
+        }>
           Delete this project 
       </button>
     </div >
   )
 }
 
-// export const mapDispatchToProps = dispatch =>
-//   bindActionCreators(
-//     {
-//       setUser
-//     },
-//     dispatch
-//   );
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      removeProject
+    },
+    dispatch
+  );
 
 export const mapStateToProps = state => ({
   user: state.user,
@@ -53,7 +60,7 @@ export const mapStateToProps = state => ({
   allPalettes: state.allPalettes
 });
 
-export default connect(mapStateToProps)(ProjectCard);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectCard);
 
 ProjectCard.propTypes = {
 
