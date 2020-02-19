@@ -4,14 +4,10 @@
 
 .PaletteCard {
   border: 2px black solid;
-  cursor: pointer;
   display: flex;
   flex: 0 0 auto;
   height: 200px;
   width: 200px;
-  &:hover {
-    opacity: 0.5;
-  }
 }
 
 .colors-div {
@@ -25,14 +21,33 @@
   width: 20%;
 }
 
-.delete-palette {
+.palette-buttons-div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.palette-button {
   background: rgb(244, 244, 244);
   border-radius: 5px;
   cursor: pointer;
   height: 50px;
-  margin-top: 22px;
+  padding: 0;
+  margin-top: 10px;
   width: 50px;
+
   &:hover {
     opacity: 0.5;
   }
+  &:disabled {
+    cursor: not-allowed;
+    
+  }
+    .delete-icon, .edit-icon {
+      height: 100%;
+      width: 100%;
+      &:disabled {
+      cursor: not-allowed;
+      }
+    }
 }
