@@ -5,7 +5,7 @@ import { loginUser } from "../../util/apiCalls";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {savePalette, saveProject} from '../../util/apiCalls'
-import { setCurrentPalette, setAllPalettes } from "../../actions/index";
+import { setCurrentPalette, addPalette, removePalette} from "../../actions/index";
 import "./PaletteForm.test";
 
 
@@ -39,7 +39,7 @@ class PaletteForm extends Component {
 
   savePalette = async () => {
     const {paletteName, projectId, projectName} = this.state
-    const {currentPalette, user} = this.props
+    const {currentPalette, user, addPalette} = this.props
     const paletteToPost = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
@@ -47,21 +47,23 @@ class PaletteForm extends Component {
       color4: currentPalette[3].hexCode,
       color5: currentPalette[4].hexCode,
       name: paletteName,
-      project_id: projectId
+      project_id: parseInt(projectId)
     };
     console.log(paletteToPost)
     if(projectId === 'CreateNew' ) {
       try {
         const res = await saveProject({name: projectName, user_id: user.user_id})
         paletteToPost.project_id = res.id
-        await savePalette(paletteToPost)
+        let newPalette = await savePalette(paletteToPost)
+        addPalette(newPalette)
         this.reset()
       } catch ({error}) {
         console.error(error)
       }
     } else {
       try {
-        savePalette(paletteToPost)
+        let newPalette = await savePalette(paletteToPost);
+        addPalette(newPalette);
         this.reset()
       } catch ({error}) {
         console.error(error)
@@ -133,8 +135,9 @@ class PaletteForm extends Component {
 export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      setCurrentPalette,
-      setAllPalettes
+      addPalette,
+      removePalette,
+      setCurrentPalette
     },
     dispatch
   );

@@ -153,7 +153,7 @@ export class App extends Component {
               <Nav />
               <PaletteContainer
                 userID={this.state.userID}
-                currentPalette={currentPalette}
+                // currentPalette={currentPalette}
                 handleChange={this.handleChange}
                 projectName={this.state.projectName}
                 paletteName={this.state.paletteName}

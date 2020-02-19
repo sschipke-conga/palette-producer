@@ -10,7 +10,7 @@ import logo from '../../assets/logo.svg';
 export const Nav = ({toggleMenu, user}) =>
   <nav>
     <img className="logo" src={logo} alt="logo" />
-    <button onClick={toggleMenu}>Menu</button>
+    {user && <button onClick={toggleMenu}>Menu</button>}
     {user ? 
     <div>
       <p className="display-username">Welcome, {user.username}!</p>

@@ -34,6 +34,11 @@ export const toggleMenu = () => ({
   type: 'TOGGLE_MENU'
 })
 
+export const addPalette = palette => ({
+  type: 'ADD_PALETTE',
+  palette
+});
+
 export const removePalette = (id) => ({
   type: 'REMOVE_PALETTE',
   id: parseInt(id)
