@@ -3,11 +3,17 @@ import React from 'react';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import {setCurrentPalette, removePalette} from '../../actions'
+import {
+  setCurrentPalette,
+  removePalette,
+  toggleMenu,
+  setCurrentPaletteInfo,
+  setCurrentProjectInfo
+} from "../../actions";
 import {deletePalette} from '../../util/apiCalls'
 import PropTypes from 'prop-types';
 
-export const PaletteCard = ({ select, project, palette, removePalette, setCurrentPalette }) => {
+export const PaletteCard = ({ select, project, palette, removePalette, setCurrentPalette, toggleMenu }) => {
 
   const colors = [palette.color1, palette.color2, palette.color3, palette.color4, palette.color5];
   let paletteToDisplay = [
@@ -35,7 +41,11 @@ export const PaletteCard = ({ select, project, palette, removePalette, setCurren
         className="PaletteCard"
         id={palette.id}
         name={palette.name}
-        onClick={() => setCurrentPalette(paletteToDisplay)}
+        onClick={() => {
+          setCurrentPalette(paletteToDisplay)
+          toggleMenu()
+          }
+        }
       >
         {displayColors}
       </div>
@@ -54,7 +64,8 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       setCurrentPalette,
-      removePalette
+      removePalette,
+      toggleMenu
     },
     dispatch
   );

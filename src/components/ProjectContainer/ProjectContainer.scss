@@ -1,16 +1,14 @@
-.ProjectContainer {
-  position: relative;
-	top: -500%;
-	left: 0;
-	height: 100vh;
-	width: 100vw;
-	transition: 0.3s ease-in-out;
-  background: gray;
-  border: 2px solid gray;
-  margin: 20px auto;
-  overflow: scroll;
-  width: 95%;
-  z-index: 10;
+div .ProjectContainer {
+  position: absolute;
+    top: 50%;
+    height: 90vh;
+    width: 100vw;
+    transition: 0.3s ease-in-out;
+    background: gray;
+    border: 2px solid gray;
+    margin: 20px auto;
+    overflow: scroll;
+    min-width: 90vw;
 }
 
 .add-project-container {
