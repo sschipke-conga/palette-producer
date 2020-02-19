@@ -58,7 +58,7 @@ export const PaletteCard = ({ palettesLeft, project, palette, removePalette, set
         <button className='palette-button'
         onClick={() => {
           setCurrentPalette(paletteToDisplay)
-          selectPaletteInfo({ name: palette.name, project_id: project.id })
+          selectPaletteInfo({ id: palette.id, name: palette.name, project_id: project.id })
           selectProjectInfo({ name: project.name, id: project.id })
           toggleMenu()
           }

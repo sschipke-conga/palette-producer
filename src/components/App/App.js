@@ -56,25 +56,25 @@ export class App extends Component {
     });
   };
 
-  removePalette = async e => {
-    let paletteId = parseInt(e.target.id);
-    try {
-      await deletePalette(paletteId);
-      this.loadUserProjectsAndPalettes(this.state.userID);
-    } catch ({ message }) { console.error(message) }
-  };
+  // removePalette = async e => {
+  //   let paletteId = parseInt(e.target.id);
+  //   try {
+  //     await deletePalette(paletteId);
+  //     this.loadUserProjectsAndPalettes(this.state.userID);
+  //   } catch ({ message }) { console.error(message) }
+  // };
 
-  removeProject = async e => {
-    let projectId = parseInt(e.target.id);
-    try {
-      await deleteProject(projectId);
-      this.loadUserProjectsAndPalettes(this.state.userID);
-    } catch ({ message }) { console.error(message) }
-  };
+  // removeProject = async e => {
+  //   let projectId = parseInt(e.target.id);
+  //   try {
+  //     await deleteProject(projectId);
+  //     this.loadUserProjectsAndPalettes(this.state.userID);
+  //   } catch ({ message }) { console.error(message) }
+  // };
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-  };
+  // handleChange = e => {
+  //   this.setState({ [e.target.name]: e.target.value });
+  // };
 
 
   render() {
@@ -111,7 +111,6 @@ export class App extends Component {
                 paletteName={this.state.paletteName}
                 save={this.save}
               />
-              {this.s}
               {isMenuActive && (
                 <ProjectContainer
                   projects={this.state.projects}
