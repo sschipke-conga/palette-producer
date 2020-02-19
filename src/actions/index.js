@@ -15,6 +15,16 @@ export const setCurrentPalette = palette => ({
   palette
 });
 
+export const setCurrentPaletteInfo = info => ({
+  type: 'SET_CURRENT_PALETTE_INFO',
+  info
+});
+
+export const setCurrentProjectInfo = info => ({
+  type: 'SET_CURRENT_PROJECT_INFO',
+  info
+});
+
 export const setAllPalettes = allPalettes => ({
   type: 'SET_PALETTES',
   allPalettes
