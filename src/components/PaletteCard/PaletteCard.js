@@ -13,7 +13,7 @@ import {
 import {deletePalette} from '../../util/apiCalls'
 import PropTypes from 'prop-types';
 
-export const PaletteCard = ({ select, project, palette, removePalette, setCurrentPalette, toggleMenu }) => {
+export const PaletteCard = ({ palettesLeft, project, palette, removePalette, setCurrentPalette, toggleMenu }) => {
 
   const colors = [palette.color1, palette.color2, palette.color3, palette.color4, palette.color5];
   let paletteToDisplay = [
@@ -49,13 +49,18 @@ export const PaletteCard = ({ select, project, palette, removePalette, setCurren
       >
         {displayColors}
       </div>
-      <IoIosCloseCircleOutline className='delete-palette'
-        id={project.id}
-        onClick={async () => {
-          await deletePalette(palette.id)
-          removePalette(palette.id)
-        }
-      } />
+      {/* { palettesLeft > 1 && */}
+        <button className='delete-palette'
+          disabled={palettesLeft > 1 ? false : true }
+          id={project.id}
+          onClick={async () => {
+            await deletePalette(palette.id)
+            removePalette(palette.id)
+          }
+        }>
+          X this palette
+        </button>
+      {/* } */}
     </div>
   );
 }
