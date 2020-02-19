@@ -49,7 +49,6 @@ class PaletteForm extends Component {
       name: paletteName,
       project_id: parseInt(projectId)
     };
-    console.log(paletteToPost)
     if(projectId === 'CreateNew' ) {
       try {
         const res = await saveProject({name: projectName, user_id: user.user_id})
