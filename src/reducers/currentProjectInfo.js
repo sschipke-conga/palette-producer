@@ -1,4 +1,4 @@
-const currentProjectInfo = (
+const selectedProjectInfo = (
   state = { name: null, id: null },
   action
 ) => {
@@ -10,4 +10,4 @@ const currentProjectInfo = (
   }
 };
 
-export default currentProjectInfo;
+export default selectedProjectInfo;

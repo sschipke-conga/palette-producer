@@ -1,4 +1,4 @@
-const currentPaletteInfo = (state = {name: null, project_id: null}, action) => {
+const selectedPaletteInfo = (state = {name: null, project_id: null}, action) => {
   switch (action.type) {
     case 'SET_CURRENT_PALETTE_INFO':
       return action.info;
@@ -7,4 +7,4 @@ const currentPaletteInfo = (state = {name: null, project_id: null}, action) => {
   }
 };
 
-export default currentPaletteInfo;
+export default selectedPaletteInfo;
