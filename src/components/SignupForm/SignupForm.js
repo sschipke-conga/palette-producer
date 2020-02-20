@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import {createNewUser} from '../../util/apiCalls';
+import PropTypes from 'prop-types'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { setUser } from "../../actions";
 import {Redirect} from 'react-router-dom';
 import './SignupForm.scss'
 
-class SignupForm extends Component {
+export class SignupForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -37,9 +38,8 @@ class SignupForm extends Component {
       }
       try {
         let res = await createNewUser(newUser)
-        setUser(res)
-        this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false,isFormComplete:true})
-      localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
+        setUser({user_id: res.id, username: res.username})
+        this.setState({username: '', password: '', confirmPassword: '', error:'', hasError: false, isFormComplete:true})
         loadProjects(res.id)
       } catch ({message}) { this.setState({hasError: true, error: message})}
     } else {
@@ -122,3 +122,9 @@ export const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignupForm);
+
+SignupForm.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired,
+  loadProjects: PropTypes.func.isRequired
+}

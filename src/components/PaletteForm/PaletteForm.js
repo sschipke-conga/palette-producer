@@ -5,13 +5,12 @@ import { loginUser } from "../../util/apiCalls";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {savePalette, saveProject, updatePalette} from '../../util/apiCalls'
-import { setCurrentPalette, addPalette, removePalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette} from "../../actions/index";
+import { setCurrentPalette, addPalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette} from "../../actions/index";
 import "./PaletteForm.scss";
-import selectedProjectInfo from "../../reducers/selectedProjectInfo";
 
 
 
-class PaletteForm extends Component {
+export class PaletteForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -30,12 +29,12 @@ class PaletteForm extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     this.savePalette()
-    e.target.reset()
+    // e.target.reset()
   };
 
   displayProjectOptions = () => {
     return this.props.allProjects.map((project, index) => {
-    return <option key={'Option' + project.id}value={project.id}>{project.name}</option>
+    return <option key={'Option' + project.id} value={project.id}>{project.name}</option>
     })
   }
 
@@ -86,7 +85,6 @@ class PaletteForm extends Component {
       id: selectedPaletteInfo.id
     };
     try {
-      console.log('trying')
       await updatePalette(paletteToUpdate)
       this.setState({isUpdateSuccess: true})
     } catch({error}) {
@@ -95,7 +93,7 @@ class PaletteForm extends Component {
   }
 
   reset = () => {
-    this.setState({projectName: '', paletteName:'', projectId:'', error:''})
+    this.setState({projectName: '', paletteName:'', projectId:'', error:'', isUpdateSuccess: false})
   }
 
 
@@ -152,7 +150,7 @@ class PaletteForm extends Component {
         </div>
         <button type="submit">Save Palette</button>
       </form>}
-      {selectedProjectInfo.name && (< div className="update-palette-div" hidden={selectedPaletteInfo.name ? false : true} >
+      {selectedPaletteInfo.name && (< div className="update-palette-div" >
           <h4>Current Palette: {selectedPaletteInfo.name}</h4>
           <p>Edit the colors of this palette, then click the button below to update it.</p>
         <button className="update-palette-button"
@@ -164,7 +162,7 @@ class PaletteForm extends Component {
             resetSelectedPalette()
             resetSelectedProject()
             resetCurrentPalette()
-            this.setState({ isUpdateSuccess: false })
+            this.reset()
           }
           }>
             Create a new palette
@@ -175,7 +173,7 @@ class PaletteForm extends Component {
             resetSelectedPalette()
             resetSelectedProject()
             resetCurrentPalette()
-            this.setState({isUpdateSuccess: false})
+            this.reset()
             }
           }>
             Create new palette
@@ -193,7 +191,6 @@ export const mapDispatchToProps = dispatch =>
     {
       addPalette,
       addProject,
-      removePalette,
       resetCurrentPalette,
       resetSelectedPalette,
       resetSelectedProject,
@@ -203,7 +200,7 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export const mapStateToProps = state => ({
-  allPalettes: state.allPalettes,
+  // allPalettes: state.allPalettes,
   allProjects: state.allProjects,
   currentPalette: state.currentPalette,
   selectedPaletteInfo: state.selectedPaletteInfo,

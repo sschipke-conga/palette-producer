@@ -92,7 +92,7 @@ describe('SignupForm', () => {
       wrapper.find('form').simulate('submit', mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled()
     })
-    it('should call createNewUser and setUser when called', () => {
+    it('should call createNewUser, loadProjects, and setUser when called', () => {
       let mockNewUser = {
         username: "Susan",
         password: "password"
@@ -105,6 +105,8 @@ describe('SignupForm', () => {
       wrapper.instance().handleSubmit(mockEvent);
       expect(createNewUser).toHaveBeenCalledWith(mockNewUser);
       expect(mockSetUser).toHaveBeenCalled()
+      expect(mockLoadProjects).toHaveBeenCalled()
+
     })
     it('should update with an error if the passwords don\'t match', () => {
       let mockEvent = { preventDefault: jest.fn() }
@@ -137,7 +139,7 @@ describe('SignupForm', () => {
   describe('alt snapShot', () => {
     it('should match the snapshot if a user is logged in', () => {
       let wrapper = shallow(<SignupForm 
-        user={null}
+        user={mockUser}
         setUser={mockSetUser}
         loadProjects={mockLoadProjects}
       />);
