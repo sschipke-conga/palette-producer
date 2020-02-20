@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {loginUser} from '../../util/apiCalls';
 import { bindActionCreators } from "redux";
+import PropTypes from 'prop-types'
 import { connect } from "react-redux";
 import {setUser} from '../../actions'
 import './LoginForm.scss';
@@ -34,9 +35,7 @@ export class LoginForm extends Component {
       let res = await loginUser(user)
       setUser({user_id: res.id, username: res.username})
       this.setState({username:"", password:"", error:""})
-
-      localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
-      this.props.loadProjects(res.id)
+      this.props.loadProjects()
     } catch ({message}) {this.setState({error: message})}
   }
 
@@ -96,3 +95,9 @@ export const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+
+LoginForm.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired,
+  loadProjects: PropTypes.func.isRequired
+}

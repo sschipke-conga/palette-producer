@@ -1,125 +1,69 @@
 import React from "react";
-import PaletteContainer from "./PaletteContainer";
-import ColorCard from '../ColorCard/ColorCard';
+import { PaletteContainer, mapStateToProps, mapDispatchToProps } from './PaletteContainer';
+import {ColorCard} from '../ColorCard/ColorCard'
 import { shallow } from "enzyme";
+import {mockCurrentPalette} from '../../assets/mockData'
+import {generateRandomHex} from '../../util/helperFuncs'
+import {setCurrentPalette} from '../../actions'
+
+jest.mock('../../util/helperFuncs')
+
+const mockSetCurrentPalette = jest.fn()
 
 describe('PaletteContainer', () => {
-  const userID = 1;
-  const currentProject = {
-    name: 'Project'
-  }
-  const currentPalette = {
-    id: 1,
-    name: "Palette",
-    project_id: 1,
-    color1: "#FFFFFF",
-    color2: "#FFFFFF",
-    color3: "#000000",
-    color4: "#FFFFFF",
-    color5: "#FFFFFF"
-  };
+  const mockUser = {name: 'Shanda', id:5};
   let wrapper, colorCards;
   beforeEach(() => {
-    colorCards = shallow(<colorCard
-      changeColor={jest.fn()}
-      toggleLock={jest.fn()}
-    />)
+    // colorCards = shallow(<ColorCard
+    //   index={3}
+    //   color={'#FFFFFF'}
+    //   changeColor={jest.fn()}
+    // />)
     wrapper = shallow(<PaletteContainer
-      userID={userID}
-      currentProject={currentProject}
-      currentPalette={currentPalette}
-      save={jest.fn()}
+      user={mockUser}
+      setCurrentPalette={mockSetCurrentPalette}
+      currentPalette={mockCurrentPalette}
     />)
-  })
-  describe('componentDidMount', () => {
-    it.skip('should call randomizePalette', () => {
-      expect(wrapper.instance().randomizePalette).toHaveBeenCalled()
-    })
-  })
-  describe('changeColor', () => {
-    it('should update the state with a new color ', () => {
-      expect(wrapper.state('color1')).toEqual({
-        hexCode: '',
-        isLocked: false
-      })
-      wrapper.instance().changeColor('color1', '#000000')
-      expect(wrapper.state("color1")).toEqual({
-        hexCode: "#000000",
-        isLocked: false
-      });
-    });
-  })
-  describe("toggleLock", () => {
-    it("should update the state by toggling the lock ", () => {
-      expect(wrapper.state("color1")).toEqual({
-        hexCode: "",
-        isLocked: false
-      });
-      wrapper.instance().toggleLock("color1", "");
-      expect(wrapper.state("color1")).toEqual({
-        hexCode: "",
-        isLocked: true
-      });
-    });
-  });
-  describe('generateRandomHex', () => {
-    it('should generate a hex code', () => {
-      const result = wrapper.instance().generateRandomHex()
-      expect(result[0]).toEqual('#')
-      expect(result.length).toEqual(7)
-    })
   })
   describe("randomizePalette", () => {
     it('should call generateRandomHex', () => {
-      wrapper.instance().generateRandomHex = jest.fn()
       wrapper.instance().randomizePalette()
-      expect(wrapper.instance().generateRandomHex).toHaveBeenCalled()
+      expect(generateRandomHex).toHaveBeenCalled()
+    })
+    it('should call setCurrentPalette', () => {
+      wrapper.instance().randomizePalette()
+      expect(mockSetCurrentPalette).toHaveBeenCalled()
     })
   });
-  describe('displayPalettes', () => {
-    it.skip('should return and array of ColorCards', () => {
-      wrapper.instance().changeColor = 3
-      wrapper.instance().toggleLock = 3;
-      expect(
-        wrapper
-          .instance()
-          .displayPalettes([
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF",
-            "#FFFFFF"
-          ])
-      ).toEqual([
-        <ColorCard
-          changeColor={3}
-          index="color1"
-          toggleLock={3}
-        />,
-        <ColorCard
-          changeColor={3}
-          index="color2"
-          toggleLock={3}
-        />,
-        <ColorCard
-          changeColor={3}
-          index="color3"
-          toggleLock={3}
-        />,
-        <ColorCard
-          changeColor={3}
-          index="color4"
-          toggleLock={3}
-        />,
-        <ColorCard
-          changeColor={3}
-          index="color5"
-          toggleLock={3}
-        />
-      ]);
+  describe('displayPalette', () => {
+    it('should return and array of ColorCards', () => {
+      expect(wrapper.instance().displayPalette().length)
+      .toEqual(5);
     })
   })
   it('should match the snapshot', () => {
     expect(wrapper).toMatchSnapshot()
+  })
+  describe('mapStateToProps/mapDispatchToProps', () => {
+    it('mapStateToProps the user and the state of the menu', () => {
+      const mockUser = { username: 'Dave', id: 4 }
+      const mockState = {
+        currentPalette: mockCurrentPalette,
+        user: mockUser,
+      };
+      const expected = {
+        currentPalette: mockCurrentPalette,
+        user: mockUser,
+      };
+      const mappedProps = mapStateToProps(mockState)
+      expect(mappedProps).toEqual(expected)
+    });
+    it('calls dispatch with setCurrentPalette action when it is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = setCurrentPalette('SET_CURRENT_PALETTE', mockCurrentPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.setCurrentPalette('SET_CURRENT_PALETTE', mockCurrentPalette);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
   })
 })

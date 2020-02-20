@@ -10,21 +10,15 @@ import { render } from 'enzyme';
 
 
 export class ColorCard extends Component {
-
-
-
   toggleLock = () => {
-    const { color, isLocked, index, setCurrentPalette } = this.props;
+    const { index, setCurrentPalette } = this.props;
     const updatedPalette = this.props.currentPalette;
     updatedPalette[index].isLocked = !updatedPalette[index].isLocked;
     setCurrentPalette(updatedPalette)
   }
 
   changeColor = (hexCode) => {
-    const { color, index, isLocked, currentPalette, setCurrentPalette } = this.props;
-    if(isLocked) {
-      return false
-    }
+    const {index, isLocked, currentPalette, setCurrentPalette } = this.props;
     const updatedPalette = currentPalette;
     updatedPalette[index].hexCode = hexCode
     setCurrentPalette(updatedPalette);
@@ -69,5 +63,8 @@ export const mapDispatchToProps = dispatch =>
 export default connect(mapStateToProps, mapDispatchToProps)(ColorCard);
 
 ColorCard.propTypes = {
-
+  index: PropTypes.number.isRequired,
+  color: PropTypes.string.isRequired,
+  setCurrentPalette: PropTypes.func.isRequired,
+  currentPalette: PropTypes.array.isRequired
 }

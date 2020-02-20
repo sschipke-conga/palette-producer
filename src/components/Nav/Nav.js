@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom';
 import { bindActionCreators } from "redux";
 import { toggleMenu } from '../../actions/index'
 import { connect } from "react-redux";
-
 import './Nav.scss'
 import logo from '../../assets/logo.svg';
 
@@ -33,3 +33,8 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+
+Nav.propTypes = {
+  user: PropTypes.object,
+ toggleMenu: PropTypes.func.isRequired
+}

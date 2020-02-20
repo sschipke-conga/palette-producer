@@ -3,21 +3,17 @@ import React from 'react';
 import ProjectCard from '../ProjectCard/ProjectCard';
 import { connect } from "react-redux";
 import PropTypes from 'prop-types';
-import { IoIosAddCircleOutline } from 'react-icons/io';
 
-export const ProjectContainer = ({ select, removePalette, removeProject, allPalettes, allProjects }) => {
+export const ProjectContainer = ({ allPalettes, allProjects }) => {
   let displayProjects = null;
   if (allProjects.length !== 0 && allPalettes.length !== 0) {
     displayProjects = allProjects.map((project, index) => {
-      let palettesByProject = allPalettes.filter(palette => palette.project_id === project.id)
+      const palettesByProject = allPalettes.filter(palette => palette.project_id === project.id)
       return (
         <ProjectCard
           key={'ProjectCard' + index}
           project={project}
           palettes={palettesByProject}
-          select={select}
-          removePalette={removePalette}
-          removeProject={removeProject}
         />
       )
     })
@@ -25,7 +21,7 @@ export const ProjectContainer = ({ select, removePalette, removeProject, allPale
 
   return (
     <div className="ProjectContainer modal-div">
-      {allProjects.length === 0 && (
+      {!allProjects.length && (
         <>
           <h4 className="no-projects">
             Get started by adding a palette to your first project!
@@ -35,21 +31,12 @@ export const ProjectContainer = ({ select, removePalette, removeProject, allPale
           </p>
         </>
       )}
-      {allProjects.length !== 0 && (
-        <button
-          className="add-project-container"
-          onClick={() => select({ name: "" }, { name: "" })}
-        >
-          Create a new project
-        </button>
-      )}
       {displayProjects}
     </div>
   );
 }
 
 export const mapStateToProps = state => ({
-  user: state.user,
   allProjects: state.allProjects,
   allPalettes: state.allPalettes
 });
@@ -57,5 +44,6 @@ export const mapStateToProps = state => ({
 export default connect(mapStateToProps)(ProjectContainer);
 
 ProjectContainer.propTypes = {
-
+  allPalettes: PropTypes.array,
+  allProjects: PropTypes.array
 }
