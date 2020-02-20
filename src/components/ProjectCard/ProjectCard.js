@@ -26,9 +26,6 @@ export const ProjectCard = ({ project, palettes, removeProject }) => {
   return (
     <div className='ProjectCard' id={project.id} name={project.name}>
       <h3 className="projectCard-header-name">{project.name}</h3>
-      <button className='add-palette-container'>
-        Create a new palette
-      </button>
       {displayPalettes}
       <button className='delete-project'
         id={project.id}

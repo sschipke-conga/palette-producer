@@ -6,7 +6,6 @@ import { setCurrentPalette } from "../../actions/index";
 import { ChromePicker } from 'react-color';
 import PropTypes from 'prop-types'
 import { IoIosLock, IoIosUnlock } from 'react-icons/io';
-import { render } from 'enzyme';
 
 
 export class ColorCard extends Component {
