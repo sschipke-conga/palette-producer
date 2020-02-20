@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaletteContainer should match the snapshot 1`] = `
+<main
+  className="PaletteContainer"
+>
+  <section
+    className="PaletteContainer-section"
+  >
+    <Connect(ColorCard)
+      index={0}
+      isLocked={false}
+      key="0"
+    />
+    <Connect(ColorCard)
+      index={1}
+      isLocked={false}
+      key="1"
+    />
+    <Connect(ColorCard)
+      index={2}
+      isLocked={false}
+      key="2"
+    />
+    <Connect(ColorCard)
+      index={3}
+      isLocked={false}
+      key="3"
+    />
+    <Connect(ColorCard)
+      index={4}
+      isLocked={false}
+      key="4"
+    />
+  </section>
+  <div
+    className="icon-container"
+  >
+    <IoIosRefresh
+      className="randomize-icon"
+      onClick={[Function]}
+    />
+  </div>
+  <Connect(PaletteForm) />
+</main>
+`;
