@@ -1,3 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectCard should match the snapshot 1`] = `undefined`;
+exports[`ProjectCard should match the snapshot 1`] = `
+<div
+  className="ProjectCard"
+  id={4}
+  name="Steve"
+>
+  <h3
+    className="projectCard-header-name"
+  >
+    Steve
+  </h3>
+  <Connect(PaletteCard)
+    key="PaletteCard0"
+    palette={
+      Object {
+        "color1": "#FFFFFF",
+        "color2": "#FFFFFF",
+        "color3": "#FFFFFF",
+        "color4": "#FFFFFF",
+        "color5": "#FFFFFF",
+        "id": 2,
+        "project_id": 2,
+      }
+    }
+    palettesLeft={1}
+    project={
+      Object {
+        "id": 4,
+        "name": "Steve",
+      }
+    }
+  />
+  <button
+    className="delete-project"
+    id={4}
+    onClick={[Function]}
+  >
+    Delete this project
+  </button>
+</div>
+`;

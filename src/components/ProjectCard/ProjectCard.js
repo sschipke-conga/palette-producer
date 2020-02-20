@@ -7,18 +7,15 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {removeProject} from '../../actions'
 import {deleteProject} from '../../util/apiCalls'
-import ProjectContainer from '../ProjectContainer/ProjectContainer';
 
-export const ProjectCard = ({ project, select, palettes, removeProject }) => {
+export const ProjectCard = ({ project, palettes, removeProject }) => {
   let displayPalettes = 'Add some palettes'
   if (palettes.length) {
-
     displayPalettes = palettes.map((palette, index) => {
       return (
         <PaletteCard
           key={'PaletteCard' + index}
           project={project}
-          select={select}
           palette={palette}
           palettesLeft={palettes.length}
         />
@@ -29,14 +26,11 @@ export const ProjectCard = ({ project, select, palettes, removeProject }) => {
   return (
     <div className='ProjectCard' id={project.id} name={project.name}>
       <h3 className="projectCard-header-name">{project.name}</h3>
-      <button className='add-palette-container' onClick={() => select(project, { name: '' })}>
-        Create a new palette
-      </button>
       {displayPalettes}
       <button className='delete-project'
         id={project.id}
-        onClick={() => {
-          deleteProject(project.id)
+        onClick={async () => {
+          await deleteProject(project.id)
           removeProject(project.id)
           }
         }>
@@ -56,12 +50,14 @@ export const mapDispatchToProps = dispatch =>
 
 export const mapStateToProps = state => ({
   user: state.user,
-  allProjects: state.allProjects,
-  allPalettes: state.allPalettes
+  // allProjects: state.allProjects,
+  // allPalettes: state.allPalettes
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectCard);
 
 ProjectCard.propTypes = {
-
+  project: PropTypes.object,
+  palettes: PropTypes.array,
+  removeProject: PropTypes.func.isRequired
 }

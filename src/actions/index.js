@@ -44,6 +44,11 @@ export const removePalette = (id) => ({
   id: parseInt(id)
 });
 
+export const updateStoredPalette = (palette) => ({
+  type: 'UPDATE_PALETTE',
+  palette
+})
+
 export const addProject = project => ({
   type: 'ADD_PROJECT',
   project

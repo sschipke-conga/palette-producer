@@ -150,7 +150,6 @@ export const deletePalette = async paletteId => {
 };
 
 export const updatePalette = async palette => {
-  console.log('updating!', palette)
   let url = `${process.env.REACT_APP_PALETTE_PRODUCER_BACKEND_BASE_URL}/api/v1/palettes/${palette.id}`;
   let options = {
     method: "PUT",

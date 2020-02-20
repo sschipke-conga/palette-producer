@@ -28,7 +28,8 @@
     "collectCoverageFrom": [
       "src/**/{!(serviceWorker),}.js",
       "!src/index.js",
-      "!src/components/Modal/Modal.js"
+      "!src/components/Modal/Modal.js",
+      "!src/components/ColorCard/ColorCard.js"
     ]
   },
   "eslintConfig": {

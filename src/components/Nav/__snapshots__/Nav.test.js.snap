@@ -1,3 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Nav should match the snapshot 1`] = `undefined`;
+exports[`Nav should match the snapshot 1`] = `
+<nav>
+  <img
+    alt="logo"
+    className="logo"
+    src="logo.svg"
+  />
+  <button
+    onClick={[MockFunction]}
+  >
+    Menu
+  </button>
+  <div>
+    <p
+      className="display-username"
+    >
+      Welcome, 
+      Gary
+      !
+    </p>
+  </div>
+</nav>
+`;

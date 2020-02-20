@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './PaletteContainer.scss';
 import PropTypes from 'prop-types';
-import { IoMdSave } from "react-icons/io";
 import { IoIosRefresh } from "react-icons/io";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -22,7 +21,7 @@ export class PaletteContainer extends Component {
     setCurrentPalette(updatedPalette)
   }
 
-  displayPalettes = () => {
+  displayPalette = () => {
     const {currentPalette} = this.props
     return currentPalette.map((color, index) => {
       return (
@@ -31,18 +30,17 @@ export class PaletteContainer extends Component {
           index={index}
           color={color.hexCode}
           isLocked={color.isLocked}
-          name={color.name}
         />
       )
     })
   }
 
   render() {
-    const {user, selectedPaletteInfo} = this.props
+    const {user} = this.props
     return (
       <main className="PaletteContainer">
         <section className="PaletteContainer-section">
-          {this.displayPalettes()}
+          {this.displayPalette()}
         </section>
         <div className="icon-container">
             <IoIosRefresh
@@ -59,13 +57,8 @@ export class PaletteContainer extends Component {
 
 
 export const mapStateToProps = state => ({
-  allPalettes: state.allPalettes,
-  allProjects: state.allProjects,
   currentPalette: state.currentPalette,
-  selectedPaletteInfo: state.selectedPaletteInfo,
-  selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
-  isMenuActive: state.isMenuActive
 });
 
 export const mapDispatchToProps = dispatch =>
@@ -77,10 +70,11 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaletteContainer);
-// PaletteContainer.propTypes = {
-
-// }
-
+PaletteContainer.propTypes = {
+  user: PropTypes.object.isRequired,
+  currentPalette: PropTypes.array.isRequired,
+  setCurrentPalette: PropTypes.func.isRequired
+}
 
 
 

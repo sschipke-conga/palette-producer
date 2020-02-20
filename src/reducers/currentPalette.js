@@ -21,7 +21,6 @@ const initialState = [
           isLocked: false
         }
       ]
-
 const currentPalette = (state = initialState, action) => {
   switch (action.type) {
     case 'SET_CURRENT_PALETTE':

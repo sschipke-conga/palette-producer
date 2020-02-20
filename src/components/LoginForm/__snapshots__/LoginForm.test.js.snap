@@ -1,9 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LoginForm alt snapShot should match the snapshot if a user is logged in 1`] = `
-<Redirect
-  to="/"
-/>
+<form
+  onSubmit={[Function]}
+>
+  <p
+    className="form-message"
+  >
+    Good to see you, welcome back!
+  </p>
+  <div
+    className="form-label-input-div"
+  >
+    <label
+      htmlFor="username"
+    >
+      Username
+    </label>
+    <input
+      className=""
+      id="username"
+      onChange={[Function]}
+      placeholder="Enter your username"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-label-input-div"
+  >
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      className=""
+      id="password"
+      minLength="8"
+      onChange={[Function]}
+      placeholder="Enter your password"
+      required={true}
+      type="password"
+      value=""
+    />
+  </div>
+  <button
+    type="submit"
+  >
+    Login
+  </button>
+</form>
 `;
 
-exports[`LoginForm should match the initial snapshot 1`] = `undefined`;
+exports[`LoginForm should match the initial snapshot 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <p
+    className="form-message"
+  >
+    Good to see you, welcome back!
+  </p>
+  <div
+    className="form-label-input-div"
+  >
+    <label
+      htmlFor="username"
+    >
+      Username
+    </label>
+    <input
+      className=""
+      id="username"
+      onChange={[Function]}
+      placeholder="Enter your username"
+      required={true}
+      type="text"
+      value=""
+    />
+  </div>
+  <div
+    className="form-label-input-div"
+  >
+    <label
+      htmlFor="password"
+    >
+      Password
+    </label>
+    <input
+      className=""
+      id="password"
+      minLength="8"
+      onChange={[Function]}
+      placeholder="Enter your password"
+      required={true}
+      type="password"
+      value=""
+    />
+  </div>
+  <button
+    type="submit"
+  >
+    Login
+  </button>
+</form>
+`;
