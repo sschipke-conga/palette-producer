@@ -97,5 +97,12 @@ export default connect(mapStateToProps, mapDispatchToProps)(PaletteCard);
 
 
 PaletteCard.propTypes = {
-
+  palettesLeft: PropTypes.number.isRequired,
+  project: PropTypes.object.isRequired,
+  palette: PropTypes.object.isRequired,
+  removePalette: PropTypes.func.isRequired,
+  setCurrentPalette: PropTypes.func.isRequired,
+  selectPaletteInfo: PropTypes.func.isRequired,
+  selectProjectInfo: PropTypes.func.isRequired,
+  toggleMenu: PropTypes.func.isRequired
 }

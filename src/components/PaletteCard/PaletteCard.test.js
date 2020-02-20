@@ -44,7 +44,6 @@ describe('PaletteCard', () => {
     expect(wrapper).toMatchSnapshot()
   })
   it('should call removePalette with the correct arguments when the  first button is clicked', async () => {
-    console.log(wrapper.find('button').first())
     await wrapper.find('button').first().simulate('click');
     expect(mockRemovePalette).toHaveBeenCalledWith(1)
   })
@@ -53,7 +52,6 @@ describe('PaletteCard', () => {
     expect(deletePalette).toHaveBeenCalledWith(1)
   })
   it('should call setCurrentPalette, selectPaletteInfo, selectProjectInfo, and toggleMenu when the  second button is clicked', () => {
-    console.log(wrapper.find('.edit-palette-button'))
     wrapper.find('.edit-palette-button').simulate('click');
     expect(mockSetCurrentPalette).toHaveBeenCalled()
     expect(mockSelectPaletteInfo).toHaveBeenCalled()
@@ -78,11 +76,41 @@ describe('PaletteCard', () => {
       expect(mappedProps).toEqual(expected)
     });
 
-    it('calls dispatch with setAllPallettes action when it is called', () => {
+    it('calls dispatch with toggleMenu action when it is called', () => {
       const mockDispatch = jest.fn();
       const actionToDispatch = toggleMenu('TOGGLE_MENU', true);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.toggleMenu('SET_USER', true);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+    it('calls dispatch with setCurrentPalette action when it is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = setCurrentPalette('SET_CURRENT_PALETTE', mockCurrentPalette);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.setCurrentPalette('SET_CURRENT_PALETTE', mockCurrentPalette);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+    it('calls dispatch with selectPaletteInfo action when it is called', () => {
+      const mockInfo = {name: 'Fake', id: 44, project_id: 33}
+      const mockDispatch = jest.fn();
+      const actionToDispatch = selectPaletteInfo('SET_PALETTE_INFO', mockInfo);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.selectPaletteInfo('SET_PALETTE_INFO', mockInfo);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+    it('calls dispatch with selectProjectInfo action when it is called', () => {
+      const mockInfo = { name: 'Fake', id: 44 }
+      const mockDispatch = jest.fn();
+      const actionToDispatch = selectProjectInfo('SET_PROJECT_INFO', mockInfo);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.selectProjectInfo('SET_PROJECT_INFO', mockInfo);
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
+    it('calls dispatch with removePalette action when it is called', () => {
+      const mockDispatch = jest.fn();
+      const actionToDispatch = removePalette('REMOVE_PALETTE', 44);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.removePalette('REMOVE_PALETTE', 44);
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   })
