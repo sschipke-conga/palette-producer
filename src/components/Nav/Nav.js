@@ -33,3 +33,8 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+
+Nav.propTypes = {
+  user: PropTypes.object,
+ toggleMenu: PropTypes.func.isRequired
+}

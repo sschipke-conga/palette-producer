@@ -65,17 +65,17 @@ exports[`PaletteCard should match the snapshot 1`] = `
   >
     <button
       className="palette-button"
-      disabled={true}
+      disabled={false}
       id={1}
       onClick={[Function]}
     >
       <IoMdTrash
         className="delete-icon"
-        disabled={true}
+        disabled={false}
       />
     </button>
     <button
-      className="palette-button"
+      className="palette-button edit-palette-button"
       onClick={[Function]}
     >
       <IoIosCreate

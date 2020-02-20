@@ -43,7 +43,6 @@ describe("Nav", () => {
       const actionToDispatch = toggleMenu('TOGGLE_MENU', true);
       const mappedProps = mapDispatchToProps(mockDispatch);
       mappedProps.toggleMenu('SET_USER', true);
-
       expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
     });
   })

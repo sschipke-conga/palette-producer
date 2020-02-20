@@ -1,5 +1,6 @@
 import './PaletteCard.scss';
 import React from 'react';
+import PropTypes from 'prop-types'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { IoIosCloseCircleOutline, IoMdTrash, IoIosCreate   } from 'react-icons/io';
@@ -11,7 +12,6 @@ import {
   selectProjectInfo
 } from "../../actions";
 import {deletePalette} from '../../util/apiCalls'
-import PropTypes from 'prop-types';
 
 export const PaletteCard = ({ palettesLeft, project, palette, removePalette, setCurrentPalette, selectPaletteInfo, selectProjectInfo, toggleMenu }) => {
 
@@ -45,7 +45,7 @@ export const PaletteCard = ({ palettesLeft, project, palette, removePalette, set
         {displayColors}
       </div>
       <div className="palette-buttons-div">
-          <button className='palette-button'
+        <button className='palette-button'
             disabled={palettesLeft > 1 ? false : true }
             id={project.id}
             onClick={async () => {
@@ -54,8 +54,8 @@ export const PaletteCard = ({ palettesLeft, project, palette, removePalette, set
             }
           }>
           <IoMdTrash disabled={palettesLeft > 1 ? false : true} className="delete-icon"/>
-          </button>
-        <button className='palette-button'
+        </button>
+        <button className='palette-button edit-palette-button'
         onClick={() => {
           setCurrentPalette(paletteToDisplay)
           selectPaletteInfo({ id: palette.id, name: palette.name, project_id: project.id })
@@ -84,11 +84,11 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export const mapStateToProps = state => ({
-  allPalettes: state.allPalettes,
-  allProjects: state.allProjects,
-  currentPalette: state.currentPalette,
-  selectedPaletteInfo: state.selectedPaletteInfo,
-  selectedProjectInfo: state.selectedProjectInfo,
+  // allPalettes: state.allPalettes,
+  // allProjects: state.allProjects,
+  // currentPalette: state.currentPalette,
+  // selectedPaletteInfo: state.selectedPaletteInfo,
+  // selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
   isMenuActive: state.isMenuActive
 });
