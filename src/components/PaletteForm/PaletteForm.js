@@ -5,7 +5,7 @@ import { loginUser } from "../../util/apiCalls";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {savePalette, saveProject, updatePalette} from '../../util/apiCalls'
-import { setCurrentPalette, addPalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette} from "../../actions/index";
+import { setCurrentPalette, addPalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette, updateStoredPalette} from "../../actions/index";
 import "./PaletteForm.scss";
 
 
@@ -73,7 +73,7 @@ export class PaletteForm extends Component {
   }
 
   updateSelectedPalette = async () => {
-    const { currentPalette, selectedPaletteInfo, selectedProjectInfo} = this.props
+    const { currentPalette, selectedPaletteInfo, selectedProjectInfo, updateStoredPalette } = this.props
     const paletteToUpdate = {
       color1: currentPalette[0].hexCode,
       color2: currentPalette[1].hexCode,
@@ -87,6 +87,7 @@ export class PaletteForm extends Component {
     try {
       await updatePalette(paletteToUpdate)
       this.setState({isUpdateSuccess: true})
+      updateStoredPalette(paletteToUpdate)
     } catch({error}) {
       console.error(error)
     }
@@ -194,7 +195,8 @@ export const mapDispatchToProps = dispatch =>
       resetCurrentPalette,
       resetSelectedPalette,
       resetSelectedProject,
-      setCurrentPalette
+      setCurrentPalette,
+      updateStoredPalette
     },
     dispatch
   );
@@ -206,7 +208,7 @@ export const mapStateToProps = state => ({
   selectedPaletteInfo: state.selectedPaletteInfo,
   selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
-  isMenuActive: state.isMenuActive
+  isMenuActive: state.isMenuActive,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaletteForm);

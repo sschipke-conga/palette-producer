@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './PaletteContainer.scss';
 import PropTypes from 'prop-types';
-import { IoMdSave } from "react-icons/io";
 import { IoIosRefresh } from "react-icons/io";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -58,13 +57,8 @@ export class PaletteContainer extends Component {
 
 
 export const mapStateToProps = state => ({
-  // allPalettes: state.allPalettes,
-  // allProjects: state.allProjects,
   currentPalette: state.currentPalette,
-  // selectedPaletteInfo: state.selectedPaletteInfo,
-  // selectedProjectInfo: state.selectedProjectInfo,
   user: state.user,
-  // isMenuActive: state.isMenuActive
 });
 
 export const mapDispatchToProps = dispatch =>
@@ -81,7 +75,6 @@ PaletteContainer.propTypes = {
   currentPalette: PropTypes.array.isRequired,
   setCurrentPalette: PropTypes.func.isRequired
 }
-
 
 
 

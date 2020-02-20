@@ -10,6 +10,10 @@ const allPalettes = (state = [], action) => {
       return [...updatedPalettes]
     case 'ADD_PALETTE':
       return  [...state, action.palette]
+      case 'UPDATE_PALETTE':
+        let paletteToUpdate = state.findIndex(palette => palette.id === action.palette.id)
+        state[paletteToUpdate] = action.palette
+        return [...state]
     default:
       return state;
   }

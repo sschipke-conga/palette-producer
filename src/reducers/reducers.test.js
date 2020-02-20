@@ -1,6 +1,11 @@
+import { mockCurrentPalette } from '../assets/mockData'
 import allPalettes from './allPalettes';
 import allProjects from './allProjects'
 import user from './user'
+import currentPalette from './currentPalette'
+import menuActive from './menuActive'
+import selectedPaletteInfo from './selectedPaletteInfo'
+import selectedProjectInfo from './selectedProjectInfo'
 
 describe('allPalettes reducer', () => {
   it('should return the initial state', () => {
@@ -441,6 +446,97 @@ describe('user', () => {
     }
     const result = user(mockUser, mockAction);
     expect(result).toEqual(null)
+  })
+})
+
+describe('currentPalette', () => {
+  it('should return a randomly generate palette for the initialState',() => {
+    const result=currentPalette(undefined, {})
+    expect(result.length).toEqual(5)
+  })
+  it('should set the current palette to state when the SET_CURRENT_PALETTE case is hit', () => {
+    const mockAction= {
+      type: 'SET_CURRENT_PALETTE',
+      palette: mockCurrentPalette
+    }
+    const result = currentPalette(null, mockAction)
+    expect(result).toEqual(mockCurrentPalette)
+  })
+  it('should reset the state to the initial state when the RESET case is hit', () => {
+    const mockAction = {
+      type: 'SET_CURRENT_PALETTE',
+      palette: mockCurrentPalette
+    }
+    expect(currentPalette(null, {})).toEqual(null)
+    const result = currentPalette(null, mockAction)
+    expect(result).toEqual(mockCurrentPalette)
+  })
+})
+
+describe('menuActive', () => {
+  it('should return false for the default state', () => {
+    const result = menuActive(undefined, {});
+    expect(result).toEqual(false)
+  });
+  it('should toggle the state when the TOGGLE_MENU case is hit', () => {
+    expect(menuActive(undefined, {})).toBe(false)
+    const mockAction = {
+      type: 'TOGGLE_MENU',
+    }
+    const result = menuActive(false, mockAction)
+    expect(result).toBe(true)
+  })
+})
+
+describe('selectedPaletteInfo', () => {
+  it('should return the initial state', () => {
+    const expected = {name: null, project_id: null, id:  null};
+    const result = selectedPaletteInfo(undefined, {});
+    expect(result).toEqual(expected)
+  });
+  it('should set the current palette info to state when the SET_CURRENT_PALETTE_INFO case is hit', () => {
+    const mockAction = {
+      type: 'SET_CURRENT_PALETTE_INFO',
+      info: {name: 'Cecily', id: 4, project_id: 12}
+    }
+    const result = selectedPaletteInfo(undefined, mockAction)
+    expect(result).toEqual(mockAction.info)
+  })
+  it('should reset the state when the RESET case is hit', () => {
+    const expected = { name: null, project_id: null, id: null };
+    const mockInfo = { name: 'Cecily', id: 4, project_id: 12 }
+    const mockAction = {
+      type: 'RESET',
+    }
+    expect(selectedPaletteInfo(mockInfo, {})).toEqual(mockInfo)
+    const result = selectedPaletteInfo(mockInfo, mockAction)
+    expect(result).toEqual(expected)
+  })
+})
+
+describe('selectedProjectInfo', () => {
+  it('should return the initial state', () => {
+    const expected = { name: null, id: null };
+    const result = selectedProjectInfo(undefined, {});
+    expect(result).toEqual(expected)
+  });
+  it('should set the current project info to state when the SET_CURRENT_PROJECT_INFO case is hit', () => {
+    const mockAction = {
+      type: 'SET_CURRENT_PROJECT_INFO',
+      info: { name: 'Living Room', id: 4 }
+    }
+    const result = selectedProjectInfo(undefined, mockAction)
+    expect(result).toEqual(mockAction.info)
+  })
+  it('should reset the state when the RESET case is hit', () => {
+    const expected = { name: null, id: null };
+    const mockInfo = { name: 'Living Room', id: 4 }
+    const mockAction = {
+      type: 'RESET',
+    }
+    expect(selectedProjectInfo(mockInfo, {})).toEqual(mockInfo)
+    const result = selectedProjectInfo(mockInfo, mockAction)
+    expect(result).toEqual(expected)
   })
 })
 
