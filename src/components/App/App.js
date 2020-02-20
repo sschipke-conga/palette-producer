@@ -1,40 +1,23 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.scss';
 import PaletteContainer from '../PaletteContainer/PaletteContainer';
 import ProjectContainer from '../ProjectContainer/ProjectContainer';
 import Modal from '../Modal/Modal';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { setCurrentPalette, setAllPalettes, setAllProjects } from "../../actions/index";
-import { getUserProjects, getProjectPalettes, deletePalette, deleteProject, saveProject, savePalette, updatePalette, updateProject } from '../../util/apiCalls';
+import { setAllPalettes, setAllProjects } from "../../actions/index";
+import { getUserProjects, getProjectPalettes} from '../../util/apiCalls';
 import Nav from '../Nav/Nav'
 import { Route } from 'react-router-dom';
-import allPalettes from '../../reducers/allPalettes';
 
 
 export class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userID: null,
-      projects: [],
-      palettes: {},
-      projectName: "",
-      paletteName: "",
-      currentPalette: {},
-      currentProject: {}
-    };
-  }
 
-  componentDidMount() {
-  }
-
-  loadUserProjectsAndPalettes = async userID => {
-    const { setAllProjects, setAllPalettes } = this.props
-    await this.setState({ projects: [], palettes: {} });
-    await this.setState({ userID: userID });
+  loadUserProjectsAndPalettes = async () => {
+    const { setAllProjects, setAllPalettes, user } = this.props
     try {
-      let projects = await getUserProjects(userID);
+      let projects = await getUserProjects(user.user_id);
       setAllProjects(projects)
       let palettePromises = [];
       await projects.forEach(project => {
@@ -43,42 +26,11 @@ export class App extends Component {
       setAllPalettes(await Promise.all(palettePromises));
     } catch ({message}) {
       console.error(message)
-      this.setState({projects: [], palettes: {}})
     }
   };
 
-  select = (project, palette) => {
-    this.setState({
-      currentProject: project,
-      projectName: project.name,
-      currentPalette: palette,
-      paletteName: palette.name
-    });
-  };
-
-  // removePalette = async e => {
-  //   let paletteId = parseInt(e.target.id);
-  //   try {
-  //     await deletePalette(paletteId);
-  //     this.loadUserProjectsAndPalettes(this.state.userID);
-  //   } catch ({ message }) { console.error(message) }
-  // };
-
-  // removeProject = async e => {
-  //   let projectId = parseInt(e.target.id);
-  //   try {
-  //     await deleteProject(projectId);
-  //     this.loadUserProjectsAndPalettes(this.state.userID);
-  //   } catch ({ message }) { console.error(message) }
-  // };
-
-  // handleChange = e => {
-  //   this.setState({ [e.target.name]: e.target.value });
-  // };
-
-
   render() {
-    const {currentPalette, isMenuActive} = this.props
+    const { isMenuActive } = this.props
     return (
       <main className="App">
         <Route
@@ -88,12 +40,6 @@ export class App extends Component {
               <Nav />
             <Modal loadProjects={this.loadUserProjectsAndPalettes} />
                 <PaletteContainer
-                userID={this.state.userID}
-                currentPalette={currentPalette}
-                handleChange={this.handleChange}
-                projectName={this.state.projectName}
-                paletteName={this.state.paletteName}
-                save={this.save}
               />
             </div>
           )}
@@ -105,19 +51,9 @@ export class App extends Component {
             <div>
               <Nav />
               <PaletteContainer
-                userID={this.state.userID}
-                handleChange={this.handleChange}
-                projectName={this.state.projectName}
-                paletteName={this.state.paletteName}
-                save={this.save}
               />
               {isMenuActive && (
                 <ProjectContainer
-                  projects={this.state.projects}
-                  palettes={this.state.palettes}
-                  select={this.select}
-                  removePalette={this.removePalette}
-                  removeProject={this.removeProject}
                 />
               )}
             </div>
@@ -133,15 +69,11 @@ export const mapDispatchToProps = dispatch =>
     {
       setAllPalettes,
       setAllProjects,
-      setCurrentPalette,
     },
     dispatch
   );
 
   export const mapStateToProps = state => ({
-    allPalettes: state.allPalettes,
-    allProjects: state.allProjects,
-    currentPalette: state.currentPalette,
     user: state.user,
     isMenuActive: state.isMenuActive
   });
@@ -149,5 +81,7 @@ export const mapDispatchToProps = dispatch =>
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
 App.propTypes = {
-
+  setAllPalettes: PropTypes.func.isRequired,
+  setAllProjects: PropTypes.func.isRequired,
+  isMenuActive: PropTypes.bool.isRequired
 }
