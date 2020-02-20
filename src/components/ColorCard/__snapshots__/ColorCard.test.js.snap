@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ColorCard alt snapshot should match the alt snapshot if it is not locked 1`] = `undefined`;
-
-exports[`ColorCard should match the snapshot 1`] = `undefined`;
