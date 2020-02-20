@@ -1,9 +1,12 @@
 import React from 'react';
-import SignupForm from './SignupForm';
+import { SignupForm, mapStateToProps, mapDispatchToProps } from './SignupForm';
+import { setUser } from '../../actions/index'
 import { shallow } from 'enzyme';
 import { createNewUser, loginUser} from '../../util/apiCalls';
 
 jest.mock('../../util/apiCalls');
+const mockSetUser = jest.fn()
+const mockLoadProjects = jest.fn()
 
 createNewUser.mockImplementation(() => {
   return Promise.resolve({
@@ -34,6 +37,9 @@ describe('SignupForm', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallow(<SignupForm
+    user={null}
+    setUser={mockSetUser}
+    loadProjects={mockLoadProjects}
     />)
 
   })
@@ -70,7 +76,11 @@ describe('SignupForm', () => {
   describe('handleSubmit', () => {
     let wrapper;
     beforeEach(() => {
-      wrapper = shallow(<SignupForm />)
+      wrapper = shallow(<SignupForm 
+        user={null}
+        setUser={mockSetUser}
+        loadProjects={mockLoadProjects}
+      />)
     })
     let mockUser = {
       id: 4,
@@ -82,7 +92,7 @@ describe('SignupForm', () => {
       wrapper.find('form').simulate('submit', mockEvent);
       expect(mockEvent.preventDefault).toHaveBeenCalled()
     })
-    it('should call createNewUser when called', () => {
+    it('should call createNewUser and setUser when called', () => {
       let mockNewUser = {
         username: "Susan",
         password: "password"
@@ -94,6 +104,7 @@ describe('SignupForm', () => {
       wrapper.instance().setState({ username: 'Susan', password: 'password', confirmPassword: 'password' });
       wrapper.instance().handleSubmit(mockEvent);
       expect(createNewUser).toHaveBeenCalledWith(mockNewUser);
+      expect(mockSetUser).toHaveBeenCalled()
     })
     it('should update with an error if the passwords don\'t match', () => {
       let mockEvent = { preventDefault: jest.fn() }
@@ -125,10 +136,37 @@ describe('SignupForm', () => {
 
   describe('alt snapShot', () => {
     it('should match the snapshot if a user is logged in', () => {
-      let wrapper = shallow(<SignupForm />);
+      let wrapper = shallow(<SignupForm 
+        user={null}
+        setUser={mockSetUser}
+        loadProjects={mockLoadProjects}
+      />);
       wrapper.instance().setState({ isLoggedIn: true });
       expect(wrapper).toMatchSnapshot()
     })
+  })
+  describe('mapStateToProps/mapDispatchToProps', () => {
+    it('mapStateToProps gives all the movies in state', () => {
+      const mockUser = { username: 'Dave', id: 4 }
+      const mockState = {
+        user: mockUser
+      };
+      const expected = {
+        user: mockUser
+      };
+      const mappedProps = mapStateToProps(mockState)
+      expect(mappedProps).toEqual(expected)
+    });
+
+    it('calls dispatch with setAllPallettes action when it is called', () => {
+      const mockUser = { username: 'Dave', id: 4 }
+      const mockDispatch = jest.fn();
+      const actionToDispatch = setUser('SET_USER', mockUser);
+      const mappedProps = mapDispatchToProps(mockDispatch);
+      mappedProps.setUser('SET_USER', mockUser);
+
+      expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+    });
   })
 })
 
