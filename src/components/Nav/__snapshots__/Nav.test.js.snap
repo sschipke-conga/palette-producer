@@ -2,16 +2,33 @@
 
 exports[`Nav should match the snapshot 1`] = `
 <nav>
-  <img
-    alt="logo"
-    className="logo"
-    src="logo.svg"
-  />
-  <button
-    onClick={[MockFunction]}
+  <Link
+    className="logo-link"
+    to="/"
   >
-    Menu
-  </button>
+    <h1
+      className="header-logo"
+    >
+      <img
+        alt="logo"
+        className="logo"
+        src="logo.svg"
+      />
+      <span
+        className="header-span"
+      >
+        alette
+      </span>
+      <img
+        alt="logo"
+        className="logo"
+        src="logo.svg"
+      />
+      <span>
+        roducer
+      </span>
+    </h1>
+  </Link>
   <div>
     <p
       className="display-username"
@@ -21,5 +38,11 @@ exports[`Nav should match the snapshot 1`] = `
       !
     </p>
   </div>
+  <button
+    className="menu-button"
+    onClick={[MockFunction]}
+  >
+    My palettes
+  </button>
 </nav>
 `;

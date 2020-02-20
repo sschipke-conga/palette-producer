@@ -1,4 +1,4 @@
-import { mockCurrentPalette } from '../assets/mockData'
+import { mockCurrentPalette, mockPalettes } from '../assets/mockData'
 import allPalettes from './allPalettes';
 import allProjects from './allProjects'
 import user from './user'
@@ -420,6 +420,25 @@ describe('allProjects reducer', () => {
     }
     const result = allPalettes(mockState, mockAction);
     expect(result).toEqual(expected)
+  })
+  it('should update a palette in state when the UPDATE_PALETTE case is hit', () => {
+    const mockNewPalette = {
+      id: 30,
+      project_id: 35,
+      name: "My Second Palette",
+      color1: "#e5349d",
+      color2: "#bdaac5",
+      color3: "#5a9def",
+      color4: "#2705b2",
+      color5: "#309a6e",
+      created_at: "2020-01-21T19:09:20.992Z",
+      updated_at: "2020-01-21T19:09:20.992Z",
+    }
+    const mockAction={
+      type: 'UPDATE_PALETTE',
+      palette: mockNewPalette
+    }
+    expect(allPalettes(mockPalettes, mockAction)[0]).toEqual(mockNewPalette)
   })
 });
 

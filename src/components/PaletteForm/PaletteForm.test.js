@@ -3,7 +3,7 @@ import { PaletteForm, mapDispatchToProps, mapStateToProps } from './PaletteForm'
 import { shallow } from 'enzyme';
 import { savePalette, saveProject, updatePalette } from '../../util/apiCalls';
 import {mockPalettes, mockUser, mockProjects, mockCurrentPalette} from '../../assets/mockData'
-import { setCurrentPalette, addPalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette } from '../../actions/index'
+import { setCurrentPalette, addPalette, addProject, resetSelectedPalette, resetSelectedProject, resetCurrentPalette, updateStoredPalette } from '../../actions/index'
 
 jest.mock('../../util/apiCalls')
 
@@ -13,6 +13,8 @@ const mockAddPalette = jest.fn()
 const mockResetSelectedPalette = jest.fn()
 const mockResetSelectedProject = jest.fn()
 const mockResetCurrentPalette = jest.fn()
+const mockUpdateStoredPalette = jest.fn()
+
 
 describe('PaletteForm', () => {
   let wrapper;
@@ -29,6 +31,7 @@ describe('PaletteForm', () => {
       currentPalette={mockCurrentPalette}
       selectedPaletteInfo={{name: null, id: null, project_id:null}}
       selectedProjectInfo={mockProjects[2]}
+      updateStoredPalette={mockUpdateStoredPalette}
       />)
     })
     afterEach(() => {
@@ -108,20 +111,22 @@ describe('PaletteForm', () => {
     })
     describe('updateSelectedPalette', () => {
       updatePalette.mockImplementation(() => Promise.resolve(mockPalettes[2]))
-      it('should call updatePalette', async () => {
+      it('should call updatePalette and updateStorePalette', async () => {
         await wrapper.instance().updateSelectedPalette()
         expect(updatePalette).toHaveBeenCalled()
+        expect(mockUpdateStoredPalette).toHaveBeenCalled()
       })
       it('should set the state of isUpdateSuccess if the palette is updated successfully', async () => {
         expect(wrapper.state('isUpdateSuccess')).toBe(false)
         await wrapper.instance().updateSelectedPalette()
         expect(wrapper.state('isUpdateSuccess')).toBe(true)
       })
-      it('should NOT set the state of isUpdateSuccess if the palette is not updated successfully', async () => {
+      it('should NOT set the state of isUpdateSuccess if the palette is not updated successfully or call updateStoredPalette', async () => {
         updatePalette.mockImplementation(() => Promise.reject({error:'Test Woops'}))
         expect(wrapper.state('isUpdateSuccess')).toBe(false)
         await wrapper.instance().updateSelectedPalette()
         expect(wrapper.state('isUpdateSuccess')).toBe(false)
+        expect(mockUpdateStoredPalette).not.toHaveBeenCalled()
       })
     })
     describe('reset', () => {
@@ -167,6 +172,7 @@ describe('PaletteForm', () => {
           currentPalette={mockCurrentPalette}
           selectedPaletteInfo={{ name: 'Fake Name', id: 5, project_id: 22 }}
           selectedProjectInfo={mockProjects[2]}
+          updateStoredPalette={mockUpdateStoredPalette}
         />)
       })
       it('should match the alternate snapshot if there is a selectedPalette', () => {
@@ -188,6 +194,7 @@ describe('PaletteForm', () => {
         currentPalette={mockCurrentPalette}
         selectedPaletteInfo={{ name: 'Fake Name', id: 5, project_id: 22 }}
         selectedProjectInfo={mockProjects[2]}
+        updateStoredPalette={mockUpdateStoredPalette}
       />)
       wrapper.instance().setState({isUpdateSuccess: true})
     })

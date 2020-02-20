@@ -1,13 +1,33 @@
+
 .form-label-input-div {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 60px;
-  margin-top: 20px;
+  margin-top: 30px;
   width: 60%;
+  label {
+    font-size: 1.2em;
+  }
   input {
+    border-bottom: 1px solid rgba(0,0,0, 0.7);
+    margin-top: 5px;
+    font-size: 1.2em;
     height: 100%;
     width: 100%;
+    &:focus {
+    border-bottom: 2px solid black;
+    }
+  }
+}
+
+.user-button {
+  background: white;
+  border: 2px solid black;
+  border-radius: 5px;
+  &:hover {
+    color: white;
+    background: black;
   }
 }

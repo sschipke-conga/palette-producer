@@ -1,3 +1,4 @@
+import {mockPalettes} from '../assets/mockData'
 import {
   setUser,
   setAllProjects,
@@ -13,6 +14,7 @@ import {
   resetCurrentPalette,
   resetSelectedPalette,
   resetSelectedProject,
+  updateStoredPalette
 } from './index.js';
 
 describe('action creators', () => {
@@ -189,6 +191,16 @@ describe('action creators', () => {
 
     expect(results).toEqual(expected);
   });
+
+  it('updateStoredPalette should return the correct object', () => {
+    const mockPalette = mockPalettes[0]
+    const expected = ({
+      type: 'UPDATE_PALETTE',
+      palette: mockPalette
+    })
+    const results = updateStoredPalette(mockPalette)
+    expect(results).toEqual(expected)
+  })
 
   it('addProject should return the correct object', () => {
     const project = {id: 44, name: 'Cistine'}
