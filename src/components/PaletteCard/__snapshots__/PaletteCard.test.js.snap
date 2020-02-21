@@ -13,7 +13,6 @@ exports[`PaletteCard should match the snapshot 1`] = `
     className="PaletteCard"
     id={1}
     name="Palette"
-    onClick={[Function]}
   >
     <div
       className="colorblocks"
@@ -61,10 +60,28 @@ exports[`PaletteCard should match the snapshot 1`] = `
       }
     />
   </div>
-  <IoIosCloseCircleOutline
-    className="delete-palette"
-    id={1}
-    onClick={[MockFunction]}
-  />
+  <div
+    className="palette-buttons-div"
+  >
+    <button
+      className="palette-button"
+      disabled={false}
+      id={1}
+      onClick={[Function]}
+    >
+      <IoMdTrash
+        className="delete-icon"
+        disabled={false}
+      />
+    </button>
+    <button
+      className="palette-button edit-palette-button"
+      onClick={[Function]}
+    >
+      <IoIosCreate
+        className="edit-icon"
+      />
+    </button>
+  </div>
 </div>
 `;

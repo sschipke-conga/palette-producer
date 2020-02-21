@@ -3,22 +3,26 @@
 exports[`ProjectCard should match the snapshot 1`] = `
 <div
   className="ProjectCard"
+  id={4}
   name="Steve"
 >
-  <h3
-    className="projectCard-header-name"
-  >
-    Steve
-  </h3>
   <div
-    className="add-palette-container"
-    onClick={[Function]}
+    className="project-div"
   >
-    <IoIosAddCircleOutline
-      className="add-palette-icon"
-    />
+    <h3
+      className="projectCard-header-name"
+    >
+      Steve
+    </h3>
+    <button
+      className="delete-project"
+      id={4}
+      onClick={[Function]}
+    >
+      Delete this project
+    </button>
   </div>
-  <PaletteCard
+  <Connect(PaletteCard)
     key="PaletteCard0"
     palette={
       Object {
@@ -31,19 +35,13 @@ exports[`ProjectCard should match the snapshot 1`] = `
         "project_id": 2,
       }
     }
+    palettesLeft={1}
     project={
       Object {
-        "id": 2,
+        "id": 4,
         "name": "Steve",
       }
     }
-    removePalette={[MockFunction]}
-    select={[MockFunction]}
-  />
-  <IoIosCloseCircleOutline
-    className="delete-project"
-    id={2}
-    onClick={[MockFunction]}
   />
 </div>
 `;

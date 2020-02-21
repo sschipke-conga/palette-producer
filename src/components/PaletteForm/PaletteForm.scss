@@ -1,0 +1,88 @@
+
+.palette-form {
+  .update-palette-div {
+    margin: 15px auto;
+    width: 40%;
+    justify-content: space-between;
+    h4 {
+      font-size: 2em;
+    }
+    .update-palette-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+    span {
+      font-weight: normal;
+    }
+  }
+  button {
+    background: #FDF7DB;
+    border: 1px solid purple;
+    border-radius: 5px;
+    font-size: 1.5em;
+    margin: 10 10px;
+    height: 40px;
+    width: 40%;
+    &:hover {
+      color: white;
+      background: purple;
+    }
+  }
+  .create-palette-button {
+    border: 1px solid red;
+    color: maroon;
+    &:hover {
+      background: red;
+      color: white;
+      border: white
+    }
+  }
+    .message {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 50%;
+      h5 {
+        color: purple;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+      }
+      button {
+        background: purple;
+        color: white;
+        &:hover {
+          background: white;
+          color: purple;
+        }
+      }
+  }
+}
+
+.editor-form {
+  width: 40%;
+  margin: 0 auto;
+  .project-editor-div {
+  display: flex;
+  }
+  label {
+    font-size: 1.3em;
+  }
+  input {
+    font-size: 1.2em;
+    background: #FDF7DB;
+    border-bottom: 1px solid purple;
+    &::placeholder {
+      color: rgba(128,0,128, 0.6)
+    }
+  }
+  padding: 0;
+  select {
+    background: #FDF7DB;
+    border: 1px solid purple;
+    border-radius: 5px;
+    font-size: 1.3em;
+    margin-right: 10px;
+  }
+
+}

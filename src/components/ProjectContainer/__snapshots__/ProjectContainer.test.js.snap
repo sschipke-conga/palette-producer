@@ -2,53 +2,22 @@
 
 exports[`ProjectContainer select alt snapshot should match the snapshot 1`] = `
 <div
-  className="ProjectContainer"
->
-  <div
-    className="add-project-container"
-    onClick={[Function]}
-  >
-    <IoIosAddCircleOutline
-      className="add-project-icon"
-    />
-  </div>
-</div>
+  className="ProjectContainer modal-div"
+/>
 `;
 
 exports[`ProjectContainer should match the snapshot 1`] = `
 <div
-  className="ProjectContainer"
+  className="ProjectContainer modal-div"
 >
-  <div
-    className="add-project-container"
-    onClick={[Function]}
-  >
-    <IoIosAddCircleOutline
-      className="add-project-icon"
-    />
-  </div>
-  <ProjectCard
+  <Connect(ProjectCard)
     key="ProjectCard0"
-    palettes={
-      Object {
-        "color1": "#FFFFFF",
-        "color2": "#FFFFFF",
-        "color3": "#000000",
-        "color4": "#FFFFFF",
-        "color5": "#FFFFFF",
-        "id": 1,
-        "name": "Palette",
-        "project_id": 1,
-      }
-    }
+    palettes={Array []}
     project={
       Object {
         "name": "Project",
       }
     }
-    removePalette={[MockFunction]}
-    removeProject={[MockFunction]}
-    select={[MockFunction]}
   />
 </div>
 `;

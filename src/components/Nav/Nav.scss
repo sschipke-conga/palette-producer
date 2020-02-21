@@ -2,9 +2,31 @@ nav {
   border-bottom: 2px solid grey;
   display: flex;
   justify-content: space-between;
-  padding: 20px;
-  a {
+  align-items: center;
+  max-height: min-content;
+  padding: 5px 20px;
+  .logo-link {
+    height: 50px;
+    color: black;
+    text-decoration: none;
+    margin: 0;
+  }
+  .logo {
+    width: 45px;
+    display: inline-block;
+  }
+  .header-logo {
+    margin: 0 -2px 0 0;
+    span {
+      margin-left: -15px;
+    }
+    .header-span {
+      margin-right: 5px;
+    }
+  }
+  .login-link {
     border-left: 1px solid gray;
+    font-size: 1.2em;
     color: black;
     padding: 10px 10px 10px 20px;
     text-decoration: none;
@@ -12,7 +34,21 @@ nav {
       opacity: 0.5;
     }
   }
-  .logo {
-    width: 45px;
+  .display-username {
+    font-size: 1.1em;
+    margin: 0
+  }
+  button {
+    border: 1px solid purple;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 1.2em;
+    width: 10%;
+    margin: 0;
+    background: #FDF7DB;
+    &:hover {
+      color: white;
+      background: purple;
+    }
   }
 }

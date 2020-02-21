@@ -1,67 +1,95 @@
 import React from 'react';
 import { shallow } from "enzyme";
 import ReactDOM from 'react-dom';
-import App from './App';
+import {App, mapDispatchToProps, mapStateToProps} from './App';
+import {mockPalettes, mockProjects, mockUser} from '../../assets/mockData'
+import { setAllPalettes, setAllProjects } from '../../actions';
+import { getUserProjects, getProjectPalettes } from '../../util/apiCalls';
+jest.mock('../../util/apiCalls')
+
+getUserProjects.mockImplementation(() => Promise.resolve(mockProjects));
+getProjectPalettes.mockImplementation(() => Promise.resolve(mockPalettes[0]));
+
 
 describe('App', () => {
-
   let wrapper;
-
   beforeEach(() => {
-    wrapper = shallow(<App />)
+    wrapper = shallow(<App
+        setAllPalettes={jest.fn()}
+        setAllProjects={jest.fn()}
+        isMenuActive={true}
+      />)
   });
 
   it('should match the snapshot with all data passed in correctly', () => {
     expect(wrapper).toMatchSnapshot();
   });
+});
 
-  it('should change state when a project and a palette are selected', () => {
-    //setup
-    const mockProject = {
-      id: 1,
-      name: 'Zigwirly',
-      user_id: 1
-    }
-    const mockPalette = {
-      id: 1,
-      project_id: 1,
-      name: 'Pigglywiggly',
-      color1: '#FFFFFF',
-      color2: '#FFFFFF',
-      color3: '#FFFFFF',
-      color4: '#FFFFFF',
-      color5: '#FFFFFF',
-    }
-    const expectedState = {
-      userID: null,
-      projects: [],
-      palettes: {},
-      projectName: 'Zigwirly',
-      paletteName: 'Pigglywiggly',
-      currentPalette: mockPalette,
-      currentProject: mockProject
-    }
+describe('Alt snapshot', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<App
+      setAllPalettes={jest.fn()}
+      setAllProjects={jest.fn()}
+      isMenuActive={true}
+      />)
+  });
+  it('should match the snapshot when the menu is active ', () => {
+    expect(wrapper).toMatchSnapshot();
+  });
+})
 
-    //execution
-    wrapper.instance().select(mockProject, mockPalette)
+describe('loadUserProjectsAndPalette', () => {
+  const mockSetAllPalettes= jest.fn()
+  const mockSetAllProjects = jest.fn()
+  let wrapper;
+  beforeEach(() => {
+    wrapper = shallow(<App
+      setAllPalettes={mockSetAllPalettes}
+      setAllProjects={mockSetAllProjects}
+      isMenuActive={true}
+      user={mockUser}
+      />)
+  });
+  it('should call getUserProjects, getProjectPalettes, setAllProjects, and setAllPalettes', async () => {
+    await wrapper.instance().loadUserProjectsAndPalettes()
+    expect(getUserProjects).toHaveBeenCalled()
+    expect(getProjectPalettes).toHaveBeenCalled()
+    expect(mockSetAllPalettes).toHaveBeenCalled()
+    expect(mockSetAllProjects).toHaveBeenCalled()
+  })
+})
 
-    //expectation
-    expect(wrapper.state()).toEqual(expectedState)
+describe('App REDUX test', () => {
+  it('mapStateToProps gives all the movies in state', () => {
+    const mockState = {
+      user: mockUser,
+      isMenuActive: false
+    };
+    const expected = {
+      user: mockUser,
+      isMenuActive: false
+    };
+    const mappedProps = mapStateToProps(mockState)
+    expect(mappedProps).toEqual(expected)
   });
 
-  it('should change state with handleChange is invoked', () => {
-    //setup
-    const mockEvent = {
-      target: {
-        name: 'projectName',
-        value: 'Gerbilation'
-      }
-    }
+  it('calls dispatch with setAllPallettes action when it is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setAllPalettes('SET_PALETTES', mockPalettes);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setAllPalettes('SET_PALETTES', mockPalettes);
 
-    //execution
-    wrapper.instance().handleChange(mockEvent);
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
 
-    //expectation
-    expect(wrapper.state('projectName')).toEqual('Gerbilation');
-  })
-});
+  it('calls dispatch with setAllProjects action when it is called', () => {
+    const mockDispatch = jest.fn();
+    const actionToDispatch = setAllProjects('SET_PROJECTS', mockProjects);
+    const mappedProps = mapDispatchToProps(mockDispatch);
+    mappedProps.setAllProjects('SET_PROJECTS', mockProjects);
+
+    expect(mockDispatch).toHaveBeenCalledWith(actionToDispatch);
+  });
+})

@@ -4,81 +4,43 @@ exports[`PaletteContainer should match the snapshot 1`] = `
 <main
   className="PaletteContainer"
 >
-  <header
-    className="PaleteContainer-header"
-  >
-    <div
-      className="PaleteContainer-names"
-    >
-      <input
-        className="project-name"
-        name="projectName"
-        placeholder="Enter new project name"
-        type="text"
-      />
-      <input
-        className="palette-name"
-        name="paletteName"
-        placeholder="Enter new palette name"
-        type="text"
-      />
-    </div>
-    <div
-      className="icon-container"
-    >
-      <IoIosRefresh
-        className="randomize-icon"
-        onClick={[Function]}
-      />
-      <IoMdSave
-        className="save-icon"
-        onClick={[Function]}
-      />
-    </div>
-  </header>
   <section
     className="PaletteContainer-section"
   >
-    <ColorCard
-      changeColor={[Function]}
-      color="#1f16fb"
-      index="color1"
+    <Connect(ColorCard)
+      index={0}
       isLocked={false}
       key="0"
-      toggleLock={[Function]}
     />
-    <ColorCard
-      changeColor={[Function]}
-      color="#8a4ab3"
-      index="color2"
+    <Connect(ColorCard)
+      index={1}
       isLocked={false}
       key="1"
-      toggleLock={[Function]}
     />
-    <ColorCard
-      changeColor={[Function]}
-      color="#6033c9"
-      index="color3"
+    <Connect(ColorCard)
+      index={2}
       isLocked={false}
       key="2"
-      toggleLock={[Function]}
     />
-    <ColorCard
-      changeColor={[Function]}
-      color="#ac5861"
-      index="color4"
+    <Connect(ColorCard)
+      index={3}
       isLocked={false}
       key="3"
-      toggleLock={[Function]}
     />
-    <ColorCard
-      changeColor={[Function]}
-      color="#5979"
-      index="color5"
+    <Connect(ColorCard)
+      index={4}
       isLocked={false}
       key="4"
-      toggleLock={[Function]}
     />
   </section>
+  <div
+    className="icon-container"
+  >
+    <IoIosRefresh
+      className="randomize-icon"
+      onClick={[Function]}
+    />
+  </div>
+  <Connect(PaletteForm) />
 </main>
 `;

@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectContainer from "./ProjectContainer";
+import { ProjectContainer, mapStateToProps, mapDispatchToProps} from "./ProjectContainer";
 import { shallow } from "enzyme";
 
 describe('ProjectContainer', () => {
@@ -21,11 +21,8 @@ describe('ProjectContainer', () => {
   beforeEach(() => {
       wrapper = shallow(
         <ProjectContainer
-          projects={mockProjects}
-          palettes={mockPalettes}
-          select={mockSelect}
-          removePalette={jest.fn()}
-          removeProject={jest.fn()}
+          allProjects={mockProjects}
+          allPalettes={mockPalettes}
         />
       );
     });
@@ -33,10 +30,6 @@ describe('ProjectContainer', () => {
     expect(wrapper).toMatchSnapshot()
   })
     describe("select", () => {
-      it("should call select on click", () => {
-        wrapper.find(".add-project-container").simulate("click");
-        expect(mockSelect).toHaveBeenCalled();
-      });
       describe('alt snapshot', () => {
           const mockSelect = jest.fn();
           const mockProjects = [
@@ -48,11 +41,8 @@ describe('ProjectContainer', () => {
           beforeEach(() => {
             wrapper = shallow(
               <ProjectContainer
-                projects={mockProjects}
-                palettes={[]}
-                select={mockSelect}
-                removePalette={jest.fn()}
-                removeProject={jest.fn()}
+                allProjects={mockProjects}
+                allPalettes={[]}
               />
             );
           });
@@ -61,4 +51,19 @@ describe('ProjectContainer', () => {
           })
       })
     });
+  describe('mapStateToProps', () => {
+    it('mapStateToProps the user and the state of the menu', () => {
+      const mockUser = { username: 'Dave', id: 4 }
+      const mockState = {
+        allPalettes: mockPalettes,
+        allProjects: mockProjects
+      };
+      const expected = {
+        allPalettes: mockPalettes,
+        allProjects: mockProjects
+      };
+      const mappedProps = mapStateToProps(mockState)
+      expect(mappedProps).toEqual(expected)
+    });
+  })
 })

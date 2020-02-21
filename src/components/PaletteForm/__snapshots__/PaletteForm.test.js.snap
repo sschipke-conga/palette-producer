@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaletteForm altSnapShot1 should match the alternate snapshot if there is a selectedPalette 1`] = `
+<div
+  className="palette-form"
+>
+  <div
+    className="update-palette-div"
+  >
+    <h4>
+      <span>
+        Palette:
+      </span>
+       
+      Fake Name
+    </h4>
+    <div
+      className="update-palette-buttons"
+    >
+      <button
+        className="update-palette-button"
+        onClick={[Function]}
+      >
+        Update palette
+      </button>
+      <button
+        className="create-palette-button"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PaletteForm altSnapShot2 should match the alternate snapshot if there is a selectedPalette, and the palette update is a success 1`] = `
+<div
+  className="palette-form"
+>
+  <div
+    className="update-palette-div"
+  >
+    <h4>
+      <span>
+        Palette:
+      </span>
+       
+      Fake Name
+    </h4>
+    <div
+      className="update-palette-buttons"
+    >
+      <button
+        className="update-palette-button"
+        onClick={[Function]}
+      >
+        Update palette
+      </button>
+      <button
+        className="create-palette-button"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+    <div
+      className="modal-div message"
+    >
+      <h5>
+        Palette successfully updated!
+      </h5>
+      <button
+        onClick={[Function]}
+      >
+        Return
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PaletteForm should match the initial snapshot 1`] = `
+<div
+  className="palette-form"
+>
+  <form
+    className="editor-form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="project-editor-div"
+    >
+      <div
+        className="form-label-input-div"
+      >
+        <label
+          htmlFor="password"
+        >
+          Project
+        </label>
+        <select
+          id="projectId"
+          onChange={[Function]}
+          required={true}
+          value=""
+        >
+          <option
+            defaultValue={true}
+            value=""
+          >
+            Please select a project
+          </option>
+          <option
+            defaultValue={true}
+            value="CreateNew"
+          >
+            Create a new project
+          </option>
+          <option
+            key="Option30"
+            value={30}
+          >
+            My First Project
+          </option>
+          <option
+            key="Option33"
+            value={33}
+          >
+            Second Projects
+          </option>
+          <option
+            key="Option40"
+            value={40}
+          >
+            Third Project
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="form-label-input-div"
+    >
+      <label
+        htmlFor="paletteName"
+      >
+        Palette Name
+      </label>
+      <input
+        id="paletteName"
+        onChange={[Function]}
+        placeholder="Enter a name for your palette"
+        required={true}
+        type="text"
+        value=""
+      />
+    </div>
+    <button
+      type="submit"
+    >
+      Save Palette
+    </button>
+  </form>
+</div>
+`;

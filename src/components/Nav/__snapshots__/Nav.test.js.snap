@@ -2,16 +2,47 @@
 
 exports[`Nav should match the snapshot 1`] = `
 <nav>
-  <img
-    alt="logo"
-    className="logo"
-    src="2026954.svg"
-  />
-  <NavLink
-    exact={true}
-    to="/login"
+  <Link
+    className="logo-link"
+    to="/"
   >
-    Account
-  </NavLink>
+    <h1
+      className="header-logo"
+    >
+      <img
+        alt="logo"
+        className="logo"
+        src="logo.svg"
+      />
+      <span
+        className="header-span"
+      >
+        alette
+      </span>
+      <img
+        alt="logo"
+        className="logo"
+        src="logo.svg"
+      />
+      <span>
+        roducer
+      </span>
+    </h1>
+  </Link>
+  <div>
+    <p
+      className="display-username"
+    >
+      Welcome, 
+      Gary
+      !
+    </p>
+  </div>
+  <button
+    className="menu-button"
+    onClick={[MockFunction]}
+  >
+    My palettes
+  </button>
 </nav>
 `;

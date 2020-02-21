@@ -1,16 +1,19 @@
 import React, {Component} from 'react';
 import {Redirect} from 'react-router-dom';
 import {loginUser} from '../../util/apiCalls';
+import { bindActionCreators } from "redux";
+import PropTypes from 'prop-types'
+import { connect } from "react-redux";
+import {setUser} from '../../actions'
 import './LoginForm.scss';
 
-class LoginForm extends Component {
+export class LoginForm extends Component {
   constructor() {
     super();
     this.state = {
       username: "",
       password: "",
       error: "",
-      isLoggedIn: false
     };
   }
 
@@ -22,6 +25,7 @@ class LoginForm extends Component {
     e.preventDefault()
     const {username, password, error
     } = this.state
+    const {setUser} = this.props
     const user = {
       username,
       password
@@ -29,15 +33,16 @@ class LoginForm extends Component {
 
     try {
       let res = await loginUser(user)
-      this.setState({username:"", password:"", error:"", isLoggedIn: true})
-      localStorage.setItem("user", JSON.stringify({user_id: res.id, username: res.username}))
-      this.props.loadProjects(res.id)
+      setUser({user_id: res.id, username: res.username})
+      this.setState({username:"", password:"", error:""})
+      this.props.loadProjects()
     } catch ({message}) {this.setState({error: message})}
   }
 
   render() {
-    const {username, password, error, isLoggedIn} = this.state;
-    if(isLoggedIn) {
+    const {username, password, error} = this.state;
+    const {user} = this.props
+    if(user) {
       return <Redirect to="/" />
     }
     let loginErrrorClass = error ? "input-error" : "";
@@ -71,10 +76,28 @@ class LoginForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="user-button" type="submit">Login</button>
       </form>
     );
   }
 }
 
-export default LoginForm;
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      setUser
+    },
+    dispatch
+  );
+
+export const mapStateToProps = state => ({
+  user: state.user,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+
+LoginForm.propTypes = {
+  user: PropTypes.object,
+  setUser: PropTypes.func.isRequired,
+  loadProjects: PropTypes.func.isRequired
+}

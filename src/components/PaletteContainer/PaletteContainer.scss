@@ -34,13 +34,12 @@
 }
 
 .icon-container {
-  align-items: center;
   display: flex;
-  margin-right: 20px;
+  justify-content: center;
+  padding-top: 10px;
 }
 
-.randomize-icon,
-.save-icon {
+.randomize-icon {
   cursor: pointer;
   height: 50px;
   margin: 10px;
@@ -53,4 +52,15 @@
 .PaletteContainer-section {
   display: flex;
   justify-content: space-around;
+}
+
+.login-signup-message {
+  font-size: 1.5em;
+  a {
+    font-size: 1.6em;
+    text-decoration: none;
+    color: black;
+    text-decoration: underline;
+    margin: 0 7px;
+  }
 }
