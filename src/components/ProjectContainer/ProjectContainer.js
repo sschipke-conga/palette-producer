@@ -29,9 +29,9 @@ export const ProjectContainer = ({ allPalettes, allProjects, toggleMenu }) => {
             Get started by creating a palette and adding it to a project!
           </h4>
           <p className="explanation">
-            Once you've made a palette, click the edit button to update its colors.
+            Once you've made a palette, click the edit button to change its colors.
           </p>
-          <button
+          <button className="no-project-button"
           onClick={() => {toggleMenu()}}
           >Get started!</button>
         </>

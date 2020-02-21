@@ -21,6 +21,15 @@ button {
       background: purple;
     }
   }
+  .no-project-button {
+  background: purple;
+  color:rgb(255, 243, 191);
+  width: 150px;
+  &:hover {
+      background: rgb(255, 243, 191);
+      color: purple;
+    }
+  }
 }
 
 .add-project-container {
@@ -34,9 +43,6 @@ button {
   &:hover {
     background: rgb(194, 194, 194);
   } 
-  &:active {
-    background: rgb(177, 177, 177);
-  }
 }
 
 .add-project-icon {
@@ -46,12 +52,12 @@ button {
 }
 
 .no-projects {
-  color: white;
+  color: purple;
   font-size: 2em;
   margin: 10px auto;
 }
 
 .explanation {
-  color: white;
+  color: purple;
   font-size: 1.5em;
 }
