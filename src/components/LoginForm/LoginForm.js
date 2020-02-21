@@ -76,7 +76,7 @@ export class LoginForm extends Component {
             onChange={this.handleChange}
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="user-button" type="submit">Login</button>
       </form>
     );
   }

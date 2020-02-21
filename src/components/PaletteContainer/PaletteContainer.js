@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {generateRandomHex} from '../../util/helperFuncs'
 import {setCurrentPalette} from '../../actions/index'
+import { Link } from "react-router-dom";
 import PaletteForm from '../PaletteForm/PaletteForm'
 import ColorCard from '../ColorCard/ColorCard';
 
@@ -43,12 +44,21 @@ export class PaletteContainer extends Component {
           {this.displayPalette()}
         </section>
         <div className="icon-container">
-            <IoIosRefresh
-              className="randomize-icon"
-              onClick={this.randomizePalette}
-            />
-          </div>
-          {user && <PaletteForm />}
+          <IoIosRefresh
+            className="randomize-icon"
+            onClick={this.randomizePalette}
+          />
+        </div>
+        {user && <PaletteForm />}
+        {!user && (
+          <h4 className="login-signup-message">
+            Please
+            <Link to="/login">Login</Link>
+            or 
+            <Link to="/signup">Sign up</Link>
+            to get started!
+          </h4>
+        )}
       </main>
     );
   }

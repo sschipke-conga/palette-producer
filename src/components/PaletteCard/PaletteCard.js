@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { IoIosCloseCircleOutline, IoMdTrash, IoIosCreate   } from 'react-icons/io';
+import { IoMdTrash, IoIosCreate   } from 'react-icons/io';
 import {
   setCurrentPalette,
   removePalette,

@@ -6,11 +6,22 @@ exports[`ProjectCard should match the snapshot 1`] = `
   id={4}
   name="Steve"
 >
-  <h3
-    className="projectCard-header-name"
+  <div
+    className="project-div"
   >
-    Steve
-  </h3>
+    <h3
+      className="projectCard-header-name"
+    >
+      Steve
+    </h3>
+    <button
+      className="delete-project"
+      id={4}
+      onClick={[Function]}
+    >
+      Delete this project
+    </button>
+  </div>
   <Connect(PaletteCard)
     key="PaletteCard0"
     palette={
@@ -32,12 +43,5 @@ exports[`ProjectCard should match the snapshot 1`] = `
       }
     }
   />
-  <button
-    className="delete-project"
-    id={4}
-    onClick={[Function]}
-  >
-    Delete this project
-  </button>
 </div>
 `;

@@ -1,7 +1,5 @@
 
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import { loginUser } from "../../util/apiCalls";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {savePalette, saveProject, updatePalette} from '../../util/apiCalls'
@@ -29,7 +27,6 @@ export class PaletteForm extends Component {
   handleSubmit = async e => {
     e.preventDefault();
     this.savePalette()
-    // e.target.reset()
   };
 
   displayProjectOptions = () => {
@@ -104,85 +101,97 @@ export class PaletteForm extends Component {
     const { selectedPaletteInfo, resetSelectedPalette, resetSelectedProject, resetCurrentPalette } = this.props
     return (
       <div className="palette-form">
-      {!selectedPaletteInfo.name && <form onSubmit={this.handleSubmit}>
-        {error ? <p className="error-message">{error}</p> : null}
-        <div className="project-div">
-          <div className="form-label-input-div">
-            <label htmlFor="password">Project</label>
-            <select
-              value={projectId}
-              onChange={this.handleChange}
-              id="projectId"
-              required
-            >
-              <option value="" defaultValue>
-                Please select a project
-              </option>
-              <option value="CreateNew" defaultValue>
-                Create a new project
-              </option>
-              {this.displayProjectOptions()}
-            </select>
-          </div>
-          {projectId === "CreateNew" && (
+        {!selectedPaletteInfo.name && (
+          <form className="editor-form" onSubmit={this.handleSubmit}>
+            {error ? <p className="error-message">{error}</p> : null}
+            <div className="project-editor-div">
+              <div className="form-label-input-div">
+                <label htmlFor="password">Project</label>
+                <select
+                  value={projectId}
+                  onChange={this.handleChange}
+                  id="projectId"
+                  required
+                >
+                  <option value="" defaultValue>
+                    Please select a project
+                  </option>
+                  <option value="CreateNew" defaultValue>
+                    Create a new project
+                  </option>
+                  {this.displayProjectOptions()}
+                </select>
+              </div>
+              {projectId === "CreateNew" && (
+                <div className="form-label-input-div">
+                  <label htmlFor="projectName">Project Name</label>
+                  <input
+                    type="text"
+                    placeholder="New Project's Name"
+                    id="projectName"
+                    required
+                    value={projectName}
+                    onChange={this.handleChange}
+                  />
+                </div>
+              )}
+            </div>
             <div className="form-label-input-div">
-              <label htmlFor="paletteName">Project Name</label>
+              <label htmlFor="paletteName">Palette Name</label>
               <input
                 type="text"
-                placeholder="New Project's Name"
-                id="projectName"
+                placeholder="Enter a name for your palette"
+                id="paletteName"
                 required
-                value={projectName}
+                value={paletteName}
                 onChange={this.handleChange}
               />
             </div>
-          )}
+            <button type="submit">Save Palette</button>
+          </form>
+        )}
+        {selectedPaletteInfo.name && (
+          <div className="update-palette-div">
+            <h4>
+              <span>Palette:</span> {selectedPaletteInfo.name}
+            </h4>
+            <div className="update-palette-buttons">
+              <button
+                className="update-palette-button"
+                onClick={() => this.updateSelectedPalette()}
+              >
+                Update palette
+              </button>
+              <button
+                className="create-palette-button"
+                onClick={() => {
+                  resetSelectedPalette();
+                  resetSelectedProject();
+                  resetCurrentPalette();
+                  this.reset();
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+            {isUpdateSuccess && (
+              <div className="modal-div message">
+                <h5>Palette successfully updated!</h5>
+                <button
+                  onClick={() => {
+                    resetSelectedPalette();
+                    resetSelectedProject();
+                    resetCurrentPalette();
+                    this.reset();
+                  }}
+                >
+                  Return
+                </button>
+              </div>
+            )}
           </div>
-        <div className="form-label-input-div">
-          <label htmlFor="paletteName">Palette Name</label>
-          <input
-            type="text"
-            placeholder="Enter your username"
-            id="paletteName"
-            required
-            value={paletteName}
-            onChange={this.handleChange}
-          />
-        </div>
-        <button type="submit">Save Palette</button>
-      </form>}
-      {selectedPaletteInfo.name && (< div className="update-palette-div" >
-          <h4>Current Palette: {selectedPaletteInfo.name}</h4>
-          <p>Edit the colors of this palette, then click the button below to update it.</p>
-        <button className="update-palette-button"
-        onClick={() => this.updateSelectedPalette()}
-        >
-          Update palette
-        </button>
-          <button onClick={() => {
-            resetSelectedPalette()
-            resetSelectedProject()
-            resetCurrentPalette()
-            this.reset()
-          }
-          }>
-            Create a new palette
-          </button>
-        {isUpdateSuccess && <div className='modal-div message'>
-          <h5>Successfully updated!</h5>
-          <button onClick={ () => {
-            resetSelectedPalette()
-            resetSelectedProject()
-            resetCurrentPalette()
-            this.reset()
-            }
-          }>
-            Create new palette
-          </button>
-        </div>
-        }
-      </div>)}
-    </div>
+        )}
+      </div>
     );
   }
 }
@@ -202,7 +211,6 @@ export const mapDispatchToProps = dispatch =>
   );
 
 export const mapStateToProps = state => ({
-  // allPalettes: state.allPalettes,
   allProjects: state.allProjects,
   currentPalette: state.currentPalette,
   selectedPaletteInfo: state.selectedPaletteInfo,

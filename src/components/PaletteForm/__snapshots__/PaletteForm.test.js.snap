@@ -8,23 +8,28 @@ exports[`PaletteForm altSnapShot1 should match the alternate snapshot if there i
     className="update-palette-div"
   >
     <h4>
-      Current Palette: 
+      <span>
+        Palette:
+      </span>
+       
       Fake Name
     </h4>
-    <p>
-      Edit the colors of this palette, then click the button below to update it.
-    </p>
-    <button
-      className="update-palette-button"
-      onClick={[Function]}
+    <div
+      className="update-palette-buttons"
     >
-      Update palette
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      Create a new palette
-    </button>
+      <button
+        className="update-palette-button"
+        onClick={[Function]}
+      >
+        Update palette
+      </button>
+      <button
+        className="create-palette-button"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
   </div>
 </div>
 `;
@@ -37,33 +42,38 @@ exports[`PaletteForm altSnapShot2 should match the alternate snapshot if there i
     className="update-palette-div"
   >
     <h4>
-      Current Palette: 
+      <span>
+        Palette:
+      </span>
+       
       Fake Name
     </h4>
-    <p>
-      Edit the colors of this palette, then click the button below to update it.
-    </p>
-    <button
-      className="update-palette-button"
-      onClick={[Function]}
+    <div
+      className="update-palette-buttons"
     >
-      Update palette
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      Create a new palette
-    </button>
+      <button
+        className="update-palette-button"
+        onClick={[Function]}
+      >
+        Update palette
+      </button>
+      <button
+        className="create-palette-button"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
     <div
       className="modal-div message"
     >
       <h5>
-        Successfully updated!
+        Palette successfully updated!
       </h5>
       <button
         onClick={[Function]}
       >
-        Create new palette
+        Return
       </button>
     </div>
   </div>
@@ -75,10 +85,11 @@ exports[`PaletteForm should match the initial snapshot 1`] = `
   className="palette-form"
 >
   <form
+    className="editor-form"
     onSubmit={[Function]}
   >
     <div
-      className="project-div"
+      className="project-editor-div"
     >
       <div
         className="form-label-input-div"
@@ -138,7 +149,7 @@ exports[`PaletteForm should match the initial snapshot 1`] = `
       <input
         id="paletteName"
         onChange={[Function]}
-        placeholder="Enter your username"
+        placeholder="Enter a name for your palette"
         required={true}
         type="text"
         value=""
