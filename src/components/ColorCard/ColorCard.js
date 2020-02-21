@@ -17,14 +17,14 @@ export class ColorCard extends Component {
   }
 
   changeColor = (hexCode) => {
-    const {index, isLocked, currentPalette, setCurrentPalette } = this.props;
+    const {index, currentPalette, setCurrentPalette } = this.props;
     const updatedPalette = currentPalette;
     updatedPalette[index].hexCode = hexCode
     setCurrentPalette(updatedPalette);
   }
 
   render() {
-    const {isLocked, index, color} = this.props
+    const {isLocked, color} = this.props
     const colorStyles = {
       background: color
     }

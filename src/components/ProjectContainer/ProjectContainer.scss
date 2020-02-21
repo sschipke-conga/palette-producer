@@ -1,20 +1,31 @@
 div .ProjectContainer {
-  position: absolute;
     top: 50%;
     height: 90vh;
     width: 100vw;
     transition: 0.3s ease-in-out;
-    background: gray;
-    border: 2px solid gray;
+    background: rgb(255, 243, 191);
     margin: 20px auto;
-    overflow: scroll;
+    padding-top: 10px;
+    overflow: hidden;
     min-width: 90vw;
+button {
+    border: 1px solid purple;
+    border-radius: 5px;
+    height: 60px;
+    font-size: 1.5em;
+    width: 20%;
+    margin: 20px auto;
+    background: #FDF7DB;
+    &:hover {
+      color: white;
+      background: purple;
+    }
+  }
 }
 
 .add-project-container {
   align-items: center;
-  background: rgb(244, 244, 244);;
-  border: 2px solid grey;
+  background: rgb(244, 244, 244);
   cursor: pointer;
   display: flex;
   height: 100px;
@@ -37,6 +48,7 @@ div .ProjectContainer {
 .no-projects {
   color: white;
   font-size: 2em;
+  margin: 10px auto;
 }
 
 .explanation {

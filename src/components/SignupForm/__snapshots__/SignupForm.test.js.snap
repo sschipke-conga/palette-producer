@@ -72,6 +72,7 @@ exports[`SignupForm should match the initial snapshot 1`] = `
     />
   </div>
   <button
+    className="user-button"
     type="submit"
   >
     Sign Up!

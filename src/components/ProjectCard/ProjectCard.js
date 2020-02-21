@@ -2,7 +2,6 @@ import './ProjectCard.scss';
 import React from 'react';
 import PaletteCard from '../PaletteCard/PaletteCard';
 import PropTypes from 'prop-types';
-import { IoIosAddCircleOutline, IoIosCloseCircleOutline } from 'react-icons/io';
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {removeProject} from '../../actions'
@@ -25,17 +24,19 @@ export const ProjectCard = ({ project, palettes, removeProject }) => {
 
   return (
     <div className='ProjectCard' id={project.id} name={project.name}>
-      <h3 className="projectCard-header-name">{project.name}</h3>
-      {displayPalettes}
-      <button className='delete-project'
-        id={project.id}
-        onClick={async () => {
-          await deleteProject(project.id)
-          removeProject(project.id)
+      <div className="project-div">
+        <h3 className="projectCard-header-name">{project.name}</h3>
+        <button className='delete-project'
+          id={project.id}
+          onClick={async () => {
+            await deleteProject(project.id)
+            removeProject(project.id)
           }
         }>
           Delete this project 
-      </button>
+        </button>
+      </div>
+      {displayPalettes}
     </div >
   )
 }
@@ -50,8 +51,6 @@ export const mapDispatchToProps = dispatch =>
 
 export const mapStateToProps = state => ({
   user: state.user,
-  // allProjects: state.allProjects,
-  // allPalettes: state.allPalettes
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectCard);

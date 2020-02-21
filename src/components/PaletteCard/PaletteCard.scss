@@ -6,8 +6,12 @@
   border: 2px black solid;
   display: flex;
   flex: 0 0 auto;
-  height: 200px;
+  height: 150px;
   width: 200px;
+}
+
+.paletteCard-header {
+  margin-bottom: 5px;
 }
 
 .colors-div {
@@ -25,23 +29,28 @@
   display: flex;
   justify-content: space-between;
   padding: 0 15px;
-}
 
-.palette-button {
-  background: rgb(244, 244, 244);
+  .palette-button {
+  border: none;
   border-radius: 5px;
   cursor: pointer;
   height: 50px;
-  padding: 0;
   margin-top: 10px;
+  padding: 0;
+  opacity: 0.6;
   width: 50px;
 
   &:hover {
-    opacity: 0.5;
+    background: #FDF7DB;
+    color: black;
+    opacity: 1;
   }
   &:disabled {
     cursor: not-allowed;
-    
+    opacity: 20%;
+    &:hover {
+      opacity: 5%;
+    }
   }
     .delete-icon, .edit-icon {
       height: 100%;
@@ -50,4 +59,5 @@
       cursor: not-allowed;
       }
     }
+  }
 }

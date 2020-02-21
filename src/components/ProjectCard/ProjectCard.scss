@@ -1,6 +1,5 @@
 .ProjectCard {
   align-items: center;
-  border: 2px solid gray;
   display: flex;
   flex-wrap: nowrap;
   height: 100%;
@@ -9,9 +8,34 @@
   width: 90%;
 }
 
+.project-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 180px;
+  h3 {
+    font-size: 1.3em;
+  }
+  .delete-project {
+  background: #FDF7DB;
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+  cursor: pointer;
+  font-size: 1.15em;
+  height: 50px;
+  margin: 10px 0;
+  min-width: 170px;
+  &:hover {
+    background: red;
+    border: 2px solid white;
+    color: white;
+  }
+}
+}
+
 .add-palette-container {
   align-items: center;
-  background: rgb(244, 244, 244);
   border: 2px black solid;
   cursor: pointer;
   display: flex;
@@ -30,18 +54,6 @@
   width: 50px;
 }
 
-.projectCard-header-name {
-  width: 150px;
-}
-
-.delete-project {
-  background: rgb(244, 244, 244);
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  margin-left: 22px;
-  width: 25%;
-  &:hover {
-    opacity: 0.5;
-  }
-}
+// .projectCard-header-name {
+//   width: 150px;
+// }

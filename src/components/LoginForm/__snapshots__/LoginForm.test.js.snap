@@ -47,6 +47,7 @@ exports[`LoginForm alt snapShot should match the snapshot if a user is logged in
     />
   </div>
   <button
+    className="user-button"
     type="submit"
   >
     Login
@@ -101,6 +102,7 @@ exports[`LoginForm should match the initial snapshot 1`] = `
     />
   </div>
   <button
+    className="user-button"
     type="submit"
   >
     Login
