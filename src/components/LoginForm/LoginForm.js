@@ -23,8 +23,7 @@ export class LoginForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault()
-    const {username, password, error
-    } = this.state
+    const {username, password} = this.state
     const {setUser} = this.props
     const user = {
       username,
