@@ -29,7 +29,7 @@ describe('LoginForm', () => {
       const mockEvent = { target: { id: 'username', value: 'Steve' } };
       expect(wrapper.state('username')).toEqual('');
       wrapper.instance().handleChange(mockEvent);
-      expect(wrapper.state('usee')).toEqual(mockEvent.target.value)
+      expect(wrapper.state('username')).toEqual(mockEvent.target.value)
     })
     it('should update state if a user types in their password', () => {
       const mockEvent = { target: { id: 'password', value: 'password' } };
