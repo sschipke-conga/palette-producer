@@ -1,9 +1,12 @@
 name: Test
+
 on: push
+
 jobs:
+
   runTests:
     name: Jest Code Coverage
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - name: Run Jest
         run: |
