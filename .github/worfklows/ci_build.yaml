@@ -1,0 +1,10 @@
+name: Test
+on: push
+jobs:
+  runTests:
+    name: Jest Code Coverage
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Run Jest
+        run: |
+          npm test --watchAll=false;
